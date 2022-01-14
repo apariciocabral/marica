@@ -1,22 +1,38 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AiFillHome, AiOutlineInfoCircle } from 'react-icons/ai';
+import {
+  FaUmbrellaBeach,
+  FaBed,
+  FaMotorcycle,
+  FaRoute,
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaYoutube,
+} from 'react-icons/fa';
+import { MdOutlineRestaurant, MdLocalFlorist } from 'react-icons/md';
+import { SiHomeassistantcommunitystore } from 'react-icons/si';
+import { BsBookmarkStarFill } from 'react-icons/bs';
+import { GiMicrophone } from 'react-icons/gi';
+import { RiCalendar2Fill } from 'react-icons/ri';
+import { VscThreeBars } from 'react-icons/vsc';
 import logoImg from '../../assets/logo.png';
 import { ContainerHeader, ContentHeader, MenuHeader } from './styles';
-import { AiFillHome, AiOutlineInfoCircle } from "react-icons/ai";
-import { FaUmbrellaBeach, FaBed, FaBars, FaMotorcycle, FaRoute } from "react-icons/fa";
-import { MdOutlineRestaurant, MdLocalFlorist } from "react-icons/md";
-import { SiHomeassistantcommunitystore  } from "react-icons/si";
-import { BsBookmarkStarFill  } from "react-icons/bs";
-import { GiMicrophone  } from "react-icons/gi";
-import { RiCalendar2Fill  } from "react-icons/ri";
 
-export const Header:React.FC = () => {
+export const Header: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
     <>
       <MenuHeader className={showMenu ? 'show' : ''}>
         <ul>
+          <button
+            type="button"
+            className="btn-close btn-close-white"
+            aria-label="Close"
+            onClick={() => setShowMenu(false)}
+          />
           <li>
             <Link to="/">
               <AiFillHome /> Inicial
@@ -24,7 +40,7 @@ export const Header:React.FC = () => {
           </li>
           <li>
             <Link to="/">
-              <AiOutlineInfoCircle /> Sobre a cidade
+              <AiOutlineInfoCircle /> Sobre a Cidade
             </Link>
           </li>
           <li>
@@ -51,12 +67,12 @@ export const Header:React.FC = () => {
             <Link to="/">
               <SiHomeassistantcommunitystore /> Comércio Local
             </Link>
-          </li> 
+          </li>
           <li>
             <Link to="/">
               <BsBookmarkStarFill /> Cupons de Desconto
             </Link>
-          </li> 
+          </li>
           <li>
             <Link to="/">
               <GiMicrophone /> Espaços para Eventos
@@ -69,7 +85,7 @@ export const Header:React.FC = () => {
           </li>
           <li>
             <Link to="/">
-              <FaRoute /> Roteiros turísticos
+              <FaRoute /> Roteiros Turísticos
             </Link>
           </li>
           <li>
@@ -79,14 +95,30 @@ export const Header:React.FC = () => {
           </li>
         </ul>
       </MenuHeader>
+
       <ContainerHeader>
         <ContentHeader>
-          <button type="button" onClick={() => setShowMenu(!showMenu)}>
-            <FaBars className='fs-4' />
-          </button>
-          <img src={logoImg} alt="marvel"></img>
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <div className="d-flex justify-content-between align-items-center">
+                  <button type="button" onClick={() => setShowMenu(!showMenu)}>
+                    <VscThreeBars className="fs-4" />
+                    <span className="text-white ms-2">Menu</span>
+                  </button>
+                  <img src={logoImg} alt="Maricá" />
+                  <div className="d-flex">
+                    <FaFacebook className="fs-5 text-white" />
+                    <FaInstagram className="fs-5 text-white mx-2" />
+                    <FaTwitter className="fs-5 text-white me-2" />
+                    <FaYoutube className="fs-5 text-white" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </ContentHeader>
       </ContainerHeader>
     </>
   );
-}
+};

@@ -4,8 +4,8 @@ import carouselLarge2 from '../../assets/carouselLarge2.jpeg';
 
 export const Carousel: React.FC = () => {
   return (
-    <section className="my-4 d-none d-md-block">
-      <div className="container">
+    <section className="d-none d-md-block">
+      <div>
         <div
           id="carouselExampleFade"
           className="carousel slide carousel-fade"
@@ -17,7 +17,6 @@ export const Carousel: React.FC = () => {
                 src={carouselLarge}
                 className="d-block w-100"
                 alt="carousel"
-                height="400px"
               />
             </div>
             <div className="carousel-item">
@@ -25,7 +24,6 @@ export const Carousel: React.FC = () => {
                 src={carouselLarge1}
                 className="d-block w-100"
                 alt="carousel"
-                height="400px"
               />
             </div>
             <div className="carousel-item">
@@ -33,7 +31,6 @@ export const Carousel: React.FC = () => {
                 src={carouselLarge2}
                 className="d-block w-100"
                 alt="carousel"
-                height="400px"
               />
             </div>
           </div>

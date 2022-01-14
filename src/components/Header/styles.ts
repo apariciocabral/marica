@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const MenuHeader = styled.nav`
   position: fixed;
@@ -6,27 +6,27 @@ export const MenuHeader = styled.nav`
   left: 0;
   width: 300px;
   height: 100vh;
-  color: rgb(255, 255, 255);
+  background-color: rgb(51, 51, 51);
 
   ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
+    button {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+    }
   }
+
   li {
-    margin-top: 35px;
+    margin-top: 30px;
     list-style-type: none;
     align-items: center;
   }
-  
+
   a {
     text-decoration: none;
     font-size: 20px;
-    color: black;
+    color: white;
   }
 
   transform: translateX(-300px);
@@ -41,28 +41,32 @@ export const MenuHeader = styled.nav`
 `;
 
 export const ContainerHeader = styled.header`
-  background: darkblue;
+  background: var(--blueone);
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 `;
 
 export const ContentHeader = styled.div`
-  max-width: 1120px;
+  max-width: 1200px;
   margin: 0 auto;
-
   padding: 1rem 1rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   img {
-    width: 130px;
+    width: 480px;
   }
 
   button {
     font-size: 1rem;
-    //color: var(--background);
-    //background: var(--red-light);
+    color: var(--white);
+    background-color: transparent;
     border: 0;
-    padding: 0 2rem;
+    padding: 0;
     border-radius: 0.25rem;
     height: 3rem;
 

@@ -1,8 +1,8 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  
   :root {
+    --blueone: rgb(45, 103, 127);
     --blue: #007bff;
     --indigo: #6610f2;
     --purple: #6f42c1;
@@ -24,13 +24,6 @@ export const GlobalStyle = createGlobalStyle`
     --danger: #dc3545;
     --light: #f8f9fa;
     --dark: #343a40;
-    --breakpoint-xs: 0;
-    --breakpoint-sm: 576px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 992px;
-    --breakpoint-xl: 1200px;
-    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
   
   * {
@@ -42,7 +35,7 @@ export const GlobalStyle = createGlobalStyle`
   html {
     @media (max-width: 1080px) {
       font-size: 93.75%;
-  }
+    }
 
     @media (max-width: 720px) {
       font-size: 87.5%;
@@ -50,36 +43,31 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    -webkit-font-smoothing: antialiased;
-    background: lightblue;
+   background: var(--background);
+   -webkit-font-smoothing: antialiased;
   }
 
   body, input, textarea, button {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-  }
-
-  .button-secondary.button-outline {
-    color: rgb(110, 189, 0);
-    border: 1px solid rgb(110, 189, 0);
-    background-color: transparent;
-  }
-
-  .button-block {
-      width: 100%;
-  }
+  } 
 
   h1, h2, h3, h4, h5, h6, strong {
-    font-weight: 600;
+    font-weight: 700;
   }
 
   button {
     cursor: pointer;
+    .button-secondary.button-outline {
+    color: rgb(110, 189, 0);
+    border: 1px solid rgb(110, 189, 0);
+    background-color: transparent;
+    }
   }
+
 
   [disabled] {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
   }
-
-`
+`;
