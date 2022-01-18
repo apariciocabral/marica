@@ -95,7 +95,6 @@ export const Header: React.FC = () => {
           </li>
         </ul>
       </MenuHeader>
-
       <ContainerHeader>
         <ContentHeader>
           <div className="container">
@@ -108,10 +107,42 @@ export const Header: React.FC = () => {
                   </button>
                   <img src={logoImg} alt="Maricá" />
                   <div className="d-flex">
-                    <FaFacebook className="fs-5 text-white" />
-                    <FaInstagram className="fs-5 text-white mx-2" />
-                    <FaTwitter className="fs-5 text-white me-2" />
-                    <FaYoutube className="fs-5 text-white" />
+                    <a
+                      className="text-white fs-5"
+                      href="https://web.facebook.com/prefeiturademarica"
+                      title="Facebook"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaFacebook />
+                    </a>
+                    <a
+                      className="text-white fs-5 mx-2"
+                      href="https://www.instagram.com/prefeiturademarica/"
+                      title="Instagram"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaInstagram />
+                    </a>
+                    <a
+                      className="text-white fs-5 me-2"
+                      href="https://twitter.com/MaricaPref"
+                      title="Twitter"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaTwitter />
+                    </a>
+                    <a
+                      className="text-white fs-5 me-2"
+                      href="https://www.youtube.com/user/prefeiturademarica1"
+                      title="Youtube"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaYoutube />
+                    </a>
                   </div>
                 </div>
               </div>

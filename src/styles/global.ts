@@ -43,8 +43,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-   background: var(--background);
-   -webkit-font-smoothing: antialiased;
+    background-color: rgb(245, 245, 245);
+    -webkit-font-smoothing: antialiased;
+   line-height: 1.5;
   }
 
   body, input, textarea, button {
