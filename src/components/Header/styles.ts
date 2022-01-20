@@ -8,6 +8,7 @@ export const MenuHeader = styled.nav`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.9);
   border-bottom: 1px solid rgb(34, 34, 34);
+  z-index: 999;
 
   ul {
     button {

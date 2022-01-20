@@ -105,7 +105,9 @@ export const Header: React.FC = () => {
                     <VscThreeBars className="fs-4" />
                     <span className="text-white ms-2">Menu</span>
                   </button>
-                  <img src={logoImg} alt="Maricá" />
+                  <Link to="/">
+                    <img src={logoImg} alt="Maricá" />
+                  </Link>
                   <div className="d-flex">
                     <a
                       className="text-white fs-5"

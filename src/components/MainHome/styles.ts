@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ContentCardHome = styled.div`
+export const ContentMainHome = styled.div`
   .hXQgjp {
     background-color: rgb(255, 255, 255);
     border-radius: 0.25rem;
@@ -49,5 +49,34 @@ export const ContentCardHome = styled.div`
     color: rgb(51, 51, 51);
     width: 48px;
     height: 48px;
+  }
+`;
+export const BeforeFooter = styled.div`
+  .hRBsWH {
+    position: relative;
+    background-color: rgb(45, 103, 127);
+    overflow: hidden;
+  }
+
+  .CWQMf {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-top: 600px solid rgb(255, 255, 255);
+    border-left: 300px solid transparent;
+    height: 0px;
+    width: 500px;
+  }
+
+  .fQkkzS {
+    font-size: 60px;
+  }
+
+  .gJlwEu {
+    font-size: 22px;
+  }
+
+  .image {
+    z-index: 100;
   }
 `;

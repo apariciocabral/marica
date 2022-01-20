@@ -1,17 +1,38 @@
 import carouselLarge from '../../assets/carouselLarge.jpeg';
 import carouselLarge1 from '../../assets/carouselLarge1.jpeg';
 import carouselLarge2 from '../../assets/carouselLarge2.jpeg';
-import { ContentCarousel } from './styles';
 
 export const Carousel: React.FC = () => {
   return (
     <section className="d-none d-md-block mb-5">
       <div>
         <div
-          id="carouselExampleFade"
+          id="carousel"
           className="carousel slide carousel-fade"
           data-bs-ride="carousel"
         >
+          <div className="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carousel"
+              data-bs-slide-to="0"
+              className="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            />
+            <button
+              type="button"
+              data-bs-target="#carousel"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            />
+            <button
+              type="button"
+              data-bs-target="#carousel"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            />
+          </div>
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
@@ -54,7 +75,7 @@ export const Carousel: React.FC = () => {
           <button
             className="carousel-control-prev"
             type="button"
-            data-bs-target="#carouselExampleFade"
+            data-bs-target="#carousel"
             data-bs-slide="prev"
           >
             <span className="carousel-control-prev-icon" aria-hidden="true" />
@@ -63,35 +84,12 @@ export const Carousel: React.FC = () => {
           <button
             className="carousel-control-next"
             type="button"
-            data-bs-target="#carouselExampleFade"
+            data-bs-target="#carousel"
             data-bs-slide="next"
           >
             <span className="carousel-control-next-icon" aria-hidden="true" />
             <span className="visually-hidden">Next</span>
           </button>
-          <ContentCarousel className="text-center">
-            <ul className="control-dots">
-              <li className="cKJzHK">
-                <button type="button"> </button>
-              </li>
-              <li
-                value="1"
-                title="slide item 2"
-                aria-label="slide item 2"
-                className="cKJzHK"
-              >
-                <button type="button"> </button>
-              </li>
-              <li
-                value="2"
-                title="slide item 3"
-                aria-label="slide item 3"
-                className="sc-fzpans cKJzHK"
-              >
-                <button type="button"> </button>
-              </li>
-            </ul>
-          </ContentCarousel>
         </div>
       </div>
     </section>
