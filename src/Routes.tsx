@@ -1,14 +1,13 @@
 import { BrowserRouter, Routes as Switch, Route } from 'react-router-dom';
-import { BannersProvider } from './Hooks/BannersProvider';
 import { Home } from './pages/Home';
+import { Spots } from './pages/Spots';
 
 export const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <BannersProvider>
-          <Route path="/" element={<Home />} />
-        </BannersProvider>
+        <Route path="/" element={<Home />} />
+        <Route path="/pontos" element={<Spots />} />
       </Switch>
     </BrowserRouter>
   );

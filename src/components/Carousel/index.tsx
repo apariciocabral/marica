@@ -1,8 +1,15 @@
-import carouselLarge from '../../assets/carouselLarge.jpeg';
-import carouselLarge1 from '../../assets/carouselLarge1.jpeg';
-import carouselLarge2 from '../../assets/carouselLarge2.jpeg';
+import { useEffect } from 'react';
+
+import { useBanners } from '../../Hooks/BannersProvider';
 
 export const Carousel: React.FC = () => {
+  const { banners, isLoading, hasError, getBanners } = useBanners();
+
+  useEffect(() => {
+    getBanners();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <section className="d-none d-md-block mb-5">
       <div>
@@ -34,43 +41,27 @@ export const Carousel: React.FC = () => {
             />
           </div>
           <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img
-                src={carouselLarge}
-                className="d-block w-100"
-                alt="carousel"
-              />
-            </div>
-            <div className="carousel-item">
-              <a
-                className="text-white fs-5"
-                href="https://calendario.eventosmarica.com.br/"
-                title="Calendário"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={carouselLarge1}
-                  className="d-block w-100"
-                  alt="carousel"
-                />
-              </a>
-            </div>
-            <div className="carousel-item">
-              <a
-                className="text-white fs-5"
-                href="https://contato.site/5d9bab8/marica-cvb3/paginaprincipal"
-                title="Roteiros Turísticos"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={carouselLarge2}
-                  className="d-block w-100"
-                  alt="carousel"
-                />
-              </a>
-            </div>
+            {hasError && 'Erro ao carregar'}
+            {isLoading && (
+              <div className="d-flex justify-content-center">
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            )}
+            {!isLoading &&
+              banners.map((banner, index) => (
+                <div
+                  key={banner.id}
+                  className={`carousel-item ${index === 0 ? 'active' : ''}`}
+                >
+                  <img
+                    src={banner.image_l}
+                    className="d-block w-100"
+                    alt="carousel"
+                  />
+                </div>
+              ))}
           </div>
           <button
             className="carousel-control-prev"

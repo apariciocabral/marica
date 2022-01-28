@@ -44,7 +44,7 @@ export const Header: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/pontos">
               <FaUmbrellaBeach /> Pontos Turísticos
             </Link>
           </li>

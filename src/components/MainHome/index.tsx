@@ -21,7 +21,7 @@ export const MainHome: React.FC = () => {
                 title="Pontos Turísticos"
                 description="Conheça nossas praias, lagoas, grutas e outros pontos
               turísticos"
-                url="/pontos-turisticos"
+                url="/pontos"
                 icon={FaUmbrellaBeach}
               />
             </div>
