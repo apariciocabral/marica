@@ -5,14 +5,19 @@ import {
   useContext,
   useMemo,
 } from 'react';
+import { CategoryType } from '../@types/Category';
 import { SpotsType } from '../@types/Spots';
 import { Api } from '../services/Api';
 
 // Aqui é definida a Interface com os tipos de dados de tudo que será disponibilizado "para fora" do Provider
 interface ISpotsContextProps {
+  // spot: SpotsType | null;
   spots: SpotsType[];
+  categories: CategoryType[];
   isLoading: boolean;
-  hasError: boolean;
+  errorMessage: string | null;
+  // setSpot: (spot: SpotsType | null) => void;
+  // getSpot: (id: number) => Promise<void>;
   getSpots: () => Promise<void>;
 }
 
@@ -37,38 +42,83 @@ export const useSpots = (): ISpotsContextProps => {
 
 // Aqui são definidas as variáveis de State e as funções do Provider
 export const SpotsProvider: React.FC = ({ children }) => {
+  // const [spot, setSpot] = useState<SpotsType | null>(null);
   const [spots, setSpots] = useState<SpotsType[]>([]);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
-  const [hasError, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
   const getSpots = useCallback(async (): Promise<void> => {
     if (!alreadyGot) {
       setLoading(true);
-      setError(false);
+      setErrorMessage(null);
+      try {
+        const response = await Api.get('/pontos');
 
-      Api.get('/pontos')
-        .then(response => {
+        if (Array.isArray(response?.data?.collection)) {
+          setSpots(response?.data?.collection);
+          setCategories(response?.data?.categorias);
           setAlreadyGot(true);
-          setSpots(response.data);
-        })
-        .catch(() => {
+        } else {
           setSpots([]);
-          setError(true);
-        })
-        .finally(() => setLoading(false));
+          setCategories([]);
+          setErrorMessage(
+            'Could not get the spot list. Please try again later.'
+          );
+        }
+      } catch (e) {
+        if (e instanceof Error) setErrorMessage(e.message);
+      } finally {
+        setLoading(false);
+      }
     }
   }, [alreadyGot]);
+
+  // const getSpot = useCallback(
+  //   async (id: number): Promise<void> => {
+  //     if (id !== spot?.id) {
+  //       setLoading(true);
+  //       setError(null);
+  //       try {
+  //         const response = await Api.get(`/pontos/${id}`);
+  //         if (response?.data?.item) {
+  //           setSpot(response?.data?.item);
+  //         } else {
+  //           setError('Could not get the spot list. Please try again later.');
+  //         }
+  //       } catch (e) {
+  //         if (e instanceof Error) setError(e.message);
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     }
+  //   },
+  //   [spot]
+  // );
 
   // Aqui são definidas quais informações estarão disponíveis "para fora" do Provider
   const providerValue = useMemo(
     () => ({
+      // spot,
       spots,
+      categories,
       isLoading,
-      hasError,
+      errorMessage,
+      // setSpot,
+      // getSpot,
       getSpots,
     }),
-    [spots, isLoading, hasError, getSpots]
+    [
+      // spot,
+      spots,
+      categories,
+      isLoading,
+      errorMessage,
+      // setSpot,
+      // getSpot,
+      getSpots,
+    ]
   );
 
   return (
