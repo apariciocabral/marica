@@ -2,28 +2,9 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --blueone: rgb(45, 103, 127);
-    --blue: #007bff;
-    --indigo: #6610f2;
-    --purple: #6f42c1;
-    --pink: #e83e8c;
-    --red: #dc3545;
-    --orange: #fd7e14;
-    --yellow: #ffc107;
-    --green: #28a745;
-    --teal: #20c997;
-    --cyan: #17a2b8;
-    --white: #fff;
-    --gray: #6c757d;
-    --gray-dark: #343a40;
-    --primary: #007bff;
-    --secondary: #6c757d;
-    --success: #28a745;
-    --info: #17a2b8;
-    --warning: #ffc107;
-    --danger: #dc3545;
-    --light: #f8f9fa;
-    --dark: #343a40;
+    --primary: rgb(45, 103, 127);
+    --secondary: rgb(110, 189, 0);
+    --gray: rgb(225, 225, 225);
   }
   
   * {
@@ -45,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     background-color: rgb(245, 245, 245);
     -webkit-font-smoothing: antialiased;
-   line-height: 1.5;
+    line-height: 1.5;
   }
 
   body, input, textarea, button {
@@ -70,5 +51,48 @@ export const GlobalStyle = createGlobalStyle`
   [disabled] {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  // Bootstrap overrides
+ 
+  .btn {
+    border-radius: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  .btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+   
+    :hover {
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+      background-color: rgb(52, 118, 146);
+      border-color: rgb(52, 118, 146);
+    }
+  }
+
+  .btn-secondary {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+
+    :hover {
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+      background-color: rgb(125, 215, 0);
+      border-color: rgb(125, 215, 0);
+    }
+  }
+
+  .btn-gray {
+    background-color: var(--gray);
+    border-color: var(--gray);
+
+    :hover {
+      text-decoration: none;
+      background-color: rgb(235, 235, 235);
+      border-color: rgb(235, 235, 235);
+    }
   }
 `;

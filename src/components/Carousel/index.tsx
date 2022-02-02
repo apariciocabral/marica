@@ -55,11 +55,21 @@ export const Carousel: React.FC = () => {
                   key={banner.id}
                   className={`carousel-item ${index === 0 ? 'active' : ''}`}
                 >
-                  <img
-                    src={banner.image_l}
-                    className="d-block w-100"
-                    alt="carousel"
-                  />
+                  {banner.url ? (
+                    <a href={banner.url} target="_blank" rel="noreferrer">
+                      <img
+                        src={banner.image_l}
+                        className="d-block w-100"
+                        alt="carousel"
+                      />
+                    </a>
+                  ) : (
+                    <img
+                      src={banner.image_l}
+                      className="d-block w-100"
+                      alt="carousel"
+                    />
+                  )}
                 </div>
               ))}
           </div>

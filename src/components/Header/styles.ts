@@ -43,7 +43,7 @@ export const MenuHeader = styled.nav`
 `;
 
 export const ContainerHeader = styled.header`
-  background: var(--blueone);
+  background: var(--primary);
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
@@ -65,7 +65,7 @@ export const ContentHeader = styled.div`
 
   button {
     font-size: 1rem;
-    color: var(--white);
+    color: white;
     background-color: transparent;
     border: 0;
     padding: 0;

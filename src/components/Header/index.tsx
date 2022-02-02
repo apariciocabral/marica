@@ -39,7 +39,7 @@ export const Header: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/sobre">
               <AiOutlineInfoCircle /> Sobre a Cidade
             </Link>
           </li>
@@ -49,37 +49,37 @@ export const Header: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/hoteis-e-pousadas">
               <FaBed /> Hotéis e Pousadas
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/bares-e-restaurantes">
               <MdOutlineRestaurant /> Bares e Restaurantes
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/delivery">
               <FaMotorcycle /> Delivery
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/comercio-local">
               <SiHomeassistantcommunitystore /> Comércio Local
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/descontos">
               <BsBookmarkStarFill /> Cupons de Desconto
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/espacos-para-eventos">
               <GiMicrophone /> Espaços para Eventos
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/eventos">
               <RiCalendar2Fill /> Eventos
             </Link>
           </li>

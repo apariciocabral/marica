@@ -16,10 +16,6 @@ export const ContentMainHome = styled.div`
     line-height: 1.2;
   }
 
-  .text-muted {
-    color: #6c757d !important;
-  }
-
   .button {
     align-items: center;
     background-color: transparent;
