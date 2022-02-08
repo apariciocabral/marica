@@ -53,7 +53,7 @@ export const MainHome: React.FC = () => {
               <Card
                 title="Comércio Local"
                 description="Veja onde fazer as suas compras"
-                url="/comércio-local"
+                url="/comercios"
                 icon={SiHomeassistantcommunitystore}
               />
             </div>

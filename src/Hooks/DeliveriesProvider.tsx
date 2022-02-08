@@ -6,65 +6,65 @@ import {
   useMemo,
 } from 'react';
 import { CategoryType } from '../@types/Category';
-import { RestaurantsType } from '../@types/Restaurants';
+import { DeliveriesType } from '../@types/Deliveries';
 import { Api } from '../services/Api';
 
 // Aqui é definida a Interface com os tipos de dados de tudo que será disponibilizado "para fora" do Provider
-interface IRestaurantsContextProps {
-  // restaurant: RestaurantsType | null;
-  restaurants: RestaurantsType[];
+interface IDeliveriesContextProps {
+  // delivery: DeliveriesType | null;
+  deliveries: DeliveriesType[];
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
-  // setRestaurant: (restaurant: RestaurantsType | null) => void;
-  // getRestaurant: (id: number) => Promise<void>;
-  getRestaurants: () => Promise<void>;
+  // setDelivery: (delivery: DeliveriesType | null) => void;
+  // getDelivery: (id: number) => Promise<void>;
+  getDeliveries: () => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
-export const RestaurantsContext = createContext<IRestaurantsContextProps>(
-  {} as IRestaurantsContextProps
+export const DeliveriesContext = createContext<IDeliveriesContextProps>(
+  {} as IDeliveriesContextProps
 );
 
 // O useBanners() é o que você vai chamar dentro dos componentes pra acessar o conteúdo interno do Provider. Exemplo:
 /*
   const { banners, getBanners } = useBanners();
 */
-export const useRestaurants = (): IRestaurantsContextProps => {
-  const context = useContext(RestaurantsContext);
+export const useDeliveries = (): IDeliveriesContextProps => {
+  const context = useContext(DeliveriesContext);
 
   if (!context) {
-    throw new Error('useRestaurants must be within RestaurantsProvider');
+    throw new Error('useDeliveries must be within DeliveriesProvider');
   }
 
   return context;
 };
 
 // Aqui são definidas as variáveis de State e as funções do Provider
-export const RestaurantsProvider: React.FC = ({ children }) => {
-  // const [restaurant, setRestaurant] = useState<RestaurantsType | null>(null);
-  const [restaurants, setRestaurants] = useState<RestaurantsType[]>([]);
+export const DeliveriesProvider: React.FC = ({ children }) => {
+  // const [delivery, setDelivery] = useState<DeliveriesType | null>(null);
+  const [deliveries, setDeliveries] = useState<DeliveriesType[]>([]);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
-  const getRestaurants = useCallback(async (): Promise<void> => {
+  const getDeliveries = useCallback(async (): Promise<void> => {
     if (!alreadyGot) {
       setLoading(true);
       setErrorMessage(null);
       try {
-        const response = await Api.get('/restaurantes');
+        const response = await Api.get('/delivery');
 
         if (Array.isArray(response?.data?.collection)) {
-          setRestaurants(response?.data?.collection);
+          setDeliveries(response?.data?.collection);
           setCategories(response?.data?.categorias);
           setAlreadyGot(true);
         } else {
-          setRestaurants([]);
+          setDeliveries([]);
           setCategories([]);
           setErrorMessage(
-            'Could not get the Restaurant list. Please try again later.'
+            'Could not get the Delivery list. Please try again later.'
           );
         }
       } catch (e) {
@@ -75,18 +75,18 @@ export const RestaurantsProvider: React.FC = ({ children }) => {
     }
   }, [alreadyGot]);
 
-  // const getRestaurant = useCallback(
+  // const getDelivery = useCallback(
   //   async (id: number): Promise<void> => {
-  //     if (id !== restaurant?.id) {
+  //     if (id !== delivery?.id) {
   //       setLoading(true);
   //       setErrorMessage(null);
   //       try {
-  //         const response = await Api.get(`/bares-e-restaurantes/${id}`);
+  //         const response = await Api.get(`/delivery/${id}`);
   //         if (response?.data?.item) {
-  //           setSpot(response?.data?.item);
+  //           setDelivery(response?.data?.item);
   //         } else {
   //           setErrorMessage(
-  //             'Could not get the Restaurant list. Please try again later.'
+  //             'Could not get the Delivery list. Please try again later.'
   //           );
   //         }
   //       } catch (e) {
@@ -96,37 +96,37 @@ export const RestaurantsProvider: React.FC = ({ children }) => {
   //       }
   //     }
   //   },
-  //   [restaurant]
+  //   [delivery]
   // );
 
   // Aqui são definidas quais informações estarão disponíveis "para fora" do Provider
   const providerValue = useMemo(
     () => ({
-      // restaurant,
-      restaurants,
+      // delivery,
+      deliveries,
       categories,
       isLoading,
       errorMessage,
-      // setRestaurant,
-      // getRestaurant,
-      getRestaurants,
+      // setDelivery,
+      // getDelivery,
+      getDeliveries,
     }),
     [
-      // restaurant,
-      restaurants,
+      // delivery,
+      deliveries,
       categories,
       isLoading,
       errorMessage,
-      // setRestaurant,
-      // getRestaurant,
-      getRestaurants,
+      // setDelivery,
+      // getDelivery,
+      getDeliveries,
     ]
   );
 
   return (
-    <RestaurantsContext.Provider value={providerValue}>
+    <DeliveriesContext.Provider value={providerValue}>
       {children}
-    </RestaurantsContext.Provider>
+    </DeliveriesContext.Provider>
   );
 };
 

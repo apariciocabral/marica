@@ -5,21 +5,21 @@ import {
   useContext,
   useMemo,
 } from 'react';
-import { useLocation } from 'react-router-dom';
 import { CategoryType } from '../@types/Category';
+import { CollectionType } from '../@types/Collection';
 import { SpotsType } from '../@types/Spots';
 import { Api } from '../services/Api';
 
 // Aqui é definida a Interface com os tipos de dados de tudo que será disponibilizado "para fora" do Provider
 interface ISpotsContextProps {
-  spot: SpotsType | null;
+  // spot: SpotsType | null;
   spots: SpotsType[];
   categories: CategoryType[];
+  collection: CollectionType[];
   isLoading: boolean;
   errorMessage: string | null;
-  state: unknown;
-  setSpot: (spot: SpotsType | null) => void;
-  getSpot: (id: number) => Promise<void>;
+  // setSpot: (spot: SpotsType | null) => void;
+  // getSpot: (id: number) => Promise<void>;
   getSpots: () => Promise<void>;
 }
 
@@ -44,14 +44,13 @@ export const useSpots = (): ISpotsContextProps => {
 
 // Aqui são definidas as variáveis de State e as funções do Provider
 export const SpotsProvider: React.FC = ({ children }) => {
-  const [spot, setSpot] = useState<SpotsType | null>(null);
+  // const [spot, setSpot] = useState<SpotsType | null>(null);
   const [spots, setSpots] = useState<SpotsType[]>([]);
   const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [collection, setCollection] = useState<CollectionType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
-
-  const { state } = useLocation();
 
   const getSpots = useCallback(async (): Promise<void> => {
     if (!alreadyGot) {
@@ -63,6 +62,7 @@ export const SpotsProvider: React.FC = ({ children }) => {
         if (Array.isArray(response?.data?.collection)) {
           setSpots(response?.data?.collection);
           setCategories(response?.data?.categorias);
+          setCollection(response?.data?.collection);
           setAlreadyGot(true);
         } else {
           setSpots([]);
@@ -79,52 +79,52 @@ export const SpotsProvider: React.FC = ({ children }) => {
     }
   }, [alreadyGot]);
 
-  const getSpot = useCallback(
-    async (id: number): Promise<void> => {
-      if (id !== spot?.id) {
-        setLoading(true);
-        setErrorMessage(null);
-        try {
-          const response = await Api.get(`/pontos/${id}`);
-          if (response?.data?.item) {
-            setSpot(response?.data?.item);
-          } else {
-            setErrorMessage(
-              'Could not get the spot list. Please try again later.'
-            );
-          }
-        } catch (e) {
-          if (e instanceof Error) setErrorMessage(e.message);
-        } finally {
-          setLoading(false);
-        }
-      }
-    },
-    [spot]
-  );
+  // const getSpot = useCallback(
+  //   async (id: number): Promise<void> => {
+  //     if (id !== spot?.id) {
+  //       setLoading(true);
+  //       setErrorMessage(null);
+  //       try {
+  //         const response = await Api.get(`/pontos/${id}`);
+  //         if (response?.data?.item) {
+  //           setSpot(response?.data?.item);
+  //         } else {
+  //           setErrorMessage(
+  //             'Could not get the spot list. Please try again later.'
+  //           );
+  //         }
+  //       } catch (e) {
+  //         if (e instanceof Error) setErrorMessage(e.message);
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     }
+  //   },
+  //   [spot]
+  // );
 
   // Aqui são definidas quais informações estarão disponíveis "para fora" do Provider
   const providerValue = useMemo(
     () => ({
-      spot,
+      // spot,
       spots,
+      collection,
       categories,
       isLoading,
       errorMessage,
-      state,
-      setSpot,
-      getSpot,
+      // setSpot,
+      // getSpot,
       getSpots,
     }),
     [
-      spot,
+      // spot,
       spots,
+      collection,
       categories,
       isLoading,
       errorMessage,
-      state,
-      setSpot,
-      getSpot,
+      // setSpot,
+      // getSpot,
       getSpots,
     ]
   );

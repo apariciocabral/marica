@@ -64,7 +64,7 @@ export const Header: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/comercio-local">
+            <Link to="/comercios">
               <SiHomeassistantcommunitystore /> Comércio Local
             </Link>
           </li>
@@ -106,7 +106,11 @@ export const Header: React.FC = () => {
                     <span className="text-white ms-2">Menu</span>
                   </button>
                   <Link to="/">
-                    <img src={logoImg} alt="Maricá" />
+                    <img
+                      src={logoImg}
+                      alt="Maricá"
+                      className="d-none d-md-block"
+                    />
                   </Link>
                   <div className="d-flex">
                     <a

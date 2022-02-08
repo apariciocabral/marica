@@ -15,7 +15,7 @@ export const Card: React.FC<ICardProps> = ({
   url,
 }) => (
   <div className="h-100 w-100 text-center d-flex flex-column hXQgjp pt-3">
-    <div className="card-body d-flex flex-column">
+    <div className="card-body">
       <Link to={url}>
         <Icon className="text-dark icon" />
       </Link>

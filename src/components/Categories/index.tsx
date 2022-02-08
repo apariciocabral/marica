@@ -15,13 +15,13 @@ export const Categories: React.FC<ICategoriesProps> = ({
   size = 'md',
 }) => (
   <div className="mb-4">
-    <ul className="d-flex flex-nowrap flex-md-wrap m-0 list-unstyled">
+    <ul className="d-flex flex-wrap m-0 list-unstyled">
       {categories.map(category => (
         <li key={category.id}>
           <Pill
             className={`btn btn-${color} btn-${size} me-2 mb-2`}
             title={category.label}
-            to={`/${url}/categorias/${category.id}`}
+            to={`/${url}/categorias/${category.id}/${category.label}`}
           >
             {category.label}
           </Pill>

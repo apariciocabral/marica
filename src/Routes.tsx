@@ -1,8 +1,11 @@
 import { BrowserRouter, Routes as Switch, Route } from 'react-router-dom';
+import { Deliveries } from './pages/Deliveries';
 import { Home } from './pages/Home';
 import { Hotels } from './pages/Hotels';
 import { Restaurants } from './pages/Restaurants';
+// import { Restaurants } from './pages/Restaurants';
 import { Spots } from './pages/Spots';
+import { Trades } from './pages/Trades';
 
 export const Routes: React.FC = () => {
   return (
@@ -15,6 +18,10 @@ export const Routes: React.FC = () => {
         {/* <Route path="/hoteis-e-pousadas/:id" element={<Hotel />} /> */}
         <Route path="/bares-e-restaurantes" element={<Restaurants />} />
         {/* <Route path="/bares-e-restaurantes/:id" element={<Restaurant />} /> */}
+        <Route path="/delivery" element={<Deliveries />} />
+        {/* <Route path="/delivery/:id" element={<Delivery />} /> */}
+        <Route path="/comercios" element={<Trades />} />
+        {/* <Route path="/comercios/:id" element={<Trade />} /> */}
       </Switch>
     </BrowserRouter>
   );
