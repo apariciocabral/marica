@@ -13,6 +13,10 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html, body, #root {
+    min-height: 100vh;
+  }
+
   html {
     @media (max-width: 1080px) {
       font-size: 93.75%;
@@ -94,5 +98,10 @@ export const GlobalStyle = createGlobalStyle`
       background-color: rgb(235, 235, 235);
       border-color: rgb(235, 235, 235);
     }
+  }
+
+  .form-control:focus {
+    border-color: transparent;
+    box-shadow: none;
   }
 `;

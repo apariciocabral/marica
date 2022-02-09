@@ -18,21 +18,28 @@ import { GiMicrophone } from 'react-icons/gi';
 import { RiCalendar2Fill } from 'react-icons/ri';
 import { VscThreeBars } from 'react-icons/vsc';
 import logoImg from '../../assets/logo.png';
-import { ContainerHeader, ContentHeader, MenuHeader } from './styles';
+import { ContainerHeader, ContentHeader, MenuHeader, Overlay } from './styles';
+
+const routesUrl = process.env.REACT_APP_ROUTES_URL ?? '';
+const craftUrl = process.env.REACT_APP_CRAFT_URL ?? '';
 
 export const Header: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
     <>
+      <Overlay
+        className={showMenu ? 'show' : ''}
+        onClick={() => setShowMenu(false)}
+      />
       <MenuHeader className={showMenu ? 'show' : ''}>
+        <button
+          type="button"
+          className="btn-close btn-close-white"
+          aria-label="Close"
+          onClick={() => setShowMenu(false)}
+        />
         <ul>
-          <button
-            type="button"
-            className="btn-close btn-close-white"
-            aria-label="Close"
-            onClick={() => setShowMenu(false)}
-          />
           <li>
             <Link to="/">
               <AiFillHome /> Inicial
@@ -83,16 +90,20 @@ export const Header: React.FC = () => {
               <RiCalendar2Fill /> Eventos
             </Link>
           </li>
-          <li>
-            <Link to="/">
-              <FaRoute /> Roteiros Turísticos
-            </Link>
-          </li>
-          <li>
-            <Link to="/">
-              <MdLocalFlorist /> Artesanato
-            </Link>
-          </li>
+          {routesUrl && (
+            <li>
+              <a href={routesUrl} target="_blank" rel="noreferrer">
+                <FaRoute /> Roteiros Turísticos
+              </a>
+            </li>
+          )}
+          {craftUrl && (
+            <li>
+              <a href={craftUrl} target="_blank" rel="noreferrer">
+                <MdLocalFlorist /> Artesanato
+              </a>
+            </li>
+          )}
         </ul>
       </MenuHeader>
       <ContainerHeader>

@@ -6,29 +6,51 @@ export const MenuHeader = styled.nav`
   left: 0;
   width: 300px;
   height: 100vh;
+  padding: 35px;
   background-color: rgba(0, 0, 0, 0.9);
   border-bottom: 1px solid rgb(34, 34, 34);
   z-index: 999;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #333;
+  }
+
+  .btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
 
   ul {
-    button {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      cursor: pointer;
-    }
+    margin: 0;
+    padding: 0;
   }
 
   li {
-    margin-top: 30px;
     list-style-type: none;
     align-items: center;
+    border-bottom: 1px solid #333;
+    padding: 8px 0;
   }
 
   a {
     text-decoration: none;
-    font-size: 20px;
     color: white;
+
+    svg {
+      margin-right: 15px;
+    }
   }
 
   transform: translateX(-300px);
@@ -77,5 +99,23 @@ export const ContentHeader = styled.div`
     &:hover {
       filter: brightness(0.9);
     }
+  }
+`;
+
+export const Overlay = styled.div`
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 998;
+  border: none;
+  cursor: default !important;
+  backdrop-filter: blur(2px);
+
+  &.show {
+    display: block;
   }
 `;

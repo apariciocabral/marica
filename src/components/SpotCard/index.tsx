@@ -8,7 +8,7 @@ interface ISpotsCardProps {
 }
 
 const SpotsCard: React.FC<ISpotsCardProps> = ({ spot }) => (
-  <div className="card mb-3">
+  <div className="card mb-3 w-100">
     <Link to={`${spot.id}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${spot.capa})` }} />
     </Link>

@@ -13,23 +13,56 @@ export const Card: React.FC<ICardProps> = ({
   title,
   description,
   url,
-}) => (
-  <div className="h-100 w-100 text-center d-flex flex-column hXQgjp pt-3">
-    <div className="card-body">
-      <Link to={url}>
-        <Icon className="text-dark icon" />
-      </Link>
-      <Link className="text-decoration-none text-dark" to={url}>
-        <h2 className="fs-sm mt-0 mb-1">{title}</h2>
-      </Link>
-      <p className="text-muted fs-xs d-none d-sm-block mt-0 mb-3">
-        {description}
-      </p>
-      <div className="mt-auto w-100">
-        <Link to={url} className="button" title="Pontos Turísticos">
-          Acessar
-        </Link>
+}) => {
+  const isInternal = url.charAt(0) === '/';
+  return (
+    <div className="h-100 w-100 text-center d-flex flex-column hXQgjp pt-3">
+      <div className="card-body">
+        {isInternal ? (
+          <>
+            <Link to={url}>
+              <Icon className="text-dark icon" />
+            </Link>
+            <Link className="text-decoration-none text-dark" to={url}>
+              <h2 className="fs-sm mt-0 mb-1">{title}</h2>
+            </Link>
+          </>
+        ) : (
+          <>
+            <a href={url} target="_blank" rel="noreferrer">
+              <Icon className="text-dark icon" />
+            </a>
+            <a
+              className="text-decoration-none text-dark"
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <h2 className="fs-sm mt-0 mb-1">{title}</h2>
+            </a>
+          </>
+        )}
+        <p className="text-muted fs-xs d-none d-sm-block mt-0 mb-3">
+          {description}
+        </p>
+        <div className="mt-auto w-100">
+          {isInternal ? (
+            <Link to={url} className="button" title="Pontos Turísticos">
+              Acessar
+            </Link>
+          ) : (
+            <a
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+              className="button"
+              title="Pontos Turísticos"
+            >
+              Acessar
+            </a>
+          )}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};

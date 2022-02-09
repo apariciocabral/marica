@@ -10,6 +10,9 @@ import AndroidImg from '../../assets/app-store.png';
 import AppleImg from '../../assets/ios-store.png';
 import PhoneImg from '../../assets/mock-phone.png';
 
+const routesUrl = process.env.REACT_APP_ROUTES_URL ?? '';
+const craftUrl = process.env.REACT_APP_CRAFT_URL ?? '';
+
 export const MainHome: React.FC = () => {
   return (
     <>
@@ -61,7 +64,7 @@ export const MainHome: React.FC = () => {
               <Card
                 title="Cupons de Desconto"
                 description="As melhores promoções para curtir a cidade"
-                url="/cupons-de-desconto"
+                url="/descontos"
                 icon={BsBookmarkStarFill}
               />
             </div>
@@ -81,23 +84,26 @@ export const MainHome: React.FC = () => {
                 icon={RiCalendar2Fill}
               />
             </div>
-            <div className="col">
-              <Card
-                title="Roteiros turísticos"
-                description="Conheça diversas trilhas ecológicas e de aventura, com
-              variados níveis de dificuldade."
-                url="/roteiros-turísticos"
-                icon={FaRoute}
-              />
-            </div>
-            <div className="col">
-              <Card
-                title="Artesanato"
-                description="Conheça e compre as criações dos artesãos de Maricá/RJ"
-                url="/artesanato"
-                icon={MdLocalFlorist}
-              />
-            </div>
+            {routesUrl && (
+              <div className="col">
+                <Card
+                  title="Roteiros turísticos"
+                  description="Conheça diversas trilhas ecológicas e de aventura, com variados níveis de dificuldade."
+                  url={routesUrl}
+                  icon={FaRoute}
+                />
+              </div>
+            )}
+            {craftUrl && (
+              <div className="col">
+                <Card
+                  title="Artesanato"
+                  description="Conheça e compre as criações dos artesãos de Maricá/RJ"
+                  url={craftUrl}
+                  icon={MdLocalFlorist}
+                />
+              </div>
+            )}
             <div className="col">
               <Card
                 title="Sobre a cidade"

@@ -1,3 +1,4 @@
+import slugify from 'react-slugify';
 import { CategoryType } from '../../@types/Category';
 import { Pill } from './styles';
 
@@ -21,9 +22,9 @@ export const Categories: React.FC<ICategoriesProps> = ({
           <Pill
             className={`btn btn-${color} btn-${size} me-2 mb-2`}
             title={category.label}
-            to={`/${url}/categorias/${category.id}/${category.label}`}
+            to={`/${url}/categorias/${category.id}/${slugify(category.label)}`}
           >
-            {category.label}
+            {`${category.label} (${category.count})`}
           </Pill>
         </li>
       ))}

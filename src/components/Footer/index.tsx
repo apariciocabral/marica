@@ -5,7 +5,7 @@ import TurismoImg from '../../assets/turismomarica.png';
 
 export const Footer: React.FC = () => {
   return (
-    <ContentFooter>
+    <ContentFooter className="mt-auto">
       <div className="hLgJkJ">
         <div className="container text-white py-5 py-md-3">
           <div className="row">

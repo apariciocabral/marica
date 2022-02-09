@@ -1,5 +1,8 @@
 import { BannersProvider } from './Hooks/BannersProvider';
+import { CityEventsProvider } from './Hooks/CityEventsProvider';
 import { DeliveriesProvider } from './Hooks/DeliveriesProvider';
+import { DiscountsProvider } from './Hooks/DiscountsProvider';
+import { EventSpacesProvider } from './Hooks/EventSpacesProvider';
 import { HotelsProvider } from './Hooks/HotelsProvider';
 import { RestaurantsProvider } from './Hooks/RestaurantsProvider';
 import { SpotsProvider } from './Hooks/SpotsProvider';
@@ -15,7 +18,13 @@ export const App: React.FC = () => (
           <RestaurantsProvider>
             <DeliveriesProvider>
               <TradesProvider>
-                <Routes />
+                <DiscountsProvider>
+                  <EventSpacesProvider>
+                    <CityEventsProvider>
+                      <Routes />
+                    </CityEventsProvider>
+                  </EventSpacesProvider>
+                </DiscountsProvider>
               </TradesProvider>
             </DeliveriesProvider>
           </RestaurantsProvider>

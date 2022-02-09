@@ -5,18 +5,18 @@ import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { PageTitle } from '../../components/PageTitle';
 import Wrapper from '../../components/Wrapper';
-import { useSpots } from '../../Hooks/SpotsProvider';
-import SpotsCard from '../../components/SpotCard';
+import { useDiscounts } from '../../Hooks/DiscountsProvider';
+import DiscountsCard from '../../components/DiscountCard';
 import { Search } from './styles';
 import { Categories } from '../../components/Categories';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 
-export const Spots: React.FC = () => {
-  const { spots, getSpots, categories, isLoading } = useSpots();
+export const Discounts: React.FC = () => {
+  const { discounts, getDiscounts, categories, isLoading } = useDiscounts();
 
   useEffect(() => {
-    getSpots();
+    getDiscounts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -30,40 +30,40 @@ export const Spots: React.FC = () => {
         <div className="container">
           <div className="row">
             <div className="d-flex col-md-6">
-              <PageTitle title="Pontos Turísticos" />
+              <PageTitle title="Cupom de Descontos" />
             </div>
-            <div className="d-flex col-md-6 justify-content-end">
+            <form className="d-flex col-md-6 justify-content-end">
               <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
                 <FaMapMarkedAlt className="me-2 fs-4" />
                 Mapa
               </div>
-              <Search className="my-4 d-flex pe-2">
+              <Search className="my-4 d-flex">
                 <input
                   className="input form-control"
                   type="search"
-                  placeholder="Buscar Pontos Turísticos"
+                  placeholder="Buscar Cupons de Descontos"
                   aria-label="Search"
                 />
                 <AiOutlineSearch className="fs-4" />
               </Search>
-            </div>
+            </form>
           </div>
         </div>
         <div className="container">
           <div className="row">
             <Categories
               categories={categories}
-              url="pontos"
+              url="/descontos"
               color="secondary"
             />
           </div>
         </div>
         <div className="container">
           <div className="row row-cols-3">
-            {spots.map(spot => {
+            {discounts.map(discount => {
               return (
-                <div key={spot.id} className="col d-flex align-items-stretch">
-                  <SpotsCard spot={spot} />
+                <div key={discount.id} className="col d-flex flex-column">
+                  <DiscountsCard discount={discount} />
                 </div>
               );
             })}
