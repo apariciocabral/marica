@@ -22,6 +22,10 @@ import { ContainerHeader, ContentHeader, MenuHeader, Overlay } from './styles';
 
 const routesUrl = process.env.REACT_APP_ROUTES_URL ?? '';
 const craftUrl = process.env.REACT_APP_CRAFT_URL ?? '';
+const facebookUrl = process.env.REACT_APP_FACEBOOK_URL ?? '';
+const instagramUrl = process.env.REACT_APP_INSTAGRAM_URL ?? '';
+const twitterUrl = process.env.REACT_APP_TWITTER_URL ?? '';
+const youtubeUrl = process.env.REACT_APP_YOUTUBE_URL ?? '';
 
 export const Header: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -124,42 +128,50 @@ export const Header: React.FC = () => {
                     />
                   </Link>
                   <div className="d-flex">
-                    <a
-                      className="text-white fs-5"
-                      href="https://web.facebook.com/prefeiturademarica"
-                      title="Facebook"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaFacebook />
-                    </a>
-                    <a
-                      className="text-white fs-5 mx-2"
-                      href="https://www.instagram.com/prefeiturademarica/"
-                      title="Instagram"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaInstagram />
-                    </a>
-                    <a
-                      className="text-white fs-5 me-2"
-                      href="https://twitter.com/MaricaPref"
-                      title="Twitter"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaTwitter />
-                    </a>
-                    <a
-                      className="text-white fs-5 me-2"
-                      href="https://www.youtube.com/user/prefeiturademarica1"
-                      title="Youtube"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaYoutube />
-                    </a>
+                    {facebookUrl && (
+                      <a
+                        className="text-white fs-5"
+                        href={facebookUrl}
+                        title="Facebook"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <FaFacebook />
+                      </a>
+                    )}
+                    {instagramUrl && (
+                      <a
+                        className="text-white fs-5 mx-2"
+                        href={instagramUrl}
+                        title="Instagram"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <FaInstagram />
+                      </a>
+                    )}
+                    {twitterUrl && (
+                      <a
+                        className="text-white fs-5 me-2"
+                        href={twitterUrl}
+                        title="Twitter"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <FaTwitter />
+                      </a>
+                    )}
+                    {youtubeUrl && (
+                      <a
+                        className="text-white fs-5 me-2"
+                        href={youtubeUrl}
+                        title="Youtube"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <FaYoutube />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

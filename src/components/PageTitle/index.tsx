@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 interface IPageTitleProps {
   title: string;
   backTo?: string;
+  url?: string;
 }
 
 export const PageTitle: React.FC<IPageTitleProps> = ({

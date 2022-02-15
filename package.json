@@ -17,10 +17,12 @@
     "react-hooks": "^1.0.1",
     "react-icons": "^4.3.1",
     "react-indicators": "^0.3.15",
+    "react-inlinesvg": "^2.3.0",
     "react-modal": "^3.14.4",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-slugify": "^2.1.0",
+    "react-svg": "^14.1.10",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.0"
   },

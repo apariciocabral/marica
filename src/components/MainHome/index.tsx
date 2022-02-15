@@ -12,6 +12,8 @@ import PhoneImg from '../../assets/mock-phone.png';
 
 const routesUrl = process.env.REACT_APP_ROUTES_URL ?? '';
 const craftUrl = process.env.REACT_APP_CRAFT_URL ?? '';
+const androidUrl = process.env.REACT_APP_ANDROID_URL ?? '';
+const iosUrl = process.env.REACT_APP_IOS_URL ?? '';
 
 export const MainHome: React.FC = () => {
   return (
@@ -108,7 +110,7 @@ export const MainHome: React.FC = () => {
               <Card
                 title="Sobre a cidade"
                 description="Conheça mais sobre Maricá"
-                url="/sobre-a-cidade"
+                url="/sobre"
                 icon={GiGreekTemple}
               />
             </div>
@@ -130,32 +132,36 @@ export const MainHome: React.FC = () => {
                 </p>
                 <div className="form-row mt-auto text-center text-md-left d-flex">
                   <div className="p-1 col-6 col-md-5 mb-3">
-                    <a
-                      href="https://play.google.com/store/apps/details?id=com.marica2030.app"
-                      title="Google Play"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        className="img-fluid"
-                        src={AndroidImg}
-                        alt="Google Play"
-                      />
-                    </a>
+                    {androidUrl && (
+                      <a
+                        href={androidUrl}
+                        title="Google Play"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          className="img-fluid"
+                          src={AndroidImg}
+                          alt="Google Play"
+                        />
+                      </a>
+                    )}
                   </div>
                   <div className="p-1 col-6 col-md-5">
-                    <a
-                      href="https://apps.apple.com/br/app/maric%C3%A1-oficial/id1493299199"
-                      title="App Store"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        className="img-fluid"
-                        src={AppleImg}
-                        alt="App Store"
-                      />
-                    </a>
+                    {iosUrl && (
+                      <a
+                        href={iosUrl}
+                        title="App Store"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          className="img-fluid"
+                          src={AppleImg}
+                          alt="App Store"
+                        />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
