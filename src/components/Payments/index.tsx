@@ -1,16 +1,20 @@
-import { StructureType } from '../../@types/Structure';
+/* eslint-disable camelcase */
+import { PaymentType } from '../../@types/Payment';
 import { SVGIcon, WrapTip } from './styles';
 
-interface IInformationsProps {
+interface IPaymentsProps {
   title: string;
-  estruturas: StructureType[];
+  icone: string;
+  label: string;
+  formas_pagamento: PaymentType[];
 }
 
-const Informations: React.FC<IInformationsProps> = ({ title, estruturas }) => (
-  <WrapTip className="mt-4">
+const Payments: React.FC<IPaymentsProps> = ({ title, formas_pagamento }) => (
+  <WrapTip className="mt-5">
     <h4 className="border-bottom border-2 mb-3">{title}</h4>
+
     <ul className="align-items-center p-0 row row-cols-3">
-      {estruturas.map(info => (
+      {formas_pagamento.map(info => (
         <li className="d-flex align-items-center list-unstyled col pb-4">
           <div className="px-2">
             <SVGIcon src={info.icone} />
@@ -22,4 +26,4 @@ const Informations: React.FC<IInformationsProps> = ({ title, estruturas }) => (
   </WrapTip>
 );
 
-export default Informations;
+export default Payments;

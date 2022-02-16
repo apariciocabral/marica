@@ -2,10 +2,13 @@
 import { AddressType } from './Address';
 import { CategoryType } from './Category';
 import { HourFunctionType } from './HourFunction';
+import { ImageType } from './Image';
 import { NetworkType } from './Network';
+import { PaymentType } from './Payment';
 import { PhoneType } from './Phone';
 import { RestrictionsType } from './Restriction';
 import { StructureType } from './Structure';
+import { TravellerType } from './Traveller';
 
 export type SpotsType = {
   id: number;
@@ -23,4 +26,11 @@ export type SpotsType = {
   redes: NetworkType[];
   horario_funcionamento: HourFunctionType[];
   phones: PhoneType[];
+  dicas_t: string;
+  preco_t: string;
+  viajantes: TravellerType[];
+  label: string;
+  formas_pagamento: PaymentType[];
+  icone: string;
+  images: ImageType[];
 };

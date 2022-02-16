@@ -24,7 +24,9 @@ const SpotsCard: React.FC<ISpotsCardProps> = ({ spot, addresses }) => (
       />
       <div className="mt-auto">
         {addresses.map(address => (
-          <p className="text-muted">{address.label}</p>
+          <p key="info.id" className="text-muted">
+            {address.label}
+          </p>
         ))}
       </div>
     </div>

@@ -1,4 +1,4 @@
 export type PaymentType = {
-  icone?: string;
-  label?: string;
+  icone: string;
+  label: string;
 };

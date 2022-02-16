@@ -13,7 +13,7 @@ import { AddressType } from '../../@types/Address';
 import { HourFunctionType } from '../../@types/HourFunction';
 import { NetworkType } from '../../@types/Network';
 import { PhoneType } from '../../@types/Phone';
-import { Icons } from './styles';
+import { Icons, WrapTip } from './styles';
 
 interface IAboutProps {
   title: string;
@@ -40,11 +40,14 @@ const About: React.FC<IAboutProps> = ({
   network,
   hourFunction,
 }) => (
-  <div className="mt-5">
-    <h1 className="">{title}</h1>
+  <WrapTip className="mt-5">
+    <h3 className="border-bottom border-2 mb-3">{title}</h3>
     <ul className="align-items-center p-0">
       {addresses.map(info => (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
+        <li
+          key="info.id"
+          className="d-flex align-items-center list-unstyled col pb-4"
+        >
           <div className="px-2">
             <Icons className="fs-5">
               <FiMapPin />
@@ -54,7 +57,10 @@ const About: React.FC<IAboutProps> = ({
         </li>
       ))}
       {phone.map(info => (
-        <li className="d-flex align-items-center list-unstyled pb-4">
+        <li
+          key="info.id"
+          className="d-flex align-items-center list-unstyled pb-4"
+        >
           {info.whatsapp ? (
             <Icons className="fs-5 px-2">
               <FaWhatsapp />
@@ -86,7 +92,7 @@ const About: React.FC<IAboutProps> = ({
             const Icon = icons[info.nome];
             return (
               <>
-                <Icons className="fs-5 px-2">
+                <Icons key="info.id" className="fs-5 px-2">
                   <Icon />
                 </Icons>
                 <a
@@ -102,18 +108,24 @@ const About: React.FC<IAboutProps> = ({
           })}
         </li>
       )}
-      {hourFunction && (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
+      {hourFunction.map(info => (
+        <li
+          key="info.id"
+          className="d-flex align-items-center list-unstyled col pb-4"
+        >
           <div className="px-2">
             <Icons className="fs-5">
               <MdOutlineWatchLater />
             </Icons>
           </div>
-          <div className="px-2 m-0">{hourFunction}</div>
+          <div className="px-2 m-0 fw-bold">{info.label}</div>
+          <div className="flex-column px-2 m-0">
+            {info.horario.abre} às {info.horario.fecha}
+          </div>
         </li>
-      )}
+      ))}
     </ul>
-  </div>
+  </WrapTip>
 );
 
 export default About;

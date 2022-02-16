@@ -10,6 +10,11 @@ import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import Informations from '../../components/Informations';
 import About from '../../components/About';
+import Tips from '../../components/Tips';
+import InputValue from '../../components/InputValue';
+import Travellers from '../../components/Travellers';
+import Payments from '../../components/Payments';
+import SpotSlider from '../../components/Slider';
 
 export const TouristSpot: React.FC = () => {
   const { spot, getSpot, setSpot, isLoading } = useSpots();
@@ -33,14 +38,20 @@ export const TouristSpot: React.FC = () => {
             <div className="d-flex col-md-6">
               <PageTitle title={spot?.nome ?? 'Carregando...'} />
             </div>
-            ,
+
             {spot && (
               <>
+                <SpotSlider images={spot.images}>
+                  import `~slick-carousel/slick/slick.css``; import
+                  `~slick-carousel/slick/slick-theme.css``;
+                </SpotSlider>
+
                 <Categories
                   categories={spot.categorias}
                   url="/pontos"
                   color="secondary"
                 />
+
                 <div className="mb-3">
                   <p>{spot.descricao_t}</p>
                 </div>
@@ -54,14 +65,44 @@ export const TouristSpot: React.FC = () => {
                   hourFunction={spot?.horario_funcionamento}
                 />
 
+                {spot.dicas_t && <Tips title="Dicas" dicas_t={spot.dicas_t} />}
+
+                {spot.preco_t && (
+                  <InputValue title="Valor da Entrada" preco_t={spot.preco_t} />
+                )}
+
+                {Array.isArray(spot?.viajantes) &&
+                  spot?.viajantes.length >= 1 && (
+                    <Travellers
+                      title="Viajantes"
+                      label={spot.label}
+                      viajantes={spot.viajantes}
+                    />
+                  )}
+
                 {Array.isArray(spot?.estruturas) &&
-                  spot?.estruturas.length > 1 && (
+                  spot?.estruturas.length >= 1 && (
                     <Informations
                       title="Estruturas"
                       estruturas={spot.estruturas}
                     />
                   )}
-                <Informations title="Restrições" estruturas={spot.restricoes} />
+                {Array.isArray(spot?.restricoes) &&
+                  spot?.restricoes.length >= 1 && (
+                    <Informations
+                      title="Restrições"
+                      estruturas={spot.restricoes}
+                    />
+                  )}
+                {Array.isArray(spot?.formas_pagamento) &&
+                  spot?.formas_pagamento.length >= 1 && (
+                    <Payments
+                      title="Formas de Pagamento"
+                      icone={spot.icone}
+                      label={spot.label}
+                      formas_pagamento={spot.formas_pagamento}
+                    />
+                  )}
               </>
             )}
           </div>

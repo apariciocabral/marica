@@ -49,7 +49,7 @@ export const AboutCity: React.FC = () => (
               A Serra da Tiririca, entre Maricá e Niterói, é um parque estadual
               com um valioso trecho de mata atlântica.
             </p>
-            <p className="">
+            <p>
               A Área de Proteção Ambiental Estadual de Maricá é uma área
               tipicamente de restinga, localizada na costa do município. É
               formada pela antiga fazenda São Bento da Lagoa, a Ponta do Fundão
