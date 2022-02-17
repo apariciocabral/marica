@@ -15,6 +15,8 @@ import InputValue from '../../components/InputValue';
 import Travellers from '../../components/Travellers';
 import Payments from '../../components/Payments';
 import SpotSlider from '../../components/Slider';
+import { DownloadApp } from '../../components/DownloadApp';
+import IframeMaps from '../../components/Maps';
 
 export const TouristSpot: React.FC = () => {
   const { spot, getSpot, setSpot, isLoading } = useSpots();
@@ -33,18 +35,14 @@ export const TouristSpot: React.FC = () => {
         waitFor={isLoading === false}
         meanwhile={<LoadingCards show numberOfCards={4} />}
       >
+        <SpotSlider images={spot?.images} />
         <div className="container">
           <div className="row">
-            <div className="d-flex col-md-6">
-              <PageTitle title={spot?.nome ?? 'Carregando...'} />
-            </div>
-
             {spot && (
               <>
-                <SpotSlider images={spot.images}>
-                  import `~slick-carousel/slick/slick.css``; import
-                  `~slick-carousel/slick/slick-theme.css``;
-                </SpotSlider>
+                <div className="d-flex col-md-6">
+                  <PageTitle title={spot?.nome ?? 'Carregando...'} />
+                </div>
 
                 <Categories
                   categories={spot.categorias}
@@ -107,6 +105,8 @@ export const TouristSpot: React.FC = () => {
             )}
           </div>
         </div>
+        {spot && <IframeMaps address={spot?.addresses} />}
+        <DownloadApp />
       </LoadingGate>
       <Footer />
     </Wrapper>

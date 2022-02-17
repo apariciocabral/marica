@@ -7,10 +7,10 @@ import { PageTitle } from '../../components/PageTitle';
 import Wrapper from '../../components/Wrapper';
 import { useSpots } from '../../Hooks/SpotsProvider';
 import SpotsCard from '../../components/SpotCard';
-import { Search } from './styles';
 import { Categories } from '../../components/Categories';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
+import { SearchInput } from '../../components/SearchInput';
 
 export const Spots: React.FC = () => {
   const { spots, getSpots, categories, isLoading } = useSpots();
@@ -19,6 +19,10 @@ export const Spots: React.FC = () => {
     getSpots();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleSearch = (searchText: string): void => {
+    getSpots(searchText);
+  };
 
   return (
     <Wrapper>
@@ -37,15 +41,17 @@ export const Spots: React.FC = () => {
                 <FaMapMarkedAlt className="me-2 fs-4" />
                 Mapa
               </div>
-              <Search className="my-4 d-flex pe-2">
-                <input
+              <div className="my-4">
+                <SearchInput
                   className="input form-control"
                   type="search"
-                  placeholder="Buscar Pontos Turísticos"
+                  onSearch={handleSearch}
+                  placeholder="Buscar pontos turísticos"
                   aria-label="Search"
-                />
-                <AiOutlineSearch className="fs-4" />
-              </Search>
+                >
+                  <AiOutlineSearch className="fs-4" />
+                </SearchInput>
+              </div>
             </div>
           </div>
         </div>

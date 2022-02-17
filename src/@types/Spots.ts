@@ -13,9 +13,9 @@ import { TravellerType } from './Traveller';
 export type SpotsType = {
   id: number;
   nome: string;
-  capa?: string;
-  lat?: number;
-  lng?: number;
+  capa: string;
+  lat: number;
+  lng: number;
   descricao_t: string;
   categorias: CategoryType[];
   addresses: AddressType[];

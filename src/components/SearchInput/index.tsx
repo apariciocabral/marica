@@ -1,46 +1,37 @@
 import { useState } from 'react';
-import { MdClose, MdSearch } from 'react-icons/md';
+import { MdSearch } from 'react-icons/md';
+import { SearchStyle } from './styles';
 
 interface ISearchInputProps {
   placeholder?: string;
   onSearch(searchText: string): void;
-  showCloseButton?: boolean;
-  onClickCloseButton(): void;
+  className: string;
+  type: string;
 }
 
 export const SearchInput: React.FC<ISearchInputProps> = ({
-  placeholder = 'Search',
+  placeholder = '',
   onSearch,
-  showCloseButton = false,
-  onClickCloseButton,
 }) => {
   const [searchText, setSearchText] = useState('');
-
   return (
-    <div className="d-flex">
-      <input
-        className="form-control"
-        type="text"
-        placeholder={placeholder}
-        value={searchText}
-        onChange={e => setSearchText(e.target.value)}
-      />
-      <button
-        className="btn btn-primary fw-bold"
-        type="button"
-        onClick={() => onSearch(searchText)}
-      >
-        <MdSearch />
-      </button>
-      {showCloseButton && (
+    <SearchStyle>
+      <div className="d-flex">
+        <input
+          onChange={e => setSearchText(e.target.value)}
+          value={searchText}
+          placeholder={placeholder}
+          type="text"
+          className="input input-display form-control"
+        />
         <button
-          className="btn btn-light ms-2 fw-bold"
+          onClick={() => onSearch(searchText)}
           type="button"
-          onClick={() => onClickCloseButton()}
+          className="btn color-white"
         >
-          <MdClose />
+          <MdSearch />
         </button>
-      )}
-    </div>
+      </div>
+    </SearchStyle>
   );
 };

@@ -20,7 +20,7 @@ interface ISpotsContextProps {
   errorMessage: string | null;
   setSpot: (spot: SpotsType | null) => void;
   getSpot: (id: number) => Promise<void>;
-  getSpots: () => Promise<void>;
+  getSpots: (text?: string) => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
@@ -47,52 +47,35 @@ export const SpotsProvider: React.FC = ({ children }) => {
   const [spot, setSpot] = useState<SpotsType | null>(null);
   const [spots, setSpots] = useState<SpotsType[]>([]);
   const [categories, setCategories] = useState<CategoryType[]>([]);
-  const [collection, setCollection] = useState<CollectionType[]>([]);
+  const [collection] = useState<CollectionType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
-  const getSpots = useCallback(async (): Promise<void> => {
-    if (!alreadyGot) {
-      setLoading(true);
-      setErrorMessage(null);
-      try {
-        const response = await Api.get('/pontos');
+  const getSpot = useCallback(async (id): Promise<void> => {
+    setLoading(true);
+    Api.get(`/pontos/${id}`)
+      .then(response => setSpot(response.data.item))
+      .catch(() => setSpot(null))
+      .finally(() => setLoading(false));
+  }, []);
 
-        if (Array.isArray(response?.data?.collection)) {
-          setSpots(response?.data?.collection);
-          setCategories(response?.data?.categorias);
-          setCollection(response?.data?.collection);
-          setAlreadyGot(true);
-        } else {
-          setSpots([]);
-          setCategories([]);
-          setErrorMessage(
-            'Could not get the spot list. Please try again later.'
-          );
-        }
-      } catch (e) {
-        if (e instanceof Error) setErrorMessage(e.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-  }, [alreadyGot]);
-
-  const getSpot = useCallback(
-    async (id: number): Promise<void> => {
-      if (id !== spot?.id) {
+  const getSpots = useCallback(
+    async (searchText = ''): Promise<void> => {
+      if (!alreadyGot || searchText.length > 0) {
         setLoading(true);
         setErrorMessage(null);
+
+        const url = searchText
+          ? `/pontos/busca?busca=${searchText}`
+          : '/pontos';
         try {
-          const response = await Api.get(`/pontos/${id}`);
-          if (response?.data?.item) {
-            setSpot(response?.data?.item);
-          } else {
-            setErrorMessage(
-              'Could not get the spot list. Please try again later.'
-            );
+          const response = await Api.get(url);
+          if (!searchText) {
+            setCategories(response.data.categorias);
           }
+          setSpots(response.data.collection);
+          setAlreadyGot(true);
         } catch (e) {
           if (e instanceof Error) setErrorMessage(e.message);
         } finally {
@@ -100,7 +83,7 @@ export const SpotsProvider: React.FC = ({ children }) => {
         }
       }
     },
-    [spot]
+    [alreadyGot]
   );
 
   // Aqui são definidas quais informações estarão disponíveis "para fora" do Provider

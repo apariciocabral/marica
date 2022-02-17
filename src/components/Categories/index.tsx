@@ -24,7 +24,9 @@ export const Categories: React.FC<ICategoriesProps> = ({
             title={category.label}
             to={`/${url}/categorias/${category.id}/${slugify(category.label)}`}
           >
-            {`${category.label} (${category?.count})`}
+            {`${category.label}${
+              category?.count ? ` (${category?.count})` : ''
+            }`}
           </Pill>
         </li>
       ))}

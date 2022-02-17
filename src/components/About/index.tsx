@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { AiOutlineMail } from 'react-icons/ai';
 import {
   FaWhatsapp,
@@ -108,22 +109,24 @@ const About: React.FC<IAboutProps> = ({
           })}
         </li>
       )}
-      {hourFunction.map(info => (
-        <li
-          key="info.id"
-          className="d-flex align-items-center list-unstyled col pb-4"
-        >
-          <div className="px-2">
-            <Icons className="fs-5">
-              <MdOutlineWatchLater />
-            </Icons>
-          </div>
-          <div className="px-2 m-0 fw-bold">{info.label}</div>
-          <div className="flex-column px-2 m-0">
-            {info.horario.abre} às {info.horario.fecha}
-          </div>
-        </li>
-      ))}
+
+      <li className="d-flex pb-4">
+        <div className="px-2">
+          <Icons className="fs-5">
+            <MdOutlineWatchLater />
+          </Icons>
+        </div>
+        <div>
+          {hourFunction.map(info => (
+            <Fragment key={info.label}>
+              <div className="px-2 m-0 fw-bold">{info.label}</div>
+              <div className="flex-column px-2 m-0">
+                {info.horario.abre} às {info.horario.fecha}
+              </div>
+            </Fragment>
+          ))}
+        </div>
+      </li>
     </ul>
   </WrapTip>
 );
