@@ -22,7 +22,9 @@ const RestaurantsCard: React.FC<IRestaurantsCardProps> = ({ restaurant }) => (
       />
       <div className="mt-auto">
         {restaurant.enderecos.map(address => (
-          <p className="text-muted">{address.label}</p>
+          <p key={address.id} className="text-muted">
+            {address.label}
+          </p>
         ))}
       </div>
     </div>

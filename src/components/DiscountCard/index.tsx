@@ -22,7 +22,9 @@ const DiscountsCard: React.FC<IDiscountsCardProps> = ({ discount }) => (
       />
       <div className="mt-auto">
         {discount.modulos.map(address => (
-          <p className="text-muted">{address?.route}</p>
+          <p key={address.id} className="text-muted">
+            {address?.route}
+          </p>
         ))}
       </div>
     </div>

@@ -15,7 +15,10 @@ const Travellers: React.FC<ITravellersProps> = ({ title, viajantes }) => (
 
     <ul className="align-items-center p-0 row row-cols-3">
       {viajantes.map(info => (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
+        <li
+          key={info.label}
+          className="d-flex align-items-center list-unstyled col pb-4"
+        >
           <Icons className="fs-5 pe-3">
             <AiOutlineCheckCircle />
           </Icons>

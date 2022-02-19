@@ -22,7 +22,9 @@ const EventSpacesCard: React.FC<IEventSpacesCardProps> = ({ eventSpace }) => (
       />
       <div className="mt-auto">
         {eventSpace.enderecos.map(address => (
-          <p className="text-muted">{address.label}</p>
+          <p key={address.id} className="text-muted">
+            {address.label}
+          </p>
         ))}
       </div>
     </div>

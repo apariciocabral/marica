@@ -22,7 +22,9 @@ const TradesCard: React.FC<ITradesCardProps> = ({ trade }) => (
       />
       <div className="mt-auto">
         {trade.enderecos.map(address => (
-          <p className="text-muted">{address.label}</p>
+          <p key={address.id} className="text-muted">
+            {address.label}
+          </p>
         ))}
       </div>
     </div>

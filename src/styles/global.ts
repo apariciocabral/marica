@@ -2,9 +2,15 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --primary: rgb(45, 103, 127);
-    --secondary: rgb(110, 189, 0);
-    --gray: rgb(225, 225, 225);
+    --primary: #2d677f;
+    --primaryHover: #347692;
+    --secondary: #6ebd00;
+    --secondaryHover: #7dd700;
+    --gray: #e1e1e1;
+    --grayHover: #ebebeb;
+    --bodyColor: #f5f5f5;
+    --darkGray: #333333;
+    --lightGray: #ffffff;
   }
   
   * {
@@ -28,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: rgb(245, 245, 245);
+    background-color: var(--bodyColor);
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
   }
@@ -45,8 +51,8 @@ export const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
     .button-secondary.button-outline {
-    color: rgb(110, 189, 0);
-    border: 1px solid rgb(110, 189, 0);
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
     background-color: transparent;
     }
   }
@@ -71,9 +77,9 @@ export const GlobalStyle = createGlobalStyle`
    
     :hover {
       text-decoration: none;
-      color: rgb(255, 255, 255);
-      background-color: rgb(52, 118, 146);
-      border-color: rgb(52, 118, 146);
+      color: var(--grayHover);
+      background-color: var(--primaryHover);
+      border-color: var(--primaryHover);
     }
   }
 
@@ -83,9 +89,9 @@ export const GlobalStyle = createGlobalStyle`
 
     :hover {
       text-decoration: none;
-      color: rgb(255, 255, 255);
-      background-color: rgb(125, 215, 0);
-      border-color: rgb(125, 215, 0);
+      color: var(--grayHover);
+      background-color: var(--secondaryHover);
+      border-color: var(--secondaryHover);
     }
   }
 
@@ -95,13 +101,12 @@ export const GlobalStyle = createGlobalStyle`
 
     :hover {
       text-decoration: none;
-      background-color: rgb(235, 235, 235);
-      border-color: rgb(235, 235, 235);
+      background-color: var(--grayHover);
+      border-color: var(--grayHover);
     }
   }
 
   .form-control:focus {
-    border-color: transparent;
     box-shadow: none;
   }
 `;

@@ -43,7 +43,7 @@ export const Spots: React.FC = () => {
               </div>
               <div className="my-4">
                 <SearchInput
-                  className="input form-control"
+                  className="input"
                   type="search"
                   onSearch={handleSearch}
                   placeholder="Buscar pontos turísticos"

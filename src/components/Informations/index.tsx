@@ -11,7 +11,10 @@ const Informations: React.FC<IInformationsProps> = ({ title, estruturas }) => (
     <h4 className="border-bottom border-2 mb-3">{title}</h4>
     <ul className="align-items-center p-0 row row-cols-3">
       {estruturas.map(info => (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
+        <li
+          key={info.label}
+          className="d-flex align-items-center list-unstyled col pb-4"
+        >
           <div className="px-2">
             <SVGIcon src={info.icone} />
           </div>

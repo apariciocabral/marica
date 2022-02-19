@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const About = styled.div`
+export const MaricaBackground = styled.div`
   .picture {
     position: relative;
     height: 80vh;
@@ -10,7 +10,6 @@ export const About = styled.div`
     background-attachment: fixed;
     background-position: center top;
   }
-
   .picture::after {
     content: '';
     position: absolute;

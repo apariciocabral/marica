@@ -22,7 +22,9 @@ const DeliveryCard: React.FC<IDeliveriesCardProps> = ({ delivery }) => (
       />
       <div className="mt-auto">
         {delivery.enderecos.map(address => (
-          <p className="text-muted">{address.label}</p>
+          <p key={address.id} className="text-muted">
+            {address.label}
+          </p>
         ))}
       </div>
     </div>

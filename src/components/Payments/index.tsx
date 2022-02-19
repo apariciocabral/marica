@@ -15,7 +15,10 @@ const Payments: React.FC<IPaymentsProps> = ({ title, formas_pagamento }) => (
 
     <ul className="align-items-center p-0 row row-cols-3">
       {formas_pagamento.map(info => (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
+        <li
+          key={info.label}
+          className="d-flex align-items-center list-unstyled col pb-4"
+        >
           <div className="px-2">
             <SVGIcon src={info.icone} />
           </div>

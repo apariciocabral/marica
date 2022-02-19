@@ -46,7 +46,7 @@ const About: React.FC<IAboutProps> = ({
     <ul className="align-items-center p-0">
       {addresses.map(info => (
         <li
-          key="info.id"
+          key={info.id}
           className="d-flex align-items-center list-unstyled col pb-4"
         >
           <div className="px-2">
@@ -92,8 +92,8 @@ const About: React.FC<IAboutProps> = ({
           {network.map(info => {
             const Icon = icons[info.nome];
             return (
-              <>
-                <Icons key="info.id" className="fs-5 px-2">
+              <Fragment key="info.id">
+                <Icons className="fs-5 px-2">
                   <Icon />
                 </Icons>
                 <a
@@ -104,29 +104,31 @@ const About: React.FC<IAboutProps> = ({
                 >
                   {info.user}
                 </a>
-              </>
+              </Fragment>
             );
           })}
         </li>
       )}
 
-      <li className="d-flex pb-4">
-        <div className="px-2">
-          <Icons className="fs-5">
-            <MdOutlineWatchLater />
-          </Icons>
-        </div>
-        <div>
-          {hourFunction.map(info => (
-            <Fragment key={info.label}>
-              <div className="px-2 m-0 fw-bold">{info.label}</div>
-              <div className="flex-column px-2 m-0">
-                {info.horario.abre} às {info.horario.fecha}
-              </div>
-            </Fragment>
-          ))}
-        </div>
-      </li>
+      {hourFunction && (
+        <li className="d-flex pb-4">
+          <div className="px-2">
+            <Icons className="fs-5">
+              <MdOutlineWatchLater />
+            </Icons>
+          </div>
+          <div>
+            {hourFunction.map(info => (
+              <Fragment key={info.label}>
+                <div className="px-2 m-0 fw-bold">{info.label}</div>
+                <div className="flex-column px-2 m-0">
+                  {info.horario.abre} às {info.horario.fecha}
+                </div>
+              </Fragment>
+            ))}
+          </div>
+        </li>
+      )}
     </ul>
   </WrapTip>
 );

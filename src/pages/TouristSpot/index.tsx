@@ -38,75 +38,90 @@ export const TouristSpot: React.FC = () => {
         <SpotSlider images={spot?.images} />
         <div className="container">
           <div className="row">
-            {spot && (
-              <>
-                <div className="d-flex col-md-6">
-                  <PageTitle title={spot?.nome ?? 'Carregando...'} />
-                </div>
+            <div className="col-lg-8">
+              {spot && (
+                <>
+                  <div className="d-flex mt-5 mb-3">
+                    <PageTitle
+                      title={spot?.nome}
+                      subtitle="Pontos Turísticos"
+                      url="/pontos"
+                    />
+                  </div>
 
-                <Categories
-                  categories={spot.categorias}
-                  url="/pontos"
-                  color="secondary"
-                />
+                  <Categories
+                    categories={spot.categorias}
+                    url="/pontos"
+                    color="secondary"
+                  />
 
-                <div className="mb-3">
-                  <p>{spot.descricao_t}</p>
-                </div>
+                  <div className="mb-3">
+                    <p>{spot.descricao_t}</p>
+                  </div>
 
-                <About
-                  title="Sobre"
-                  addresses={spot.addresses}
-                  phone={spot.phones}
-                  email={spot?.email}
-                  network={spot?.redes}
-                  hourFunction={spot?.horario_funcionamento}
-                />
+                  <About
+                    title="Sobre"
+                    addresses={spot.addresses}
+                    phone={spot.phones}
+                    email={spot?.email}
+                    network={spot?.redes}
+                    hourFunction={spot?.horario_funcionamento}
+                  />
 
-                {spot.dicas_t && <Tips title="Dicas" dicas_t={spot.dicas_t} />}
+                  {spot.dicas_t && (
+                    <Tips title="Dicas" dicas_t={spot.dicas_t} />
+                  )}
 
-                {spot.preco_t && (
-                  <InputValue title="Valor da Entrada" preco_t={spot.preco_t} />
-                )}
-
-                {Array.isArray(spot?.viajantes) &&
-                  spot?.viajantes.length >= 1 && (
-                    <Travellers
-                      title="Viajantes"
-                      label={spot.label}
-                      viajantes={spot.viajantes}
+                  {spot.preco_t && (
+                    <InputValue
+                      title="Valor da Entrada"
+                      preco_t={spot.preco_t}
                     />
                   )}
 
-                {Array.isArray(spot?.estruturas) &&
-                  spot?.estruturas.length >= 1 && (
-                    <Informations
-                      title="Estruturas"
-                      estruturas={spot.estruturas}
-                    />
-                  )}
-                {Array.isArray(spot?.restricoes) &&
-                  spot?.restricoes.length >= 1 && (
-                    <Informations
-                      title="Restrições"
-                      estruturas={spot.restricoes}
-                    />
-                  )}
-                {Array.isArray(spot?.formas_pagamento) &&
-                  spot?.formas_pagamento.length >= 1 && (
-                    <Payments
-                      title="Formas de Pagamento"
-                      icone={spot.icone}
-                      label={spot.label}
-                      formas_pagamento={spot.formas_pagamento}
-                    />
-                  )}
-              </>
-            )}
+                  {Array.isArray(spot?.viajantes) &&
+                    spot?.viajantes.length >= 1 && (
+                      <Travellers
+                        title="Viajantes"
+                        label={spot.label}
+                        viajantes={spot.viajantes}
+                      />
+                    )}
+
+                  {Array.isArray(spot?.estruturas) &&
+                    spot?.estruturas.length >= 1 && (
+                      <Informations
+                        title="Estruturas"
+                        estruturas={spot.estruturas}
+                      />
+                    )}
+                  {Array.isArray(spot?.restricoes) &&
+                    spot?.restricoes.length >= 1 && (
+                      <Informations
+                        title="Restrições"
+                        estruturas={spot.restricoes}
+                      />
+                    )}
+                  {Array.isArray(spot?.formas_pagamento) &&
+                    spot?.formas_pagamento.length >= 1 && (
+                      <Payments
+                        title="Formas de Pagamento"
+                        icone={spot.icone}
+                        label={spot.label}
+                        formas_pagamento={spot.formas_pagamento}
+                      />
+                    )}
+                </>
+              )}
+            </div>
+            <div className="col-lg-4">
+              {spot && <IframeMaps address={spot?.addresses} />}
+              <div className="mt-4">
+                <DownloadApp />
+              </div>
+            </div>
           </div>
         </div>
-        {spot && <IframeMaps address={spot?.addresses} />}
-        <DownloadApp />
       </LoadingGate>
       <Footer />
     </Wrapper>

@@ -1,3 +1,4 @@
+import { AboutCityProvider } from './Hooks/AboutCity';
 import { BannersProvider } from './Hooks/BannersProvider';
 import { CityEventsProvider } from './Hooks/CityEventsProvider';
 import { DeliveriesProvider } from './Hooks/DeliveriesProvider';
@@ -21,7 +22,9 @@ export const App: React.FC = () => (
                 <DiscountsProvider>
                   <EventSpacesProvider>
                     <CityEventsProvider>
-                      <Routes />
+                      <AboutCityProvider>
+                        <Routes />
+                      </AboutCityProvider>
                     </CityEventsProvider>
                   </EventSpacesProvider>
                 </DiscountsProvider>

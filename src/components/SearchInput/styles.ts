@@ -13,8 +13,8 @@ export const SearchStyle = styled.div`
     align-items: center;
     width: 100%;
     height: 40px;
-    border: 1px solid rgb(51, 51, 51);
+    border: 1px solid var(--darkGray);
     border-radius: 20px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--lightGray);
   }
 `;

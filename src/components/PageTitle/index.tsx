@@ -3,21 +3,28 @@ import { Link } from 'react-router-dom';
 
 interface IPageTitleProps {
   title: string;
-  backTo?: string;
+  subtitle?: string;
   url?: string;
 }
 
 export const PageTitle: React.FC<IPageTitleProps> = ({
   title,
-  backTo = '/',
-}) => (
-  <div className="d-flex align-items-center my-4">
-    <Link
-      to={backTo}
-      className="fs-4 text-dark ms-0 me-2 d-flex align-items-center"
-    >
-      <MdArrowBack />
-    </Link>
-    <h1 className="fs-3 fw-bold m-0">{title}</h1>
-  </div>
-);
+  subtitle,
+  url = '/',
+}) => {
+  return (
+    <div className="d-flex m-0 align-items-center">
+      <Link className="fs-4 fw-bold text-dark me-2" to={url}>
+        <MdArrowBack />
+      </Link>
+      <div className="">
+        {subtitle && (
+          <Link to={url} className="text-decoration-none text-muted fs-6">
+            {subtitle}
+          </Link>
+        )}
+        <p className="text-decoration-none fw-bold mb-0 fs-3">{title}</p>
+      </div>
+    </div>
+  );
+};
