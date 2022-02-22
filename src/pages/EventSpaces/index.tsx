@@ -13,7 +13,7 @@ import LoadingCards from '../../components/LoadingCards';
 import EventSpacesCard from '../../components/EventSpaceCard';
 
 export const EventSpaces: React.FC = () => {
-  const { eventSpaces, getEventSpaces, categories, isLoading } =
+  const { eventSpaces, getEventSpaces, categories, isLoading, setCategories } =
     useEventSpaces();
 
   useEffect(() => {
@@ -56,6 +56,7 @@ export const EventSpaces: React.FC = () => {
               categories={categories}
               url="/espacos-para-eventos"
               color="secondary"
+              setCategories={setCategories}
             />
           </div>
         </div>
@@ -64,7 +65,10 @@ export const EventSpaces: React.FC = () => {
             {eventSpaces.map(eventSpace => {
               return (
                 <div key={eventSpace.id} className="col d-flex flex-column">
-                  <EventSpacesCard eventSpace={eventSpace} />
+                  <EventSpacesCard
+                    eventSpace={eventSpace}
+                    setCategories={setCategories}
+                  />
                 </div>
               );
             })}

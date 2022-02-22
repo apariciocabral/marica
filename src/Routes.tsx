@@ -18,7 +18,7 @@ export const Routes: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/pontos" element={<Spots />} />
         <Route path="/pontos/:id" element={<TouristSpot />} />
-        {/* <Route path="/pontos/categorias/:id/:label" element={<Spots />} /> */}
+        <Route path="/pontos/categorias/:id/:label" element={<Spots />} />
         <Route path="/hoteis-e-pousadas" element={<Hotels />} />
         {/* <Route path="/hoteis-e-pousadas/:id" element={<Hotel />} /> */}
         <Route path="/bares-e-restaurantes" element={<Restaurants />} />

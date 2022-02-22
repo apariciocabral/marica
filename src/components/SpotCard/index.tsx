@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AddressType } from '../../@types/Address';
+import { CategoryType } from '../../@types/Category';
 import { SpotsType } from '../../@types/Spots';
 import { Categories } from '../Categories';
 import { Cover } from './styles';
@@ -7,9 +8,14 @@ import { Cover } from './styles';
 interface ISpotsCardProps {
   spot: SpotsType;
   addresses: AddressType[];
+  setCategories: (categories: CategoryType[]) => void;
 }
 
-const SpotsCard: React.FC<ISpotsCardProps> = ({ spot, addresses }) => (
+const SpotsCard: React.FC<ISpotsCardProps> = ({
+  spot,
+  addresses,
+  setCategories,
+}) => (
   <div className="card mb-3 w-100">
     <Link to={`${spot.id}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${spot.capa})` }} />
@@ -21,6 +27,7 @@ const SpotsCard: React.FC<ISpotsCardProps> = ({ spot, addresses }) => (
         url="pontos"
         color="gray"
         size="sm"
+        setCategories={setCategories}
       />
       <div className="mt-auto">
         {addresses.map(address => (

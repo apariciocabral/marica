@@ -16,6 +16,7 @@ interface IRestaurantsContextProps {
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
+  setCategories: (categories: CategoryType[]) => void;
   // setRestaurant: (restaurant: RestaurantsType | null) => void;
   // getRestaurant: (id: number) => Promise<void>;
   getRestaurants: () => Promise<void>;
@@ -107,6 +108,7 @@ export const RestaurantsProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setRestaurant,
       // getRestaurant,
       getRestaurants,
@@ -117,6 +119,7 @@ export const RestaurantsProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setRestaurant,
       // getRestaurant,
       getRestaurants,

@@ -16,6 +16,7 @@ interface IHotelsContextProps {
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
+  setCategories: (categories: CategoryType[]) => void;
   // setHotel: (hotel: HotelsType | null) => void;
   // getHotel: (id: number) => Promise<void>;
   getHotels: () => Promise<void>;
@@ -105,6 +106,7 @@ export const HotelsProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setHotel,
       // getHotel,
       getHotels,
@@ -115,6 +117,7 @@ export const HotelsProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setHotel,
       // getHotel,
       getHotels,

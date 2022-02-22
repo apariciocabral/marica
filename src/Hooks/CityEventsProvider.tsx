@@ -16,6 +16,7 @@ interface ICityEventsContextProps {
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
+  setCategories: (categories: CategoryType[]) => void;
   // setCityEvent: (cityEvents: CityEventsType | null) => void;
   // getCityEvent: (id: number) => Promise<void>;
   getCityEvents: () => Promise<void>;
@@ -105,6 +106,7 @@ export const CityEventsProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setCityEvent,
       // getCityEvent,
       getCityEvents,
@@ -115,6 +117,7 @@ export const CityEventsProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setCityEvent,
       // getCityEvent,
       getCityEvents,

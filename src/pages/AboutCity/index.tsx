@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import { useEffect } from 'react';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
@@ -25,7 +26,7 @@ export const AboutCity: React.FC = () => {
               <div className="d-flex align-items-center fs-3">
                 <PageTitle title="Conheça Maricá" />
               </div>
-              {aboutCity}
+              <div dangerouslySetInnerHTML={{ __html: aboutCity }} />
             </div>
           </div>
         </div>

@@ -19,6 +19,7 @@ interface ISpotsContextProps {
   isLoading: boolean;
   errorMessage: string | null;
   setSpot: (spot: SpotsType | null) => void;
+  setCategories: (categories: CategoryType[]) => void;
   getSpot: (id: number) => Promise<void>;
   getSpots: (text?: string) => Promise<void>;
 }
@@ -95,6 +96,7 @@ export const SpotsProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       setSpot,
       getSpot,
       getSpots,
@@ -106,6 +108,7 @@ export const SpotsProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       setSpot,
       getSpot,
       getSpots,

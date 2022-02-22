@@ -1,13 +1,18 @@
 import { Link } from 'react-router-dom';
+import { CategoryType } from '../../@types/Category';
 import { RestaurantsType } from '../../@types/Restaurants';
 import { Categories } from '../Categories';
 import { Cover } from './styles';
 
 interface IRestaurantsCardProps {
   restaurant: RestaurantsType;
+  setCategories: (categories: CategoryType[]) => void;
 }
 
-const RestaurantsCard: React.FC<IRestaurantsCardProps> = ({ restaurant }) => (
+const RestaurantsCard: React.FC<IRestaurantsCardProps> = ({
+  restaurant,
+  setCategories,
+}) => (
   <div className="card mb-3">
     <Link to={`${restaurant.id}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${restaurant.capa})` }} />
@@ -19,6 +24,7 @@ const RestaurantsCard: React.FC<IRestaurantsCardProps> = ({ restaurant }) => (
         url="restaurantes"
         color="gray"
         size="sm"
+        setCategories={setCategories}
       />
       <div className="mt-auto">
         {restaurant.enderecos.map(address => (

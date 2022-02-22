@@ -16,6 +16,7 @@ interface IDeliveriesContextProps {
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
+  setCategories: (categories: CategoryType[]) => void;
   // setDelivery: (delivery: DeliveriesType | null) => void;
   // getDelivery: (id: number) => Promise<void>;
   getDeliveries: () => Promise<void>;
@@ -107,6 +108,7 @@ export const DeliveriesProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setDelivery,
       // getDelivery,
       getDeliveries,
@@ -117,6 +119,7 @@ export const DeliveriesProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setDelivery,
       // getDelivery,
       getDeliveries,

@@ -1,13 +1,18 @@
 import { Link } from 'react-router-dom';
+import { CategoryType } from '../../@types/Category';
 import { EventSpacesType } from '../../@types/EventSpaces';
 import { Categories } from '../Categories';
 import { Cover } from './styles';
 
 interface IEventSpacesCardProps {
   eventSpace: EventSpacesType;
+  setCategories: (categories: CategoryType[]) => void;
 }
 
-const EventSpacesCard: React.FC<IEventSpacesCardProps> = ({ eventSpace }) => (
+const EventSpacesCard: React.FC<IEventSpacesCardProps> = ({
+  eventSpace,
+  setCategories,
+}) => (
   <div className="card mb-3">
     <Link to={`${eventSpace.id}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${eventSpace.capa})` }} />
@@ -19,6 +24,7 @@ const EventSpacesCard: React.FC<IEventSpacesCardProps> = ({ eventSpace }) => (
         url="espacos-para-eventos"
         color="gray"
         size="sm"
+        setCategories={setCategories}
       />
       <div className="mt-auto">
         {eventSpace.enderecos.map(address => (

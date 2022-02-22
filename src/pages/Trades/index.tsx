@@ -13,7 +13,8 @@ import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 
 export const Trades: React.FC = () => {
-  const { trades, getTrades, categories, isLoading } = useTrades();
+  const { trades, getTrades, categories, isLoading, setCategories } =
+    useTrades();
 
   useEffect(() => {
     getTrades();
@@ -55,6 +56,7 @@ export const Trades: React.FC = () => {
               categories={categories}
               url="/comercios"
               color="secondary"
+              setCategories={setCategories}
             />
           </div>
         </div>
@@ -63,7 +65,7 @@ export const Trades: React.FC = () => {
             {trades.map(trade => {
               return (
                 <div key={trade.id} className="col d-flex flex-column">
-                  <TradesCard trade={trade} />
+                  <TradesCard trade={trade} setCategories={setCategories} />
                 </div>
               );
             })}

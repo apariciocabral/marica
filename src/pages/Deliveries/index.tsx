@@ -11,7 +11,8 @@ import { Categories } from '../../components/Categories';
 import { Select } from './styles';
 
 export const Deliveries: React.FC = () => {
-  const { getDeliveries, categories, isLoading } = useDeliveries();
+  const { getDeliveries, categories, isLoading, setCategories } =
+    useDeliveries();
 
   useEffect(() => {
     getDeliveries();
@@ -80,6 +81,7 @@ export const Deliveries: React.FC = () => {
                   categories={categories}
                   url="/delivery"
                   color="secondary"
+                  setCategories={setCategories}
                 />
               </div>
             </div>

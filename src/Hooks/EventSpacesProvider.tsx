@@ -16,6 +16,7 @@ interface IEventSpacesContextProps {
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
+  setCategories: (categories: CategoryType[]) => void;
   // setEventSpace: (eventSpace: EventSpacesType | null) => void;
   // getEventSpace: (id: number) => Promise<void>;
   getEventSpaces: () => Promise<void>;
@@ -105,6 +106,7 @@ export const EventSpacesProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setEventSpace,
       // getEventSpace,
       getEventSpaces,
@@ -115,6 +117,7 @@ export const EventSpacesProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setEventSpace,
       // getEventSpace,
       getEventSpaces,

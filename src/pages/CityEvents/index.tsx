@@ -13,7 +13,8 @@ import LoadingCards from '../../components/LoadingCards';
 import CityEventCard from '../../components/CityEventCard';
 
 export const CityEvents: React.FC = () => {
-  const { cityEvents, getCityEvents, categories, isLoading } = useCityEvents();
+  const { cityEvents, getCityEvents, categories, isLoading, setCategories } =
+    useCityEvents();
 
   useEffect(() => {
     getCityEvents();
@@ -55,6 +56,7 @@ export const CityEvents: React.FC = () => {
               categories={categories}
               url="/eventos"
               color="secondary"
+              setCategories={setCategories}
             />
           </div>
         </div>
@@ -63,7 +65,10 @@ export const CityEvents: React.FC = () => {
             {cityEvents.map(cityEvent => {
               return (
                 <div key={cityEvent.id} className="col d-flex flex-column">
-                  <CityEventCard cityEvent={cityEvent} />
+                  <CityEventCard
+                    cityEvent={cityEvent}
+                    setCategories={setCategories}
+                  />
                 </div>
               );
             })}

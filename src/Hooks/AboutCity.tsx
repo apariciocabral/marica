@@ -5,12 +5,11 @@ import {
   useContext,
   useMemo,
 } from 'react';
-import { AboutCityType } from '../@types/AboutCity';
 import { Api } from '../services/Api';
 
 // Aqui é definida a Interface com os tipos de dados de tudo que será disponibilizado "para fora" do Provider
 interface IAboutCityContextProps {
-  aboutCity: AboutCityType[];
+  aboutCity: string;
   isLoading: boolean;
   getAboutCity: () => Promise<void>;
 }
@@ -36,7 +35,7 @@ export const useAboutCity = (): IAboutCityContextProps => {
 
 // Aqui são definidas as variáveis de State e as funções do Provider
 export const AboutCityProvider: React.FC = ({ children }) => {
-  const [aboutCity, setAboutCity] = useState<AboutCityType[]>([]);
+  const [aboutCity, setAboutCity] = useState('');
   const [isLoading, setLoading] = useState(true);
 
   const getAboutCity = useCallback(async (): Promise<void> => {

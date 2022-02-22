@@ -16,6 +16,7 @@ interface ITradesContextProps {
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
+  setCategories: (categories: CategoryType[]) => void;
   // setTrade: (trade: TradesType | null) => void;
   // getTrade: (id: number) => Promise<void>;
   getTrades: () => Promise<void>;
@@ -107,6 +108,7 @@ export const TradesProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setTrade,
       // getTrade,
       getTrades,
@@ -117,6 +119,7 @@ export const TradesProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setTrade,
       // getTrade,
       getTrades,

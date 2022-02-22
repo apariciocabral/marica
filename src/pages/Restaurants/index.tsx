@@ -13,7 +13,7 @@ import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 
 export const Restaurants: React.FC = () => {
-  const { restaurants, getRestaurants, categories, isLoading } =
+  const { restaurants, getRestaurants, categories, isLoading, setCategories } =
     useRestaurants();
 
   useEffect(() => {
@@ -56,6 +56,7 @@ export const Restaurants: React.FC = () => {
               categories={categories}
               url={`/restaurantes/${categories}`}
               color="secondary"
+              setCategories={setCategories}
             />
           </div>
         </div>
@@ -64,7 +65,10 @@ export const Restaurants: React.FC = () => {
             {restaurants.map(restaurant => {
               return (
                 <div key={restaurant.id} className="col d-flex flex-column">
-                  <RestaurantsCard restaurant={restaurant} />
+                  <RestaurantsCard
+                    restaurant={restaurant}
+                    setCategories={setCategories}
+                  />
                 </div>
               );
             })}

@@ -110,7 +110,7 @@ const About: React.FC<IAboutProps> = ({
         </li>
       )}
 
-      {hourFunction && (
+      {Array.isArray(hourFunction) && hourFunction.length > 0 && (
         <li className="d-flex pb-4">
           <div className="px-2">
             <Icons className="fs-5">

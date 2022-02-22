@@ -13,7 +13,7 @@ import LoadingCards from '../../components/LoadingCards';
 import { SearchInput } from '../../components/SearchInput';
 
 export const Spots: React.FC = () => {
-  const { spots, getSpots, categories, isLoading } = useSpots();
+  const { spots, getSpots, categories, isLoading, setCategories } = useSpots();
 
   useEffect(() => {
     getSpots();
@@ -61,6 +61,7 @@ export const Spots: React.FC = () => {
               categories={categories}
               url="pontos"
               color="secondary"
+              setCategories={setCategories}
             />
           </div>
         </div>
@@ -69,7 +70,11 @@ export const Spots: React.FC = () => {
             {spots.map(spot => {
               return (
                 <div key={spot.id} className="col d-flex align-items-stretch">
-                  <SpotsCard spot={spot} addresses={spot.enderecos} />
+                  <SpotsCard
+                    spot={spot}
+                    addresses={spot.enderecos}
+                    setCategories={setCategories}
+                  />
                 </div>
               );
             })}

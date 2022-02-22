@@ -18,6 +18,7 @@ interface IDiscountsContextProps {
   collection: CollectionType[];
   isLoading: boolean;
   errorMessage: string | null;
+  setCategories: (categories: CategoryType[]) => void;
   // setDiscount: (spot: SpotsType | null) => void;
   // getDiscount: (id: number) => Promise<void>;
   getDiscounts: () => Promise<void>;
@@ -112,6 +113,7 @@ export const DiscountsProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setDiscount,
       // getDiscount,
       getDiscounts,
@@ -123,6 +125,7 @@ export const DiscountsProvider: React.FC = ({ children }) => {
       categories,
       isLoading,
       errorMessage,
+      setCategories,
       // setDiscount,
       // getDiscount,
       getDiscounts,

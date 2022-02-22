@@ -13,7 +13,8 @@ import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 
 export const Discounts: React.FC = () => {
-  const { discounts, getDiscounts, categories, isLoading } = useDiscounts();
+  const { discounts, getDiscounts, categories, isLoading, setCategories } =
+    useDiscounts();
 
   useEffect(() => {
     getDiscounts();
@@ -55,6 +56,7 @@ export const Discounts: React.FC = () => {
               categories={categories}
               url="/descontos"
               color="secondary"
+              setCategories={setCategories}
             />
           </div>
         </div>
@@ -63,7 +65,10 @@ export const Discounts: React.FC = () => {
             {discounts.map(discount => {
               return (
                 <div key={discount.id} className="col d-flex flex-column">
-                  <DiscountsCard discount={discount} />
+                  <DiscountsCard
+                    discount={discount}
+                    setCategories={setCategories}
+                  />
                 </div>
               );
             })}

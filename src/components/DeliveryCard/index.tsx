@@ -1,13 +1,18 @@
 import { Link } from 'react-router-dom';
+import { CategoryType } from '../../@types/Category';
 import { DeliveriesType } from '../../@types/Deliveries';
 import { Categories } from '../Categories';
 import { Cover } from './styles';
 
 interface IDeliveriesCardProps {
   delivery: DeliveriesType;
+  setCategories: (categories: CategoryType[]) => void;
 }
 
-const DeliveryCard: React.FC<IDeliveriesCardProps> = ({ delivery }) => (
+const DeliveryCard: React.FC<IDeliveriesCardProps> = ({
+  delivery,
+  setCategories,
+}) => (
   <div className="card mb-3">
     <Link to={`${delivery.id}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${delivery.capa})` }} />
@@ -19,6 +24,7 @@ const DeliveryCard: React.FC<IDeliveriesCardProps> = ({ delivery }) => (
         url="delivery"
         color="gray"
         size="sm"
+        setCategories={setCategories}
       />
       <div className="mt-auto">
         {delivery.enderecos.map(address => (

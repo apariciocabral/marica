@@ -1,13 +1,18 @@
 import { Link } from 'react-router-dom';
+import { CategoryType } from '../../@types/Category';
 import { CityEventsType } from '../../@types/CityEvents';
 import { Categories } from '../Categories';
 import { Cover } from './styles';
 
 interface ICityEventsCardProps {
   cityEvent: CityEventsType;
+  setCategories: (categories: CategoryType[]) => void;
 }
 
-const CityEventsCard: React.FC<ICityEventsCardProps> = ({ cityEvent }) => (
+const CityEventsCard: React.FC<ICityEventsCardProps> = ({
+  cityEvent,
+  setCategories,
+}) => (
   <div className="card mb-3">
     <Link to={`${cityEvent.id}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${cityEvent.capa})` }} />
@@ -19,6 +24,7 @@ const CityEventsCard: React.FC<ICityEventsCardProps> = ({ cityEvent }) => (
         url="espacos-para-eventos"
         color="gray"
         size="sm"
+        setCategories={setCategories}
       />
       <div className="mt-auto">
         {cityEvent.enderecos.map(address => (
