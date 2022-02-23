@@ -17,7 +17,7 @@ export const PageTitle: React.FC<IPageTitleProps> = ({
       <Link className="fs-4 fw-bold text-dark me-2" to={url}>
         <MdArrowBack />
       </Link>
-      <div className="">
+      <div>
         {subtitle && (
           <Link to={url} className="text-decoration-none text-muted fs-6">
             {subtitle}

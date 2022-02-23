@@ -9,4 +9,5 @@ export type CollectionType = {
   lng?: number;
   enderecos: AddressType[];
   categorias: CategoryType[];
+  label?: string;
 };

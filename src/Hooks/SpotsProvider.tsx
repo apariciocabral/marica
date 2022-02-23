@@ -15,6 +15,7 @@ interface ISpotsContextProps {
   spot: SpotsType | null;
   spots: SpotsType[];
   categories: CategoryType[];
+  category: CategoryType | null;
   collection: CollectionType[];
   isLoading: boolean;
   errorMessage: string | null;
@@ -22,6 +23,7 @@ interface ISpotsContextProps {
   setCategories: (categories: CategoryType[]) => void;
   getSpot: (id: number) => Promise<void>;
   getSpots: (text?: string) => Promise<void>;
+  getSpotsByCategory: (id: number) => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
@@ -48,10 +50,19 @@ export const SpotsProvider: React.FC = ({ children }) => {
   const [spot, setSpot] = useState<SpotsType | null>(null);
   const [spots, setSpots] = useState<SpotsType[]>([]);
   const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [category, setCategory] = useState<CategoryType | null>(null);
   const [collection] = useState<CollectionType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
+
+  const getSpotsByCategory = useCallback(async (id): Promise<void> => {
+    setLoading(true);
+    Api.get(`/pontos/categorias/${id}`)
+      .then(response => setSpots(response.data.collection))
+      .catch(() => setCategories([]))
+      .finally(() => setLoading(false));
+  }, []);
 
   const getSpot = useCallback(async (id): Promise<void> => {
     setLoading(true);
@@ -94,24 +105,30 @@ export const SpotsProvider: React.FC = ({ children }) => {
       spots,
       collection,
       categories,
+      category,
       isLoading,
       errorMessage,
       setCategories,
+      setCategory,
       setSpot,
       getSpot,
       getSpots,
+      getSpotsByCategory,
     }),
     [
       spot,
       spots,
       collection,
       categories,
+      category,
       isLoading,
       errorMessage,
       setCategories,
+      setCategory,
       setSpot,
       getSpot,
       getSpots,
+      getSpotsByCategory,
     ]
   );
 

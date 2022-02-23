@@ -19,7 +19,8 @@ import { DownloadApp } from '../../components/DownloadApp';
 import IframeMaps from '../../components/Maps';
 
 export const TouristSpot: React.FC = () => {
-  const { spot, getSpot, setSpot, isLoading, setCategories } = useSpots();
+  const { spot, categories, getSpot, setSpot, isLoading, setCategories } =
+    useSpots();
   const { id } = useParams();
 
   useEffect(() => {
@@ -50,7 +51,7 @@ export const TouristSpot: React.FC = () => {
                   </div>
 
                   <Categories
-                    categories={spot.categorias}
+                    categories={categories}
                     url="/pontos"
                     color="secondary"
                     setCategories={setCategories}
