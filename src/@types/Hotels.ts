@@ -1,12 +1,41 @@
+/* eslint-disable camelcase */
 import { AddressType } from './Address';
 import { CategoryType } from './Category';
+import { HourFunctionType } from './HourFunction';
+import { ImageType } from './Image';
+import { NetworkType } from './Network';
+import { PaymentType } from './Payment';
+import { PhoneType } from './Phone';
+import { RestrictionsType } from './Restriction';
+import { StructureType } from './Structure';
 
 export type HotelsType = {
   id: number;
   nome: string;
-  capa?: string;
-  lat?: number;
-  lng?: number;
-  categorias: CategoryType[];
+  email: string;
+  capa: string;
+  lat: number;
+  lng: number;
+  site: string;
+  quartos: number;
+  leitos: number;
+  cafe_manha: boolean;
+  cafe_hospedes: boolean;
+  almoco: boolean;
+  almoco_hospedes: boolean;
+  jantar: boolean;
+  jantar_hospedes: boolean;
+  descricao_t: string;
   enderecos: AddressType[];
+  images: ImageType[];
+  horario_funcionamento: HourFunctionType[];
+  phones: PhoneType[];
+  categorias: CategoryType[];
+  estruturas: StructureType[];
+  formas_pagamento: PaymentType[];
+  redes: NetworkType[];
+  restricoes: RestrictionsType[];
+  addresses: AddressType[];
+  icone: string;
+  label: string;
 };

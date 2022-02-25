@@ -5,12 +5,12 @@ import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { PageTitle } from '../../components/PageTitle';
 import Wrapper from '../../components/Wrapper';
-import { useHotels } from '../../Hooks/HotelsProvider';
 import HotelsCard from '../../components/HotelCard';
 import { Search } from './styles';
 import { Categories } from '../../components/Categories';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
+import { useHotels } from '../../Hooks/HotelsProvider';
 
 export const Hotels: React.FC = () => {
   const { hotels, getHotels, categories, isLoading, setCategories } =
@@ -54,7 +54,7 @@ export const Hotels: React.FC = () => {
           <div className="row">
             <Categories
               categories={categories}
-              url="/hoteis-e-pousadas"
+              url="hoteis-e-pousadas"
               color="secondary"
               setCategories={setCategories}
             />
@@ -65,7 +65,11 @@ export const Hotels: React.FC = () => {
             {hotels.map(hotel => {
               return (
                 <div key={hotel.id} className="col d-flex flex-column">
-                  <HotelsCard hotel={hotel} setCategories={setCategories} />
+                  <HotelsCard
+                    hotel={hotel}
+                    setCategories={setCategories}
+                    addresses={hotel.enderecos}
+                  />
                 </div>
               );
             })}

@@ -2,7 +2,7 @@ import Slider from 'react-slick';
 import { ImageType } from '../../@types/Image';
 import { Cover } from './styles';
 
-interface ISpotSliderProps {
+interface ICarouselSliderProps {
   images?: ImageType[];
 }
 
@@ -33,7 +33,7 @@ const responsive = [
   },
 ];
 
-const SpotSlider: React.FC<ISpotSliderProps> = ({ images }) => (
+const CarouselSlider: React.FC<ICarouselSliderProps> = ({ images }) => (
   <div>
     {Array.isArray(images) && images?.length >= 4 && (
       <Slider
@@ -68,4 +68,4 @@ const SpotSlider: React.FC<ISpotSliderProps> = ({ images }) => (
   </div>
 );
 
-export default SpotSlider;
+export default CarouselSlider;

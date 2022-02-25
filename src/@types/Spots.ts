@@ -1,14 +1,11 @@
 /* eslint-disable camelcase */
 import { AddressType } from './Address';
 import { CategoryType } from './Category';
+import { GeneralInfoType } from './GeneralInfo';
 import { HourFunctionType } from './HourFunction';
 import { ImageType } from './Image';
 import { NetworkType } from './Network';
-import { PaymentType } from './Payment';
 import { PhoneType } from './Phone';
-import { RestrictionsType } from './Restriction';
-import { StructureType } from './Structure';
-import { TravellerType } from './Traveller';
 
 export type SpotsType = {
   id: number;
@@ -20,17 +17,18 @@ export type SpotsType = {
   categorias: CategoryType[];
   addresses: AddressType[];
   enderecos: AddressType[];
-  estruturas: StructureType[];
-  restricoes: RestrictionsType[];
+  estruturas: GeneralInfoType[];
+  restricoes: GeneralInfoType[];
   email: string;
   redes: NetworkType[];
   horario_funcionamento: HourFunctionType[];
   phones: PhoneType[];
   dicas_t: string;
   preco_t: string;
-  viajantes: TravellerType[];
+  viajantes: GeneralInfoType[];
   label: string;
-  formas_pagamento: PaymentType[];
+  formas_pagamento: GeneralInfoType[];
   icone: string;
   images: ImageType[];
+  site: string;
 };

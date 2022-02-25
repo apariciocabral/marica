@@ -108,5 +108,10 @@ export const GlobalStyle = createGlobalStyle`
 
   .form-control:focus {
     box-shadow: none;
+  } 
+
+  .secondary {
+    color: var(--secondary);
+    background-color: var(--secondary);
   }
 `;

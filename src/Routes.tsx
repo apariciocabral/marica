@@ -11,6 +11,11 @@ import { Spots } from './pages/Spots';
 import { TouristSpot } from './pages/TouristSpot';
 import { Trades } from './pages/Trades';
 import { SpotsByCategory } from './pages/CategoriesSpots';
+import { Hotel } from './pages/Hotel';
+import { HotelsByCategory } from './pages/CategoriesHotels';
+import { Restaurant } from './pages/Restaurant';
+import { RestaurantsByCategory } from './pages/CategoriesRestaurants';
+import { SpotsMap } from './pages/SpotsMap';
 
 export const Routes: React.FC = () => {
   return (
@@ -18,15 +23,24 @@ export const Routes: React.FC = () => {
       <Switch>
         <Route path="/" element={<Home />} />
         <Route path="/pontos" element={<Spots />} />
+        <Route path="/pontos/mapa" element={<SpotsMap />} />
         <Route path="/pontos/:id" element={<TouristSpot />} />
         <Route
           path="/pontos/categorias/:id/:label"
           element={<SpotsByCategory />}
         />
         <Route path="/hoteis-e-pousadas" element={<Hotels />} />
-        {/* <Route path="/hoteis-e-pousadas/:id" element={<Hotel />} /> */}
+        <Route path="/hoteis-e-pousadas/:id" element={<Hotel />} />
+        <Route
+          path="/hoteis-e-pousadas/categorias/:id/:label"
+          element={<HotelsByCategory />}
+        />
         <Route path="/bares-e-restaurantes" element={<Restaurants />} />
-        {/* <Route path="/bares-e-restaurantes/:id" element={<Restaurant />} /> */}
+        <Route path="/bares-e-restaurantes/:id" element={<Restaurant />} />
+        <Route
+          path="/bares-e-restaurantes/categorias/:id/:label"
+          element={<RestaurantsByCategory />}
+        />
         <Route path="/delivery" element={<Deliveries />} />
         {/* <Route path="/delivery/:id" element={<Delivery />} /> */}
         <Route path="/comercios" element={<Trades />} />

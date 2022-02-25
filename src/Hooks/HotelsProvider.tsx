@@ -6,20 +6,24 @@ import {
   useMemo,
 } from 'react';
 import { CategoryType } from '../@types/Category';
+import { CollectionType } from '../@types/Collection';
 import { HotelsType } from '../@types/Hotels';
 import { Api } from '../services/Api';
 
 // Aqui é definida a Interface com os tipos de dados de tudo que será disponibilizado "para fora" do Provider
 interface IHotelsContextProps {
-  // hotel: HotelsType | null;
   hotels: HotelsType[];
+  hotel: HotelsType | null;
   categories: CategoryType[];
+  category: CategoryType | null;
+  collection: CollectionType[];
   isLoading: boolean;
   errorMessage: string | null;
+  setHotel: (hotel: HotelsType | null) => void;
   setCategories: (categories: CategoryType[]) => void;
-  // setHotel: (hotel: HotelsType | null) => void;
-  // getHotel: (id: number) => Promise<void>;
-  getHotels: () => Promise<void>;
+  getHotel: (id: number) => Promise<void>;
+  getHotels: (text?: string) => Promise<void>;
+  getHotelsByCategory: (id: number) => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
@@ -35,7 +39,7 @@ export const useHotels = (): IHotelsContextProps => {
   const context = useContext(HotelsContext);
 
   if (!context) {
-    throw new Error('useHotels must be within HotelsProvider');
+    throw new Error('useSpots must be within HotelsProvider');
   }
 
   return context;
@@ -43,84 +47,88 @@ export const useHotels = (): IHotelsContextProps => {
 
 // Aqui são definidas as variáveis de State e as funções do Provider
 export const HotelsProvider: React.FC = ({ children }) => {
-  // const [hotel, setHotel] = useState<HotelsType | null>(null);
+  const [hotel, setHotel] = useState<HotelsType | null>(null);
   const [hotels, setHotels] = useState<HotelsType[]>([]);
   const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [category, setCategory] = useState<CategoryType | null>(null);
+  const [collection] = useState<CollectionType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
-  const getHotels = useCallback(async (): Promise<void> => {
-    if (!alreadyGot) {
-      setLoading(true);
-      setErrorMessage(null);
-      try {
-        const response = await Api.get('/hoteis-e-pousadas');
+  const getHotelsByCategory = useCallback(async (id): Promise<void> => {
+    setLoading(true);
+    Api.get(`/hoteis-e-pousadas/categorias/${id}`)
+      .then(response => setHotels(response.data.collection))
+      .catch(() => setCategories([]))
+      .finally(() => setLoading(false));
+  }, []);
 
-        if (Array.isArray(response?.data?.collection)) {
-          setHotels(response?.data?.collection);
-          setCategories(response?.data?.categorias);
+  const getHotel = useCallback(async (id): Promise<void> => {
+    setLoading(true);
+    Api.get(`/hoteis-e-pousadas/${id}`)
+      .then(response => setHotel(response.data.item))
+      .catch(() => setHotel(null))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const getHotels = useCallback(
+    async (searchText = ''): Promise<void> => {
+      if (!alreadyGot || searchText.length > 0) {
+        setLoading(true);
+        setErrorMessage(null);
+
+        const url = searchText
+          ? `/hoteis-e-pousadas/busca?busca=${searchText}`
+          : '/hoteis-e-pousadas';
+        try {
+          const response = await Api.get(url);
+          if (!searchText) {
+            setCategories(response.data.categorias);
+          }
+          setHotels(response.data.collection);
           setAlreadyGot(true);
-        } else {
-          setHotels([]);
-          setCategories([]);
-          setErrorMessage(
-            'Could not get the hotel list. Please try again later.'
-          );
+        } catch (e) {
+          if (e instanceof Error) setErrorMessage(e.message);
+        } finally {
+          setLoading(false);
         }
-      } catch (e) {
-        if (e instanceof Error) setErrorMessage(e.message);
-      } finally {
-        setLoading(false);
       }
-    }
-  }, [alreadyGot]);
-
-  // const getHotel = useCallback(
-  //   async (id: number): Promise<void> => {
-  //     if (id !== hotel?.id) {
-  //       setLoading(true);
-  //       setError(null);
-  //       try {
-  //         const response = await Api.get(`/hoteis-e-pousadas/${id}`);
-  //         if (response?.data?.item) {
-  //           setHotel(response?.data?.item);
-  //         } else {
-  //           setError('Could not get the Hotels list. Please try again later.');
-  //         }
-  //       } catch (e) {
-  //         if (e instanceof Error) setError(e.message);
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     }
-  //   },
-  //   [hotel]
-  // );
+    },
+    [alreadyGot]
+  );
 
   // Aqui são definidas quais informações estarão disponíveis "para fora" do Provider
   const providerValue = useMemo(
     () => ({
-      // hotel,
+      hotel,
       hotels,
+      collection,
       categories,
+      category,
       isLoading,
       errorMessage,
       setCategories,
-      // setHotel,
-      // getHotel,
+      setCategory,
+      setHotel,
+      getHotel,
       getHotels,
+      getHotelsByCategory,
     }),
     [
-      // hotel,
+      hotel,
       hotels,
+      collection,
       categories,
+      category,
       isLoading,
       errorMessage,
       setCategories,
-      // setHotel,
-      // getHotel,
+      setCategory,
+      setHotel,
+      getHotel,
       getHotels,
+      getHotelsByCategory,
     ]
   );
 

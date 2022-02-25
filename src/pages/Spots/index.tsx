@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { FaMapMarkedAlt } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { PageTitle } from '../../components/PageTitle';
@@ -37,10 +38,12 @@ export const Spots: React.FC = () => {
               <PageTitle title="Pontos Turísticos" />
             </div>
             <div className="d-flex col-md-6 justify-content-end">
-              <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
-                <FaMapMarkedAlt className="me-2 fs-4" />
-                Mapa
-              </div>
+              <Link to="/pontos/mapa">
+                <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
+                  <FaMapMarkedAlt className="me-2 fs-4 text-white" />
+                  Mapa
+                </div>
+              </Link>
               <div className="my-4">
                 <SearchInput
                   className="input"

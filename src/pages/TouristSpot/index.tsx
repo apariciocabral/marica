@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { PageTitle } from '../../components/PageTitle';
@@ -14,13 +14,12 @@ import Tips from '../../components/Tips';
 import InputValue from '../../components/InputValue';
 import Travellers from '../../components/Travellers';
 import Payments from '../../components/Payments';
-import SpotSlider from '../../components/Slider';
 import { DownloadApp } from '../../components/DownloadApp';
 import IframeMaps from '../../components/Maps';
+import CarouselSlider from '../../components/Slider';
 
 export const TouristSpot: React.FC = () => {
-  const { spot, categories, getSpot, setSpot, isLoading, setCategories } =
-    useSpots();
+  const { spot, getSpot, setSpot, isLoading, setCategories } = useSpots();
   const { id } = useParams();
 
   useEffect(() => {
@@ -36,7 +35,7 @@ export const TouristSpot: React.FC = () => {
         waitFor={isLoading === false}
         meanwhile={<LoadingCards show numberOfCards={4} />}
       >
-        <SpotSlider images={spot?.images} />
+        <CarouselSlider images={spot?.images} />
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
@@ -51,11 +50,13 @@ export const TouristSpot: React.FC = () => {
                   </div>
 
                   <Categories
-                    categories={categories}
-                    url="/pontos"
+                    categories={spot.categorias}
+                    url="pontos"
                     color="secondary"
                     setCategories={setCategories}
-                  />
+                  >
+                    <Link to={`/pontos/categorias/${id}`} />
+                  </Categories>
 
                   <div className="mb-3">
                     <p>{spot.descricao_t}</p>
@@ -68,6 +69,7 @@ export const TouristSpot: React.FC = () => {
                     email={spot?.email}
                     network={spot?.redes}
                     hourFunction={spot?.horario_funcionamento}
+                    site={spot?.site}
                   />
 
                   {spot.dicas_t && (

@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { AiOutlineMail } from 'react-icons/ai';
+import { AiOutlineGlobal, AiOutlineMail } from 'react-icons/ai';
 import {
   FaWhatsapp,
   FaFacebook,
@@ -21,6 +21,7 @@ interface IAboutProps {
   addresses: AddressType[];
   phone: PhoneType[];
   email: string;
+  site: string;
   network: NetworkType[];
   hourFunction: HourFunctionType[];
 }
@@ -38,6 +39,7 @@ const About: React.FC<IAboutProps> = ({
   addresses,
   phone,
   email,
+  site,
   network,
   hourFunction,
 }) => (
@@ -85,6 +87,16 @@ const About: React.FC<IAboutProps> = ({
             </Icons>
           </div>
           <div className="px-2 m-0">{email}</div>
+        </li>
+      )}
+      {site && (
+        <li className="d-flex align-items-center list-unstyled col pb-4">
+          <div className="px-2">
+            <Icons className="fs-5">
+              <AiOutlineGlobal />
+            </Icons>
+          </div>
+          <div className="px-2 m-0">{site}</div>
         </li>
       )}
       {network && (
