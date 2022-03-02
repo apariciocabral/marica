@@ -1,13 +1,11 @@
 /* eslint-disable camelcase */
 import { AddressType } from './Address';
 import { CategoryType } from './Category';
+import { GeneralInfoType } from './GeneralInfo';
 import { HourFunctionType } from './HourFunction';
 import { ImageType } from './Image';
 import { NetworkType } from './Network';
-import { PaymentType } from './Payment';
 import { PhoneType } from './Phone';
-import { RestrictionsType } from './Restriction';
-import { StructureType } from './Structure';
 
 export type HotelsType = {
   id: number;
@@ -31,10 +29,10 @@ export type HotelsType = {
   horario_funcionamento: HourFunctionType[];
   phones: PhoneType[];
   categorias: CategoryType[];
-  estruturas: StructureType[];
-  formas_pagamento: PaymentType[];
+  estruturas: GeneralInfoType[];
+  formas_pagamento: GeneralInfoType[];
   redes: NetworkType[];
-  restricoes: RestrictionsType[];
+  restricoes: GeneralInfoType[];
   addresses: AddressType[];
   icone: string;
   label: string;

@@ -12,8 +12,6 @@ import Informations from '../../components/Informations';
 import About from '../../components/About';
 import Tips from '../../components/Tips';
 import InputValue from '../../components/InputValue';
-import Travellers from '../../components/Travellers';
-import Payments from '../../components/Payments';
 import { DownloadApp } from '../../components/DownloadApp';
 import IframeMaps from '../../components/Maps';
 import CarouselSlider from '../../components/Slider';
@@ -85,10 +83,9 @@ export const TouristSpot: React.FC = () => {
 
                   {Array.isArray(spot?.viajantes) &&
                     spot?.viajantes.length >= 1 && (
-                      <Travellers
-                        title="Viajantes"
-                        label={spot.label}
-                        viajantes={spot.viajantes}
+                      <Informations
+                        title="Estruturas"
+                        contents={spot.viajantes}
                       />
                     )}
 
@@ -96,23 +93,22 @@ export const TouristSpot: React.FC = () => {
                     spot?.estruturas.length >= 1 && (
                       <Informations
                         title="Estruturas"
-                        estruturas={spot.estruturas}
+                        contents={spot.estruturas}
                       />
                     )}
                   {Array.isArray(spot?.restricoes) &&
                     spot?.restricoes.length >= 1 && (
                       <Informations
                         title="Restrições"
-                        estruturas={spot.restricoes}
+                        contents={spot.restricoes}
                       />
                     )}
+
                   {Array.isArray(spot?.formas_pagamento) &&
                     spot?.formas_pagamento.length >= 1 && (
-                      <Payments
-                        title="Formas de Pagamento"
-                        icone={spot.icone}
-                        label={spot.label}
-                        formas_pagamento={spot.formas_pagamento}
+                      <Informations
+                        title="Restrições"
+                        contents={spot.formas_pagamento}
                       />
                     )}
                 </>

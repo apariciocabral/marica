@@ -74,6 +74,22 @@ export const Restaurant: React.FC = () => {
                     />
                   )}
 
+                  {Array.isArray(restaurant?.refeicoes) &&
+                    restaurant.refeicoes.length > 0 && (
+                      <Informations
+                        title="Refeições"
+                        contents={restaurant.refeicoes}
+                      />
+                    )}
+
+                  {Array.isArray(restaurant?.cozinhas) &&
+                    restaurant.cozinhas.length > 0 && (
+                      <Informations
+                        title="Cozinhas"
+                        contents={restaurant.cozinhas}
+                      />
+                    )}
+
                   {Array.isArray(restaurant?.estruturas) &&
                     restaurant.estruturas.length > 0 && (
                       <Informations

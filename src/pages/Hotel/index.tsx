@@ -8,7 +8,6 @@ import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import Informations from '../../components/Informations';
 import About from '../../components/About';
-import Payments from '../../components/Payments';
 import { DownloadApp } from '../../components/DownloadApp';
 import IframeMaps from '../../components/Maps';
 import { useHotels } from '../../Hooks/HotelsProvider';
@@ -86,23 +85,22 @@ export const Hotel: React.FC = () => {
                     hotel?.estruturas.length >= 1 && (
                       <Informations
                         title="Estruturas"
-                        estruturas={hotel.estruturas}
+                        contents={hotel.estruturas}
                       />
                     )}
                   {Array.isArray(hotel?.restricoes) &&
                     hotel?.restricoes.length >= 1 && (
                       <Informations
                         title="Restrições"
-                        estruturas={hotel.restricoes}
+                        contents={hotel.restricoes}
                       />
                     )}
+
                   {Array.isArray(hotel?.formas_pagamento) &&
                     hotel?.formas_pagamento.length >= 1 && (
-                      <Payments
-                        title="Formas de Pagamento"
-                        icone={hotel.icone}
-                        label={hotel.label}
-                        formas_pagamento={hotel.formas_pagamento}
+                      <Informations
+                        title="Restrições"
+                        contents={hotel.formas_pagamento}
                       />
                     )}
                 </>
