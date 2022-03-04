@@ -29,5 +29,4 @@ export const MapTitle = styled(Link)`
   box-shadow: rgb(0 0 0 / 30%) 0px 1px 5px;
   z-index: 2;
   border: none;
-  background-color: transparent;
 `;

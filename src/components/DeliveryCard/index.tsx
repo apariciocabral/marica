@@ -13,7 +13,7 @@ const DeliveryCard: React.FC<IDeliveriesCardProps> = ({
   delivery,
   setCategories,
 }) => (
-  <div className="card mb-3">
+  <div className="card mb-3 w-100">
     <Link to={`${delivery.id}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${delivery.capa})` }} />
     </Link>

@@ -71,6 +71,14 @@ export const ContainerHeader = styled.header`
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+
+  &.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+  }
 `;
 
 export const ContentHeader = styled.div`

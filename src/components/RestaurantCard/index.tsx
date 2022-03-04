@@ -16,7 +16,7 @@ const RestaurantsCard: React.FC<IRestaurantsCardProps> = ({
   addresses,
   setCategories,
 }) => (
-  <div className="card mb-3">
+  <div className="card mb-3 w-100">
     <Link to={`${restaurant.id}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${restaurant.capa})` }} />
     </Link>

@@ -27,7 +27,11 @@ const instagramUrl = process.env.REACT_APP_INSTAGRAM_URL ?? '';
 const twitterUrl = process.env.REACT_APP_TWITTER_URL ?? '';
 const youtubeUrl = process.env.REACT_APP_YOUTUBE_URL ?? '';
 
-export const Header: React.FC = () => {
+interface IHeaderProps {
+  fixed?: boolean;
+}
+
+export const Header: React.FC<IHeaderProps> = ({ fixed = false }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -110,7 +114,7 @@ export const Header: React.FC = () => {
           )}
         </ul>
       </MenuHeader>
-      <ContainerHeader>
+      <ContainerHeader className={fixed ? 'fixed' : undefined}>
         <ContentHeader>
           <div className="container">
             <div className="row">

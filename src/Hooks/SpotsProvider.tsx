@@ -6,7 +6,6 @@ import {
   useMemo,
 } from 'react';
 import { CategoryType } from '../@types/Category';
-import { CollectionType } from '../@types/Collection';
 import { SpotsType } from '../@types/Spots';
 import { Api } from '../services/Api';
 
@@ -16,7 +15,6 @@ interface ISpotsContextProps {
   spots: SpotsType[];
   categories: CategoryType[];
   category: CategoryType | null;
-  collection: CollectionType[];
   isLoading: boolean;
   errorMessage: string | null;
   setSpot: (spot: SpotsType | null) => void;
@@ -49,20 +47,30 @@ export const useSpots = (): ISpotsContextProps => {
 export const SpotsProvider: React.FC = ({ children }) => {
   const [spot, setSpot] = useState<SpotsType | null>(null);
   const [spots, setSpots] = useState<SpotsType[]>([]);
-  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [category, setCategory] = useState<CategoryType | null>(null);
-  const [collection] = useState<CollectionType[]>([]);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
-  const getSpotsByCategory = useCallback(async (id): Promise<void> => {
-    setLoading(true);
-    Api.get(`/pontos/categorias/${id}`)
-      .then(response => setSpots(response.data.collection))
-      .catch(() => setCategories([]))
-      .finally(() => setLoading(false));
-  }, []);
+  const getSpotsByCategory = useCallback(
+    async (id): Promise<void> => {
+      setLoading(true);
+      Api.get(`/pontos/categorias/${id}`)
+        .then(response => {
+          setSpots(response.data.collection);
+          const categoryToFind = categories.find(c => c.id === id);
+          setCategory(categoryToFind ?? null);
+          setAlreadyGot(false);
+        })
+        .catch(() => {
+          setSpots([]);
+          setCategory(null);
+        })
+        .finally(() => setLoading(false));
+    },
+    [categories]
+  );
 
   const getSpot = useCallback(async (id): Promise<void> => {
     setLoading(true);
@@ -103,7 +111,6 @@ export const SpotsProvider: React.FC = ({ children }) => {
     () => ({
       spot,
       spots,
-      collection,
       categories,
       category,
       isLoading,
@@ -118,7 +125,6 @@ export const SpotsProvider: React.FC = ({ children }) => {
     [
       spot,
       spots,
-      collection,
       categories,
       category,
       isLoading,

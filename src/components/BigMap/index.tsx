@@ -17,6 +17,7 @@ interface IMapMarkerProps {
 
 const MapMarker: React.FC<IMapMarkerProps> = () => (
   <MarkerStyles>
+    <div>aqui</div>
     <FaMapMarkerAlt color="red" className="fs-3" />
   </MarkerStyles>
 );
@@ -34,7 +35,7 @@ const BigMap: React.FC<IBigMapProps> = ({ items, url, backTo }) => {
         </div>
       </MapTitle>
 
-      <div style={{ height: '100%', width: '100%' }}>
+      <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: `${process.env.REACT_APP_GOOGLE_KEY}`,

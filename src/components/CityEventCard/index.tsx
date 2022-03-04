@@ -13,7 +13,7 @@ const CityEventsCard: React.FC<ICityEventsCardProps> = ({
   cityEvent,
   setCategories,
 }) => (
-  <div className="card mb-3">
+  <div className="card mb-3 w-100">
     <Link to={`${cityEvent.id}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${cityEvent.capa})` }} />
     </Link>

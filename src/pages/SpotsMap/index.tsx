@@ -14,8 +14,8 @@ export const SpotsMap: React.FC = () => {
 
   return (
     <Wrapper>
-      <Header />
-      {spots && (
+      <Header fixed />
+      {Array.isArray(spots) && spots.length > 0 && (
         <BigMap items={spots} url="/pontos" backTo="Pontos Turísticos" />
       )}
     </Wrapper>

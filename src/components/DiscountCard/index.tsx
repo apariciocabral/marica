@@ -13,7 +13,7 @@ const DiscountsCard: React.FC<IDiscountsCardProps> = ({
   discount,
   setCategories,
 }) => (
-  <div className="card mb-3">
+  <div className="card mb-3 w-100">
     <Link to={`${discount.data}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${discount.links})` }} />
     </Link>

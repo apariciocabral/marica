@@ -28,10 +28,10 @@ export const Deliveries: React.FC = () => {
       >
         <div className="container">
           <div className="row">
-            <div className="d-flex col-md-6">
+            <div className="d-flex col-md-6 my-4">
               <PageTitle title="Delivery" />
             </div>
-            <p className="ms-0">Selecione o tipo de estabelecimento:</p>
+            <p className="mb-4">Selecione o tipo de estabelecimento:</p>
             <Select>
               <div className="row">
                 <div className="col">
@@ -55,6 +55,8 @@ export const Deliveries: React.FC = () => {
                   </div>
                 </div>
               </div>
+            </Select>
+            <Select>
               <div className="d-flex align-items-center p-3">
                 <a
                   className=""
