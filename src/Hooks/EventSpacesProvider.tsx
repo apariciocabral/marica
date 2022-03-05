@@ -11,15 +11,17 @@ import { Api } from '../services/Api';
 
 // Aqui é definida a Interface com os tipos de dados de tudo que será disponibilizado "para fora" do Provider
 interface IEventSpacesContextProps {
-  // eventSpace: EventSpacesType | null;
+  eventSpace: EventSpacesType | null;
   eventSpaces: EventSpacesType[];
   categories: CategoryType[];
+  category: CategoryType | null;
   isLoading: boolean;
   errorMessage: string | null;
+  setEventSpace: (eventSpace: EventSpacesType | null) => void;
   setCategories: (categories: CategoryType[]) => void;
-  // setEventSpace: (eventSpace: EventSpacesType | null) => void;
-  // getEventSpace: (id: number) => Promise<void>;
-  getEventSpaces: () => Promise<void>;
+  getEventSpace: (id: number) => Promise<void>;
+  getEventSpaces: (text?: string) => Promise<void>;
+  getEventSpacesByCategory: (id: number) => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
@@ -43,84 +45,96 @@ export const useEventSpaces = (): IEventSpacesContextProps => {
 
 // Aqui são definidas as variáveis de State e as funções do Provider
 export const EventSpacesProvider: React.FC = ({ children }) => {
-  // const [eventSpace, setEventSpace] = useState<EventSpacesType | null>(null);
+  const [eventSpace, setEventSpace] = useState<EventSpacesType | null>(null);
   const [eventSpaces, setEventSpaces] = useState<EventSpacesType[]>([]);
+  const [category, setCategory] = useState<CategoryType | null>(null);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
-  const getEventSpaces = useCallback(async (): Promise<void> => {
-    if (!alreadyGot) {
+  const getEventSpacesByCategory = useCallback(
+    async (id): Promise<void> => {
       setLoading(true);
-      setErrorMessage(null);
-      try {
-        const response = await Api.get('/espacos-para-eventos');
-
-        if (Array.isArray(response?.data?.collection)) {
-          setEventSpaces(response?.data?.collection);
-          setCategories(response?.data?.categorias);
-          setAlreadyGot(true);
-        } else {
+      Api.get(`/espacos/categorias/${id}`)
+        .then(response => {
+          setEventSpaces(response.data.collection);
+          const categoryToFind = categories.find(c => c.id === id);
+          setCategory(categoryToFind ?? null);
+          setAlreadyGot(false);
+        })
+        .catch(() => {
           setEventSpaces([]);
-          setCategories([]);
-          setErrorMessage(
-            'Could not get the EventSpace list. Please try again later.'
-          );
-        }
-      } catch (e) {
-        if (e instanceof Error) setErrorMessage(e.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-  }, [alreadyGot]);
+          setCategory(null);
+        })
+        .finally(() => setLoading(false));
+    },
+    [categories]
+  );
 
-  // const getEventSpace = useCallback(
-  //   async (id: number): Promise<void> => {
-  //     if (id !== eventSpace?.id) {
-  //       setLoading(true);
-  //       setError(null);
-  //       try {
-  //         const response = await Api.get(`/espacos-para-eventos/${id}`);
-  //         if (response?.data?.item) {
-  //           setEventSpace(response?.data?.item);
-  //         } else {
-  //           setError('Could not get the EventSpaces list. Please try again later.');
-  //         }
-  //       } catch (e) {
-  //         if (e instanceof Error) setError(e.message);
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     }
-  //   },
-  //   [eventSpace]
-  // );
+  const getEventSpace = useCallback(async (id): Promise<void> => {
+    setLoading(true);
+    Api.get(`/espacos/${id}`)
+      .then(response => setEventSpace(response.data.item))
+      .catch(() => setEventSpace(null))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const getEventSpaces = useCallback(
+    async (searchText = ''): Promise<void> => {
+      if (!alreadyGot || searchText.length > 0) {
+        setLoading(true);
+        setErrorMessage(null);
+
+        const url = searchText
+          ? `/espacos/busca?busca=${searchText}`
+          : '/espacos';
+        try {
+          const response = await Api.get(url);
+          if (!searchText) {
+            setCategories(response.data.categorias);
+          }
+          setEventSpaces(response.data.collection);
+          setAlreadyGot(true);
+        } catch (e) {
+          if (e instanceof Error) setErrorMessage(e.message);
+        } finally {
+          setLoading(false);
+        }
+      }
+    },
+    [alreadyGot]
+  );
 
   // Aqui são definidas quais informações estarão disponíveis "para fora" do Provider
   const providerValue = useMemo(
     () => ({
-      // eventSpace,
+      eventSpace,
       eventSpaces,
       categories,
+      category,
       isLoading,
       errorMessage,
       setCategories,
-      // setEventSpace,
-      // getEventSpace,
+      setCategory,
+      setEventSpace,
+      getEventSpace,
       getEventSpaces,
+      getEventSpacesByCategory,
     }),
     [
-      // eventSpace,
+      eventSpace,
       eventSpaces,
       categories,
+      category,
       isLoading,
       errorMessage,
       setCategories,
-      // setEventSpace,
-      // getEventSpace,
+      setCategory,
+      setEventSpace,
+      getEventSpace,
       getEventSpaces,
+      getEventSpacesByCategory,
     ]
   );
 

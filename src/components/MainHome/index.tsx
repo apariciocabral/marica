@@ -42,7 +42,7 @@ export const MainHome: React.FC = () => {
               <Card
                 title="Bares e Restaurantes"
                 description="Aprecie a gastronomia de Maricá"
-                url="/bares-e-restaurantes"
+                url="/restaurantes"
                 icon={MdOutlineRestaurant}
               />
             </div>

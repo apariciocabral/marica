@@ -47,7 +47,7 @@ export const Card: React.FC<ICardProps> = ({
         </p>
         <div className="mt-auto w-100">
           {isInternal ? (
-            <Link to={url} className="button" title="Pontos Turísticos">
+            <Link to={url} className="button" title={title}>
               Acessar
             </Link>
           ) : (
@@ -56,7 +56,7 @@ export const Card: React.FC<ICardProps> = ({
               target="_blank"
               rel="noreferrer"
               className="button"
-              title="Pontos Turísticos"
+              title={title}
             >
               Acessar
             </a>

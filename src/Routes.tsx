@@ -16,6 +16,14 @@ import { HotelsByCategory } from './pages/CategoriesHotels';
 import { Restaurant } from './pages/Restaurant';
 import { RestaurantsByCategory } from './pages/CategoriesRestaurants';
 import { SpotsMap } from './pages/SpotsMap';
+import { RestaurantsMap } from './pages/RestaurantsMap';
+import { HotelsMap } from './pages/HotelsMap';
+import { TradesMap } from './pages/TradesMap';
+import { TradesByCategory } from './pages/CategoriesTrades';
+import { Trade } from './pages/Trade';
+import { EventSpace } from './pages/EventSpace';
+import { EventSpacesMap } from './pages/EventSpacesMap';
+import { EventSpacesByCategory } from './pages/CategoriesEventSpaces';
 
 export const Routes: React.FC = () => {
   return (
@@ -30,25 +38,37 @@ export const Routes: React.FC = () => {
           element={<SpotsByCategory />}
         />
         <Route path="/hoteis-e-pousadas" element={<Hotels />} />
+        <Route path="/hoteis-e-pousadas/mapa" element={<HotelsMap />} />
         <Route path="/hoteis-e-pousadas/:id" element={<Hotel />} />
         <Route
           path="/hoteis-e-pousadas/categorias/:id/:label"
           element={<HotelsByCategory />}
         />
-        <Route path="/bares-e-restaurantes" element={<Restaurants />} />
-        <Route path="/bares-e-restaurantes/:id" element={<Restaurant />} />
+        <Route path="/restaurantes" element={<Restaurants />} />
+        <Route path="/restaurantes/mapa" element={<RestaurantsMap />} />
+        <Route path="/restaurantes/:id" element={<Restaurant />} />
         <Route
-          path="/bares-e-restaurantes/categorias/:id/:label"
+          path="/restaurantes/categorias/:id/:label"
           element={<RestaurantsByCategory />}
         />
         <Route path="/delivery" element={<Deliveries />} />
         {/* <Route path="/delivery/:id" element={<Delivery />} /> */}
         <Route path="/comercios" element={<Trades />} />
-        {/* <Route path="/comercios/:id" element={<Trade />} /> */}
+        <Route path="/comercios/mapa" element={<TradesMap />} />
+        <Route path="/comercios/:id" element={<Trade />} />
+        <Route
+          path="/comercios/categorias/:id/:label"
+          element={<TradesByCategory />}
+        />
         <Route path="/descontos" element={<Discounts />} />
         {/* <Route path="/descontos/:id" element={<Discount />} /> */}
-        <Route path="/espacos-para-eventos" element={<EventSpaces />} />
-        {/* <Route path="/espacos-para-eventos/:id" element={<EventSpace />} /> */}
+        <Route path="/espacos" element={<EventSpaces />} />
+        <Route path="/espacos/mapa" element={<EventSpacesMap />} />
+        <Route path="/espacos/:id" element={<EventSpace />} />
+        <Route
+          path="/espacos/categorias/:id/:label"
+          element={<EventSpacesByCategory />}
+        />
         <Route path="/eventos" element={<CityEvents />} />
         {/* <Route path="/eventos/:id" element={<CityEvent />} /> */}
         <Route path="/sobre" element={<AboutCity />} />

@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
 import { FaMapMarkedAlt } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { PageTitle } from '../../components/PageTitle';
 import Wrapper from '../../components/Wrapper';
+import { useHotels } from '../../Hooks/HotelsProvider';
 import HotelsCard from '../../components/HotelCard';
-import { Search } from './styles';
 import { Categories } from '../../components/Categories';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
-import { useHotels } from '../../Hooks/HotelsProvider';
+import { SearchInput } from '../../components/SearchInput';
 
 export const Hotels: React.FC = () => {
   const { hotels, getHotels, categories, isLoading, setCategories } =
@@ -20,6 +21,10 @@ export const Hotels: React.FC = () => {
     getHotels();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleSearch = (searchText: string): void => {
+    getHotels(searchText);
+  };
 
   return (
     <Wrapper>
@@ -33,21 +38,25 @@ export const Hotels: React.FC = () => {
             <div className="d-flex col-md-6">
               <PageTitle title="Hotéis e Pousadas" />
             </div>
-            <form className="d-flex col-md-6 justify-content-end">
-              <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
-                <FaMapMarkedAlt className="me-2 fs-4" />
-                Mapa
-              </div>
-              <Search className="my-4 d-flex">
-                <input
-                  className="input form-control"
+            <div className="d-flex col-md-6 justify-content-end">
+              <Link to="/hoteis-e-pousadas/mapa">
+                <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
+                  <FaMapMarkedAlt className="me-2 fs-4 text-white" />
+                  Mapa
+                </div>
+              </Link>
+              <div className="my-4">
+                <SearchInput
+                  className="input"
                   type="search"
-                  placeholder="Buscar Hotéis e Pousadas"
+                  onSearch={handleSearch}
+                  placeholder="Buscar hotéis e pousadas"
                   aria-label="Search"
-                />
-                <AiOutlineSearch className="fs-4" />
-              </Search>
-            </form>
+                >
+                  <AiOutlineSearch className="fs-4" />
+                </SearchInput>
+              </div>
+            </div>
           </div>
         </div>
         <div className="container">
@@ -64,11 +73,11 @@ export const Hotels: React.FC = () => {
           <div className="row row-cols-3">
             {hotels.map(hotel => {
               return (
-                <div key={hotel.id} className="col d-flex flex-column">
+                <div key={hotel.id} className="col d-flex align-items-stretch">
                   <HotelsCard
                     hotel={hotel}
-                    setCategories={setCategories}
                     addresses={hotel.enderecos}
+                    setCategories={setCategories}
                   />
                 </div>
               );

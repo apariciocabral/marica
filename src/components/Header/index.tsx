@@ -69,7 +69,7 @@ export const Header: React.FC<IHeaderProps> = ({ fixed = false }) => {
             </Link>
           </li>
           <li>
-            <Link to="/bares-e-restaurantes">
+            <Link to="/restaurantes">
               <MdOutlineRestaurant /> Bares e Restaurantes
             </Link>
           </li>

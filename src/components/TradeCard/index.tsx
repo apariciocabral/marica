@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AddressType } from '../../@types/Address';
 import { CategoryType } from '../../@types/Category';
 import { TradesType } from '../../@types/Trades';
 import { Categories } from '../Categories';
@@ -6,11 +7,16 @@ import { Cover } from './styles';
 
 interface ITradesCardProps {
   trade: TradesType;
+  enderecos: AddressType[];
   setCategories: (categories: CategoryType[]) => void;
 }
 
-const TradesCard: React.FC<ITradesCardProps> = ({ trade, setCategories }) => (
-  <div className="card mb-3">
+const TradesCard: React.FC<ITradesCardProps> = ({
+  trade,
+  enderecos,
+  setCategories,
+}) => (
+  <div className="card mb-3 w-100">
     <Link to={`${trade.id}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${trade.capa})` }} />
     </Link>
@@ -24,9 +30,9 @@ const TradesCard: React.FC<ITradesCardProps> = ({ trade, setCategories }) => (
         setCategories={setCategories}
       />
       <div className="mt-auto">
-        {trade.enderecos.map(address => (
-          <p key={address.id} className="text-muted">
-            {address.label}
+        {enderecos.map(endereco => (
+          <p key={endereco.id} className="text-muted">
+            {endereco.label}
           </p>
         ))}
       </div>

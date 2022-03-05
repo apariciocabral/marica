@@ -24,7 +24,7 @@ const RestaurantsCard: React.FC<IRestaurantsCardProps> = ({
       <h5 className="fs-6 card-title mb-3">{restaurant.nome}</h5>
       <Categories
         categories={restaurant.categorias}
-        url="bares-e-restaurantes"
+        url="restaurantes"
         color="gray"
         size="sm"
         setCategories={setCategories}

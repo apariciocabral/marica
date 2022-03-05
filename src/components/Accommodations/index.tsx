@@ -5,7 +5,7 @@ import { FaBed, FaConciergeBell } from 'react-icons/fa';
 import { GiKnifeFork } from 'react-icons/gi';
 import { Icons } from './styles';
 
-interface IAccommodationProps {
+interface IAccommodationsProps {
   title: string;
   quartos?: number;
   leitos?: number;
@@ -17,7 +17,7 @@ interface IAccommodationProps {
   jantar_hospedes?: boolean;
 }
 
-const Accommodation: React.FC<IAccommodationProps> = ({
+const Accommodations: React.FC<IAccommodationsProps> = ({
   title,
   quartos,
   cafe_manha,
@@ -108,4 +108,4 @@ const Accommodation: React.FC<IAccommodationProps> = ({
   </div>
 );
 
-export default Accommodation;
+export default Accommodations;

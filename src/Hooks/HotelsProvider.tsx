@@ -6,17 +6,15 @@ import {
   useMemo,
 } from 'react';
 import { CategoryType } from '../@types/Category';
-import { CollectionType } from '../@types/Collection';
 import { HotelsType } from '../@types/Hotels';
 import { Api } from '../services/Api';
 
 // Aqui é definida a Interface com os tipos de dados de tudo que será disponibilizado "para fora" do Provider
 interface IHotelsContextProps {
-  hotels: HotelsType[];
   hotel: HotelsType | null;
+  hotels: HotelsType[];
   categories: CategoryType[];
   category: CategoryType | null;
-  collection: CollectionType[];
   isLoading: boolean;
   errorMessage: string | null;
   setHotel: (hotel: HotelsType | null) => void;
@@ -39,7 +37,7 @@ export const useHotels = (): IHotelsContextProps => {
   const context = useContext(HotelsContext);
 
   if (!context) {
-    throw new Error('useSpots must be within HotelsProvider');
+    throw new Error('useHotels must be within HotelsProvider');
   }
 
   return context;
@@ -49,20 +47,30 @@ export const useHotels = (): IHotelsContextProps => {
 export const HotelsProvider: React.FC = ({ children }) => {
   const [hotel, setHotel] = useState<HotelsType | null>(null);
   const [hotels, setHotels] = useState<HotelsType[]>([]);
-  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [category, setCategory] = useState<CategoryType | null>(null);
-  const [collection] = useState<CollectionType[]>([]);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
-  const getHotelsByCategory = useCallback(async (id): Promise<void> => {
-    setLoading(true);
-    Api.get(`/hoteis-e-pousadas/categorias/${id}`)
-      .then(response => setHotels(response.data.collection))
-      .catch(() => setCategories([]))
-      .finally(() => setLoading(false));
-  }, []);
+  const getHotelsByCategory = useCallback(
+    async (id): Promise<void> => {
+      setLoading(true);
+      Api.get(`/hoteis-e-pousadas/categorias/${id}`)
+        .then(response => {
+          setHotels(response.data.collection);
+          const categoryToFind = categories.find(c => c.id === id);
+          setCategory(categoryToFind ?? null);
+          setAlreadyGot(false);
+        })
+        .catch(() => {
+          setHotels([]);
+          setCategory(null);
+        })
+        .finally(() => setLoading(false));
+    },
+    [categories]
+  );
 
   const getHotel = useCallback(async (id): Promise<void> => {
     setLoading(true);
@@ -103,7 +111,6 @@ export const HotelsProvider: React.FC = ({ children }) => {
     () => ({
       hotel,
       hotels,
-      collection,
       categories,
       category,
       isLoading,
@@ -118,7 +125,6 @@ export const HotelsProvider: React.FC = ({ children }) => {
     [
       hotel,
       hotels,
-      collection,
       categories,
       category,
       isLoading,

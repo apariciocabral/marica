@@ -43,16 +43,16 @@ export const Restaurant: React.FC = () => {
                     <PageTitle
                       title={restaurant.nome}
                       subtitle="Bares e Restaurantes"
-                      url="/bares-e-restaurantes"
+                      url="/restaurantes"
                     />
                   </div>
                   <Categories
                     categories={restaurant.categorias}
-                    url="bares-e-restaurantes"
+                    url="restaurantes"
                     color="secondary"
                     setCategories={setCategories}
                   >
-                    <Link to={`/bares-e-restaurantes/categorias/${id}`} />
+                    <Link to={`/restaurantes/categorias/${id}`} />
                   </Categories>
                   <div className="mb-3">
                     <p>{restaurant.descricao_t}</p>

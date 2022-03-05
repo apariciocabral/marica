@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { FaMapMarkedAlt } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { PageTitle } from '../../components/PageTitle';
@@ -38,10 +39,12 @@ export const Restaurants: React.FC = () => {
               <PageTitle title="Bares e Restaurantes" />
             </div>
             <div className="d-flex col-md-6 justify-content-end">
-              <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
-                <FaMapMarkedAlt className="me-2 fs-4" />
-                Mapa
-              </div>
+              <Link to="/restaurantes/mapa">
+                <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
+                  <FaMapMarkedAlt className="me-2 fs-4 text-white" />
+                  Mapa
+                </div>
+              </Link>
               <div className="my-4">
                 <SearchInput
                   className="input"
@@ -60,7 +63,7 @@ export const Restaurants: React.FC = () => {
           <div className="row">
             <Categories
               categories={categories}
-              url="bares-e-restaurantes"
+              url="restaurantes"
               color="secondary"
               setCategories={setCategories}
             />
@@ -76,8 +79,8 @@ export const Restaurants: React.FC = () => {
                 >
                   <RestaurantsCard
                     restaurant={restaurant}
-                    setCategories={setCategories}
                     addresses={restaurant.enderecos}
+                    setCategories={setCategories}
                   />
                 </div>
               );

@@ -12,16 +12,16 @@ import { DownloadApp } from '../../components/DownloadApp';
 import IframeMaps from '../../components/Maps';
 import CarouselSlider from '../../components/Slider';
 import { Categories } from '../../components/Categories';
-import Accommodations from '../../components/Accommodations';
-import { useHotels } from '../../Hooks/HotelsProvider';
+import { useEventSpaces } from '../../Hooks/EventSpacesProvider';
 
-export const Hotel: React.FC = () => {
-  const { hotel, getHotel, setHotel, isLoading, setCategories } = useHotels();
+export const EventSpace: React.FC = () => {
+  const { eventSpace, getEventSpace, setEventSpace, isLoading, setCategories } =
+    useEventSpaces();
   const { id } = useParams();
 
   useEffect(() => {
-    setHotel(null);
-    getHotel(parseInt(id ?? '', 10));
+    setEventSpace(null);
+    getEventSpace(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -32,73 +32,61 @@ export const Hotel: React.FC = () => {
         waitFor={isLoading === false}
         meanwhile={<LoadingCards show numberOfCards={4} />}
       >
-        <CarouselSlider images={hotel?.images} />
+        <CarouselSlider images={eventSpace?.images} />
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
-              {hotel && (
+              {eventSpace && (
                 <>
                   <div className="d-flex mt-5 mb-3">
                     <PageTitle
-                      title={hotel.nome}
-                      subtitle="Hotéis e Pousadas"
-                      url="/hoteis-e-pousadas"
+                      title={eventSpace.nome}
+                      subtitle="Espaços para eventos"
+                      url="/espacos"
                     />
                   </div>
                   <Categories
-                    categories={hotel.categorias}
-                    url="hoteis-e-pousadas"
+                    categories={eventSpace.categorias}
+                    url="espacos"
                     color="secondary"
                     setCategories={setCategories}
                   >
-                    <Link to={`/hoteis-e-pousadas/categorias/${id}`} />
+                    <Link to={`/espacos/categorias/${id}`} />
                   </Categories>
                   <div className="mb-3">
-                    <p>{hotel.descricao_t}</p>
+                    <p>{eventSpace.descricao_t}</p>
                   </div>
 
                   <About
                     title="Sobre"
-                    addresses={hotel.addresses}
-                    phone={hotel.phones}
-                    email={hotel?.email}
-                    site={hotel.site}
-                    network={hotel?.redes}
-                    hourFunction={hotel?.horario_funcionamento}
+                    addresses={eventSpace.addresses}
+                    phone={eventSpace.phones}
+                    email={eventSpace?.email}
+                    site={eventSpace.site}
+                    network={eventSpace?.redes}
+                    hourFunction={eventSpace?.horario_funcionamento}
                   />
 
-                  <Accommodations
-                    title="Comodidades"
-                    quartos={hotel.quartos}
-                    leitos={hotel.leitos}
-                    cafe_manha={hotel.cafe_manha}
-                    cafe_hospedes={hotel.cafe_hospedes}
-                    almoco={hotel.almoco}
-                    almoco_hospedes={hotel.almoco_hospedes}
-                    jantar={hotel.jantar}
-                    jantar_hospedes={hotel.jantar_hospedes}
-                  />
-
-                  {Array.isArray(hotel?.estruturas) &&
-                    hotel.estruturas.length > 0 && (
+                  {Array.isArray(eventSpace?.estruturas) &&
+                    eventSpace.estruturas.length > 0 && (
                       <Informations
                         title="Estruturas"
-                        contents={hotel.estruturas}
+                        contents={eventSpace.estruturas}
                       />
                     )}
 
-                  {Array.isArray(hotel?.formas_pagamento) &&
-                    hotel?.formas_pagamento.length >= 1 && (
+                  {Array.isArray(eventSpace?.formas_pagamento) &&
+                    eventSpace?.formas_pagamento.length >= 1 && (
                       <Informations
                         title="Formas de Pagamento"
-                        contents={hotel.formas_pagamento}
+                        contents={eventSpace.formas_pagamento}
                       />
                     )}
                 </>
               )}
             </div>
             <div className="col-lg-4">
-              {hotel && <IframeMaps address={hotel?.addresses} />}
+              {eventSpace && <IframeMaps address={eventSpace?.addresses} />}
               <div className="mt-4">
                 <DownloadApp />
               </div>

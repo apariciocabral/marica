@@ -1,11 +1,14 @@
 import GoogleMapReact from 'google-map-react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { MdArrowBack } from 'react-icons/md';
+import { HotelsType } from '../../@types/Hotels';
+import { RestaurantsType } from '../../@types/Restaurants';
 import { SpotsType } from '../../@types/Spots';
+import { TradesType } from '../../@types/Trades';
 import { MapTitle, MarkerStyles } from './styles';
 
 interface IBigMapProps {
-  items: SpotsType[];
+  items: SpotsType[] | RestaurantsType[] | HotelsType[] | TradesType[];
   url: string;
   backTo: string;
 }

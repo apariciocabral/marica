@@ -6,18 +6,15 @@ import {
   useMemo,
 } from 'react';
 import { CategoryType } from '../@types/Category';
-import { CollectionType } from '../@types/Collection';
 import { RestaurantsType } from '../@types/Restaurants';
-
 import { Api } from '../services/Api';
 
 // Aqui é definida a Interface com os tipos de dados de tudo que será disponibilizado "para fora" do Provider
 interface IRestaurantsContextProps {
-  restaurants: RestaurantsType[];
   restaurant: RestaurantsType | null;
+  restaurants: RestaurantsType[];
   categories: CategoryType[];
   category: CategoryType | null;
-  collection: CollectionType[];
   isLoading: boolean;
   errorMessage: string | null;
   setRestaurant: (restaurant: RestaurantsType | null) => void;
@@ -50,20 +47,30 @@ export const useRestaurants = (): IRestaurantsContextProps => {
 export const RestaurantsProvider: React.FC = ({ children }) => {
   const [restaurant, setRestaurant] = useState<RestaurantsType | null>(null);
   const [restaurants, setRestaurants] = useState<RestaurantsType[]>([]);
-  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [category, setCategory] = useState<CategoryType | null>(null);
-  const [collection] = useState<CollectionType[]>([]);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
-  const getRestaurantsByCategory = useCallback(async (id): Promise<void> => {
-    setLoading(true);
-    Api.get(`/bares-e-restaurantes/categorias/${id}`)
-      .then(response => setRestaurants(response.data.collection))
-      .catch(() => setCategories([]))
-      .finally(() => setLoading(false));
-  }, []);
+  const getRestaurantsByCategory = useCallback(
+    async (id): Promise<void> => {
+      setLoading(true);
+      Api.get(`/restaurantes/categorias/${id}`)
+        .then(response => {
+          setRestaurants(response.data.collection);
+          const categoryToFind = categories.find(c => c.id === id);
+          setCategory(categoryToFind ?? null);
+          setAlreadyGot(false);
+        })
+        .catch(() => {
+          setRestaurants([]);
+          setCategory(null);
+        })
+        .finally(() => setLoading(false));
+    },
+    [categories]
+  );
 
   const getRestaurant = useCallback(async (id): Promise<void> => {
     setLoading(true);
@@ -104,7 +111,6 @@ export const RestaurantsProvider: React.FC = ({ children }) => {
     () => ({
       restaurant,
       restaurants,
-      collection,
       categories,
       category,
       isLoading,
@@ -119,7 +125,6 @@ export const RestaurantsProvider: React.FC = ({ children }) => {
     [
       restaurant,
       restaurants,
-      collection,
       categories,
       category,
       isLoading,
