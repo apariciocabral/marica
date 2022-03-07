@@ -89,7 +89,7 @@ export const Header: React.FC<IHeaderProps> = ({ fixed = false }) => {
             </Link>
           </li>
           <li>
-            <Link to="/espacos-para-eventos">
+            <Link to="/espacos">
               <GiMicrophone /> Espaços para Eventos
             </Link>
           </li>

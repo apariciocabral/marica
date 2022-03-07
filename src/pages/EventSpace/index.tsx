@@ -13,6 +13,8 @@ import IframeMaps from '../../components/Maps';
 import CarouselSlider from '../../components/Slider';
 import { Categories } from '../../components/Categories';
 import { useEventSpaces } from '../../Hooks/EventSpacesProvider';
+import Spaces from '../../components/Space';
+import Equipment from '../../components/Equipment';
 
 export const EventSpace: React.FC = () => {
   const { eventSpace, getEventSpace, setEventSpace, isLoading, setCategories } =
@@ -66,6 +68,19 @@ export const EventSpace: React.FC = () => {
                     network={eventSpace?.redes}
                     hourFunction={eventSpace?.horario_funcionamento}
                   />
+
+                  {Array.isArray(eventSpace?.espacos) &&
+                    eventSpace.espacos.length > 0 && (
+                      <Spaces title="Espaços" contents={eventSpace.espacos} />
+                    )}
+
+                  {Array.isArray(eventSpace?.equipamentos) &&
+                    eventSpace.equipamentos.length > 0 && (
+                      <Equipment
+                        title="Equipamentos"
+                        contents={eventSpace.equipamentos}
+                      />
+                    )}
 
                   {Array.isArray(eventSpace?.estruturas) &&
                     eventSpace.estruturas.length > 0 && (

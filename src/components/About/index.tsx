@@ -90,7 +90,7 @@ const About: React.FC<IAboutProps> = ({
         </li>
       )}
       {site && (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
+        <li className="d-flex align-items-center list-unstyled col">
           <div className="px-2">
             <Icons className="fs-5">
               <AiOutlineGlobal />
@@ -100,22 +100,24 @@ const About: React.FC<IAboutProps> = ({
         </li>
       )}
       {network && (
-        <li className="d-flex align-items-center list-unstyled pb-4">
+        <li className="align-items-center list-unstyled">
           {network.map(info => {
             const Icon = icons[info.nome];
             return (
               <Fragment key="info.id">
-                <Icons className="fs-5 px-2">
-                  <Icon />
-                </Icons>
-                <a
-                  href={info.url}
-                  target="_blank"
-                  className="px-2 m-0 text-decoration-none fs-5"
-                  rel="noreferrer"
-                >
-                  {info.user}
-                </a>
+                <div className="d-flex my-4">
+                  <Icons className="fs-5 px-2">
+                    <Icon />
+                  </Icons>
+                  <a
+                    href={info.url}
+                    target="_blank"
+                    className="px-2 m-0 text-decoration-none fs-5"
+                    rel="noreferrer"
+                  >
+                    {info.user}
+                  </a>
+                </div>
               </Fragment>
             );
           })}

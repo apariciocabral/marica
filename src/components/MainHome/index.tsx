@@ -74,7 +74,7 @@ export const MainHome: React.FC = () => {
               <Card
                 title="Espaços para Eventos"
                 description="Locais para fazer suas festas ou reuniões"
-                url="/espaços-para-eventos"
+                url="/espacos"
                 icon={GiMicrophone}
               />
             </div>

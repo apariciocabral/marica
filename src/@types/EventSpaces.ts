@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { AddressType } from './Address';
 import { CategoryType } from './Category';
-import { EquipmentType } from './Equipaments';
+import { EquipmentType } from './Equipments';
 import { GeneralInfoType } from './GeneralInfo';
 import { HourFunctionType } from './HourFunction';
 import { ImageType } from './Image';
@@ -36,4 +36,11 @@ export type EventSpacesType = {
   site: string;
   espacos: SpaceType[];
   equipamentos: EquipmentType[];
+  espaco_id: number;
+  descricao: string;
+  area: number;
+  pe_direito: number;
+  medidas: string;
+  capacidade: number;
+  ordem: number;
 };
