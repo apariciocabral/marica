@@ -21,7 +21,7 @@ const SpotsCard: React.FC<ISpotsCardProps> = ({
       <Cover style={{ backgroundImage: `url(${spot.capa})` }} />
     </Link>
     <div className="card-body">
-      <h5 className="fs-6 card-title mb-3">{spot.nome}</h5>
+      <h5 className="fs-6 primary mb-3">{spot.nome}</h5>
       <Categories
         categories={spot.categorias}
         url="pontos"

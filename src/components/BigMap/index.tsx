@@ -1,6 +1,7 @@
 import GoogleMapReact from 'google-map-react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { MdArrowBack } from 'react-icons/md';
+import { CityEventsType } from '../../@types/CityEvents';
 import { HotelsType } from '../../@types/Hotels';
 import { RestaurantsType } from '../../@types/Restaurants';
 import { SpotsType } from '../../@types/Spots';
@@ -8,7 +9,12 @@ import { TradesType } from '../../@types/Trades';
 import { MapTitle, MarkerStyles } from './styles';
 
 interface IBigMapProps {
-  items: SpotsType[] | RestaurantsType[] | HotelsType[] | TradesType[];
+  items:
+    | SpotsType[]
+    | RestaurantsType[]
+    | HotelsType[]
+    | TradesType[]
+    | CityEventsType[];
   url: string;
   backTo: string;
 }

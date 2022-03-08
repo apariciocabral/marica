@@ -16,7 +16,7 @@ export const Card: React.FC<ICardProps> = ({
 }) => {
   const isInternal = url.charAt(0) === '/';
   return (
-    <div className="h-100 w-100 text-center d-flex flex-column hXQgjp pt-3">
+    <div className="h-100 w-100 text-center d-flex flex-column pt-3">
       <div className="card-body">
         {isInternal ? (
           <>

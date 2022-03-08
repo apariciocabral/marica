@@ -90,7 +90,11 @@ export const RestaurantsProvider: React.FC = ({ children }) => {
           ? `/restaurantes/busca?busca=${searchText}`
           : '/restaurantes';
         try {
-          const response = await Api.get(url);
+          const response = await Api.get(url, {
+            params: {
+              fields: 'is_delivery',
+            },
+          });
           if (!searchText) {
             setCategories(response.data.categorias);
           }

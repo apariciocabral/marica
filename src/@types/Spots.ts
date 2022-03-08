@@ -30,5 +30,6 @@ export type SpotsType = {
   formas_pagamento: GeneralInfoType[];
   icone: string;
   images: ImageType[];
+  gratuito: number;
   site: string;
 };

@@ -24,6 +24,9 @@ import { Trade } from './pages/Trade';
 import { EventSpace } from './pages/EventSpace';
 import { EventSpacesMap } from './pages/EventSpacesMap';
 import { EventSpacesByCategory } from './pages/CategoriesEventSpaces';
+import { CityEvent } from './pages/CityEvent';
+import { CityEventsMap } from './pages/CityEventsMap';
+import { CityEventsByCategory } from './pages/CategoriesCityEvents';
 
 export const Routes: React.FC = () => {
   return (
@@ -70,7 +73,12 @@ export const Routes: React.FC = () => {
           element={<EventSpacesByCategory />}
         />
         <Route path="/eventos" element={<CityEvents />} />
-        {/* <Route path="/eventos/:id" element={<CityEvent />} /> */}
+        <Route path="/eventos/mapa" element={<CityEventsMap />} />
+        <Route path="/eventos/:id" element={<CityEvent />} />
+        <Route
+          path="/eventos/categorias/:id/:label"
+          element={<CityEventsByCategory />}
+        />
         <Route path="/sobre" element={<AboutCity />} />
       </Switch>
     </BrowserRouter>

@@ -19,11 +19,11 @@ import { Icons, WrapTip } from './styles';
 interface IAboutProps {
   title: string;
   addresses: AddressType[];
-  phone: PhoneType[];
-  email: string;
-  site: string;
-  network: NetworkType[];
-  hourFunction: HourFunctionType[];
+  phone?: PhoneType[];
+  email?: string;
+  site?: string;
+  network?: NetworkType[];
+  hourFunction?: HourFunctionType[];
 }
 
 const icons = {
@@ -59,26 +59,28 @@ const About: React.FC<IAboutProps> = ({
           <div className="px-2 m-0">{info.label}</div>
         </li>
       ))}
-      {phone.map(info => (
-        <li
-          key="info.id"
-          className="d-flex align-items-center list-unstyled pb-4"
-        >
-          {info.whatsapp ? (
-            <Icons className="fs-5 px-2">
-              <FaWhatsapp />
-            </Icons>
-          ) : (
-            <Icons className="fs-5 px-2">
-              <FiPhone />
-            </Icons>
-          )}
-          <div className="flex-column">
-            <div className="px-2 m-0">{info.nome}</div>
-            <div className="px-2 m-0">{info.number}</div>
-          </div>
-        </li>
-      ))}
+      {Array.isArray(phone) &&
+        phone.length > 0 &&
+        phone.map(info => (
+          <li
+            key="info.id"
+            className="d-flex align-items-center list-unstyled pb-4"
+          >
+            {info.whatsapp ? (
+              <Icons className="fs-5 px-2">
+                <FaWhatsapp />
+              </Icons>
+            ) : (
+              <Icons className="fs-5 px-2">
+                <FiPhone />
+              </Icons>
+            )}
+            <div className="flex-column">
+              <div className="px-2 m-0">{info.nome}</div>
+              <div className="px-2 m-0">{info.number}</div>
+            </div>
+          </li>
+        ))}
       {email && (
         <li className="d-flex align-items-center list-unstyled col pb-4">
           <div className="px-2">

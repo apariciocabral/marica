@@ -39,5 +39,5 @@ export type RestaurantsType = {
   cozinhas: GeneralInfoType[];
   faixa_preco: number;
   refeicoes: GeneralInfoType[];
-  is_delivery: number;
+  is_delivery: boolean;
 };

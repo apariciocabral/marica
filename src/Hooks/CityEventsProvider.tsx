@@ -11,15 +11,17 @@ import { Api } from '../services/Api';
 
 // Aqui é definida a Interface com os tipos de dados de tudo que será disponibilizado "para fora" do Provider
 interface ICityEventsContextProps {
-  // cityEvent: CityEventsType | null;
+  cityEvent: CityEventsType | null;
   cityEvents: CityEventsType[];
   categories: CategoryType[];
+  category: CategoryType | null;
   isLoading: boolean;
   errorMessage: string | null;
+  setCityEvent: (cityEvent: CityEventsType | null) => void;
   setCategories: (categories: CategoryType[]) => void;
-  // setCityEvent: (cityEvents: CityEventsType | null) => void;
-  // getCityEvent: (id: number) => Promise<void>;
-  getCityEvents: () => Promise<void>;
+  getCityEvent: (id: number) => Promise<void>;
+  getCityEvents: (text?: string) => Promise<void>;
+  getCityEventsByCategory: (id: number) => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
@@ -43,84 +45,102 @@ export const useCityEvents = (): ICityEventsContextProps => {
 
 // Aqui são definidas as variáveis de State e as funções do Provider
 export const CityEventsProvider: React.FC = ({ children }) => {
-  // const [cityEvent, setCityEvent] = useState<CityEventsType | null>(null);
+  const [cityEvent, setCityEvent] = useState<CityEventsType | null>(null);
   const [cityEvents, setCityEvents] = useState<CityEventsType[]>([]);
+  const [category, setCategory] = useState<CategoryType | null>(null);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
-  const getCityEvents = useCallback(async (): Promise<void> => {
-    if (!alreadyGot) {
+  const getCityEventsByCategory = useCallback(
+    async (id): Promise<void> => {
       setLoading(true);
-      setErrorMessage(null);
-      try {
-        const response = await Api.get('/eventos');
-
-        if (Array.isArray(response?.data?.collection)) {
-          setCityEvents(response?.data?.collection);
-          setCategories(response?.data?.categorias);
-          setAlreadyGot(true);
-        } else {
+      Api.get(`/eventos/categorias/${id}`)
+        .then(response => {
+          setCityEvents(response.data.collection);
+          const categoryToFind = categories.find(c => c.id === id);
+          setCategory(categoryToFind ?? null);
+          setAlreadyGot(false);
+        })
+        .catch(() => {
           setCityEvents([]);
-          setCategories([]);
-          setErrorMessage(
-            'Could not get the CityEvent list. Please try again later.'
-          );
-        }
-      } catch (e) {
-        if (e instanceof Error) setErrorMessage(e.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-  }, [alreadyGot]);
+          setCategory(null);
+        })
+        .finally(() => setLoading(false));
+    },
+    [categories]
+  );
 
-  // const getCityEvent = useCallback(
-  //   async (id: number): Promise<void> => {
-  //     if (id !== cityEvent?.id) {
-  //       setLoading(true);
-  //       setError(null);
-  //       try {
-  //         const response = await Api.get(`/eventos/${id}`);
-  //         if (response?.data?.item) {
-  //           setCityEvent(response?.data?.item);
-  //         } else {
-  //           setError('Could not get the CityEvents list. Please try again later.');
-  //         }
-  //       } catch (e) {
-  //         if (e instanceof Error) setError(e.message);
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     }
-  //   },
-  //   [cityEvent]
-  // );
+  const getCityEvent = useCallback(async (id): Promise<void> => {
+    setLoading(true);
+    Api.get(`/eventos/${id}`)
+      .then(response => setCityEvent(response.data.item))
+      .catch(() => setCityEvent(null))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const getCityEvents = useCallback(
+    async (searchText = ''): Promise<void> => {
+      if (!alreadyGot || searchText.length > 0) {
+        setLoading(true);
+        setErrorMessage(null);
+
+        const url = searchText
+          ? `/eventos/busca?busca=${searchText}`
+          : '/eventos';
+        try {
+          const response = await Api.get(url, {
+            params: {
+              fields: 'datahora_inicio',
+              orderby: 'datahora_inicio',
+              order: 'asc',
+            },
+          });
+          if (!searchText) {
+            setCategories(response.data.categorias);
+          }
+          setCityEvents(response.data.collection);
+          setAlreadyGot(true);
+        } catch (e) {
+          if (e instanceof Error) setErrorMessage(e.message);
+        } finally {
+          setLoading(false);
+        }
+      }
+    },
+    [alreadyGot]
+  );
 
   // Aqui são definidas quais informações estarão disponíveis "para fora" do Provider
   const providerValue = useMemo(
     () => ({
-      // cityEvent,
+      cityEvent,
       cityEvents,
       categories,
+      category,
       isLoading,
       errorMessage,
       setCategories,
-      // setCityEvent,
-      // getCityEvent,
+      setCategory,
+      setCityEvent,
+      getCityEvent,
       getCityEvents,
+      getCityEventsByCategory,
     }),
     [
-      // cityEvent,
+      cityEvent,
       cityEvents,
       categories,
+      category,
       isLoading,
       errorMessage,
       setCategories,
-      // setCityEvent,
-      // getCityEvent,
+      setCategory,
+      setCityEvent,
+      getCityEvent,
       getCityEvents,
+      getCityEventsByCategory,
     ]
   );
 

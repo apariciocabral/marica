@@ -114,4 +114,8 @@ export const GlobalStyle = createGlobalStyle`
     color: var(--secondary);
     background-color: var(--secondary);
   }
+
+  .primary {
+    color: var(--primary);
+  }
 `;
