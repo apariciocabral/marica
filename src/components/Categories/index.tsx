@@ -17,7 +17,7 @@ export const Categories: React.FC<ICategoriesProps> = ({
   size = 'md',
   setCategories,
 }) => (
-  <div className="mb-4">
+  <div className="mb-3">
     <ul className="d-flex flex-wrap m-0 list-unstyled">
       {categories.map(category => (
         <li key={category.id}>

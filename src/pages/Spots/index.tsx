@@ -69,10 +69,10 @@ export const Spots: React.FC = () => {
           </div>
         </div>
         <div className="container">
-          <div className="row row-cols-3">
+          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
             {spots.map(spot => {
               return (
-                <div key={spot.id} className="col d-flex align-items-stretch">
+                <div key={spot.id} className="d-flex align-items-stretch">
                   <SpotsCard
                     spot={spot}
                     addresses={spot.enderecos}

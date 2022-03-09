@@ -11,6 +11,16 @@ interface ICityEventsCardProps {
   setCategories: (categories: CategoryType[]) => void;
 }
 
+export const getDate = (isoDate: string): string => {
+  const isInvalid = new Date(isoDate).toString() === 'Invalid Date';
+  if (isInvalid) return 'Invalid Date';
+
+  return new Intl.DateTimeFormat('pt-BR', {
+    day: 'numeric',
+    month: 'short',
+  }).format(new Date(isoDate));
+};
+
 const CityEventsCard: React.FC<ICityEventsCardProps> = ({
   cityEvent,
   addresses,
@@ -21,7 +31,17 @@ const CityEventsCard: React.FC<ICityEventsCardProps> = ({
       <Cover style={{ backgroundImage: `url(${cityEvent.capa})` }} />
     </Link>
     <div className="card-body">
-      <h5 className="fs-6 primary mb-3">{cityEvent.nome}</h5>
+      <div className="d-flex">
+        <div className="text-uppercase">
+          {getDate(cityEvent.datahora_inicio)}
+        </div>
+        <Link
+          to={`${cityEvent.id}`}
+          className="fs-1 text-center text-decoration-none"
+        >
+          <h5 className="fs-6 primary mb-3">{cityEvent.nome}</h5>
+        </Link>
+      </div>
       <Categories
         categories={cityEvent.categorias}
         url="pontos"

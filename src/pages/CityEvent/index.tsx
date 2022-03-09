@@ -25,7 +25,6 @@ export const CityEvent: React.FC = () => {
     getCityEvent(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <Wrapper>
       <Header />

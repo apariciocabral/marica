@@ -70,13 +70,10 @@ export const EventSpaces: React.FC = () => {
           </div>
         </div>
         <div className="container">
-          <div className="row row-cols-3">
+          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
             {eventSpaces.map(eventSpace => {
               return (
-                <div
-                  key={eventSpace.id}
-                  className="col d-flex align-items-stretch"
-                >
+                <div key={eventSpace.id} className="d-flex align-items-stretch">
                   <EventSpacesCard
                     eventSpace={eventSpace}
                     enderecos={eventSpace.enderecos}

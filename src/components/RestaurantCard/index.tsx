@@ -1,9 +1,10 @@
+import { FaMotorcycle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AddressType } from '../../@types/Address';
 import { CategoryType } from '../../@types/Category';
 import { RestaurantsType } from '../../@types/Restaurants';
 import { Categories } from '../Categories';
-import { Cover } from './styles';
+import { Cover, PillDelivery } from './styles';
 
 interface IRestaurantsCardProps {
   restaurant: RestaurantsType;
@@ -22,7 +23,16 @@ const RestaurantsCard: React.FC<IRestaurantsCardProps> = ({
     </Link>
     <div className="card-body">
       <h5 className="fs-6 primary mb-3">{restaurant.nome}</h5>
-      {!!restaurant.is_delivery && <p>Entrega</p>}
+
+      {!!restaurant.is_delivery && (
+        <div className="mb-2">
+          <PillDelivery className="px-3">
+            <FaMotorcycle className="me-2" />
+            Delivery
+          </PillDelivery>
+        </div>
+      )}
+
       <Categories
         categories={restaurant.categorias}
         url="restaurantes"

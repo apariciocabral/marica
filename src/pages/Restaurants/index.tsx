@@ -70,13 +70,10 @@ export const Restaurants: React.FC = () => {
           </div>
         </div>
         <div className="container">
-          <div className="row row-cols-3">
+          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3">
             {restaurants.map(restaurant => {
               return (
-                <div
-                  key={restaurant.id}
-                  className="col d-flex align-items-stretch"
-                >
+                <div key={restaurant.id} className="d-flex align-items-stretch">
                   <RestaurantsCard
                     restaurant={restaurant}
                     addresses={restaurant.enderecos}

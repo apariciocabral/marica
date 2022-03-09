@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ContentMainHome = styled.div`
-  .hXQgjp {
+  .colorCard {
     background-color: rgb(255, 255, 255);
     border-radius: 0.25rem;
   }

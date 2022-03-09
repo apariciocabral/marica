@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { IconType } from 'react-icons';
+import { ColorCard } from './styles';
 
 interface ICardProps {
   icon: IconType;
@@ -16,8 +17,8 @@ export const Card: React.FC<ICardProps> = ({
 }) => {
   const isInternal = url.charAt(0) === '/';
   return (
-    <div className="h-100 w-100 text-center d-flex flex-column pt-3">
-      <div className="card-body">
+    <div className="h-100 w-100 text-center d-flex flex-column">
+      <ColorCard className="card-body">
         {isInternal ? (
           <>
             <Link to={url}>
@@ -62,7 +63,7 @@ export const Card: React.FC<ICardProps> = ({
             </a>
           )}
         </div>
-      </div>
+      </ColorCard>
     </div>
   );
 };

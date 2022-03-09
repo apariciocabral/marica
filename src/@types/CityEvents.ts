@@ -17,7 +17,7 @@ export type CityEventsType = {
   enderecos: AddressType[];
   datahora_fim_f?: string;
   datahora_inicio_f?: string;
-  datahora_inicio?: string;
+  datahora_inicio: string;
   descricao_t?: string;
   preco_t?: string;
   email?: string;

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { FaMotorcycle } from 'react-icons/fa';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { PageTitle } from '../../components/PageTitle';
@@ -14,6 +15,7 @@ import CarouselSlider from '../../components/Slider';
 import { Categories } from '../../components/Categories';
 import { useRestaurants } from '../../Hooks/RestaurantsProvider';
 import { PriceRange } from '../../components/PriceRange';
+import { PillDelivery } from './styles';
 
 export const Restaurant: React.FC = () => {
   const { restaurant, getRestaurant, setRestaurant, isLoading, setCategories } =
@@ -54,6 +56,14 @@ export const Restaurant: React.FC = () => {
                   >
                     <Link to={`/restaurantes/categorias/${id}`} />
                   </Categories>
+                  {!!restaurant.is_delivery && (
+                    <div className="mb-4">
+                      <PillDelivery className="px-4 py-2">
+                        <FaMotorcycle className="me-2 fs-4" />
+                        Delivery
+                      </PillDelivery>
+                    </div>
+                  )}
                   <div className="mb-3">
                     <p>{restaurant.descricao_t}</p>
                   </div>
