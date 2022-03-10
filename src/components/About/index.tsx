@@ -56,7 +56,7 @@ const About: React.FC<IAboutProps> = ({
               <FiMapPin />
             </Icons>
           </div>
-          <div className="px-2 m-0">{info.label}</div>
+          <div className="px-2 fs-5 m-0">{info.label}</div>
         </li>
       ))}
       {Array.isArray(phone) &&

@@ -15,6 +15,7 @@ export type CityEventsType = {
   lng?: number;
   categorias: CategoryType[];
   enderecos: AddressType[];
+  addresses: AddressType[];
   datahora_fim_f?: string;
   datahora_inicio_f?: string;
   datahora_inicio: string;

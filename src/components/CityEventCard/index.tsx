@@ -44,7 +44,7 @@ const CityEventsCard: React.FC<ICityEventsCardProps> = ({
       </div>
       <Categories
         categories={cityEvent.categorias}
-        url="pontos"
+        url="eventos"
         color="gray"
         size="sm"
         setCategories={setCategories}

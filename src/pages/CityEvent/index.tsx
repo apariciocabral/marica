@@ -15,6 +15,20 @@ import { DownloadApp } from '../../components/DownloadApp';
 import IframeMaps from '../../components/Maps';
 import CarouselSlider from '../../components/Slider';
 
+export const getDate = (isoDate: string): string => {
+  const isInvalid = new Date(isoDate).toString() === 'Invalid Date';
+  if (isInvalid) return 'Invalid Date';
+
+  return new Intl.DateTimeFormat('pt-BR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(isoDate));
+};
+
 export const CityEvent: React.FC = () => {
   const { cityEvent, getCityEvent, setCityEvent, isLoading, setCategories } =
     useCityEvents();
@@ -55,24 +69,23 @@ export const CityEvent: React.FC = () => {
                     <Link to={`/eventos/categorias/${id}`} />
                   </Categories>
 
-                  <div className="mb-3">
-                    <p>{cityEvent.descricao_t}</p>
+                  <div className="fs-5">
+                    De: {getDate(cityEvent?.datahora_inicio_f ?? '')}h
                   </div>
+                  <div className="fs-5">
+                    Até: {getDate(cityEvent?.datahora_fim_f ?? '')}h
+                  </div>
+                  {cityEvent.descricao_t && (
+                    <div className="my-3 fs-5 flex-column">
+                      <p>{cityEvent.descricao_t}</p>
+                    </div>
+                  )}
+                  <About title="Sobre" addresses={cityEvent.addresses} />
 
-                  <About
-                    title="Sobre"
-                    addresses={cityEvent.enderecos}
-                    phone={cityEvent.phones}
-                    email={cityEvent?.email}
-                    network={cityEvent?.redes}
-                    hourFunction={cityEvent?.horario_funcionamento}
-                    site={cityEvent?.site}
-                  />
-
-                  {cityEvent.preco_t && (
+                  {cityEvent.gratuito && (
                     <InputValue
                       title="Valor da Entrada"
-                      preco_t={cityEvent.preco_t}
+                      preco_t={cityEvent.preco_t ?? ''}
                       isFree={!!cityEvent.gratuito}
                     />
                   )}
@@ -90,11 +103,18 @@ export const CityEvent: React.FC = () => {
                         contents={cityEvent.restricoes}
                       />
                     )}
+                  {Array.isArray(cityEvent?.formas_pagamento) &&
+                    cityEvent?.formas_pagamento.length >= 1 && (
+                      <Informations
+                        title="Formas de Pagamento"
+                        contents={cityEvent.formas_pagamento}
+                      />
+                    )}
                 </>
               )}
             </div>
             <div className="col-lg-4">
-              {cityEvent && <IframeMaps address={cityEvent?.enderecos} />}
+              {cityEvent && <IframeMaps address={cityEvent?.addresses} />}
               <div className="mt-4">
                 <DownloadApp />
               </div>

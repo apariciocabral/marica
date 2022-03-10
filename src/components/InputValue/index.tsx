@@ -15,7 +15,7 @@ const InputValue: React.FC<IInformationsProps> = ({
 }) => (
   <WrapTip className="mt-5">
     <h4 className="border-bottom border-2 mb-3">{title}</h4>
-    <div className="d-flex align-items-center">
+    <div className="d-flex fs-5 align-items-center">
       <Icons className="fs-5 pe-3">
         <FaRegMoneyBillAlt />
       </Icons>

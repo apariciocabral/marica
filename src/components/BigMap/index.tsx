@@ -1,6 +1,7 @@
 import GoogleMapReact from 'google-map-react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { MdArrowBack } from 'react-icons/md';
+import { CategoryType } from '../../@types/Category';
 import { CityEventsType } from '../../@types/CityEvents';
 import { HotelsType } from '../../@types/Hotels';
 import { RestaurantsType } from '../../@types/Restaurants';
@@ -17,19 +18,31 @@ interface IBigMapProps {
     | CityEventsType[];
   url: string;
   backTo: string;
+  // setCategory: (categories: CategoryType[]) => void;
 }
 
 interface IMapMarkerProps {
   lat: number;
   lng: number;
+  items: SpotsType | RestaurantsType | HotelsType | TradesType | CityEventsType;
+  // setCategory: (categories: CategoryType[]) => void;
+  showCard: boolean;
+  onPinClick: () => void;
 }
 
-const MapMarker: React.FC<IMapMarkerProps> = () => (
-  <MarkerStyles>
-    <div>aqui</div>
-    <FaMapMarkerAlt color="red" className="fs-3" />
-  </MarkerStyles>
-);
+const MapMarker: React.FC<IMapMarkerProps> = ({
+  items,
+  // setCategory,
+  showCard,
+  onPinClick,
+}) => {
+  return (
+    <MarkerStyles>
+      <div>aqui</div>
+      <FaMapMarkerAlt color="red" className="fs-3" />
+    </MarkerStyles>
+  );
+};
 
 const BigMap: React.FC<IBigMapProps> = ({ items, url, backTo }) => {
   return (
@@ -58,7 +71,14 @@ const BigMap: React.FC<IBigMapProps> = ({ items, url, backTo }) => {
         >
           {items?.map(item =>
             item?.enderecos?.map(address => (
-              <MapMarker lat={address.lat} lng={address.lng} key={address.id} />
+              <MapMarker
+                lat={address.lat}
+                lng={address.lng}
+                key={address.id}
+                items={item}
+                showCard={false}
+                onPinClick={}
+              />
             ))
           )}
         </GoogleMapReact>
