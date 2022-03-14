@@ -35,4 +35,9 @@ export const MaricaBackground = styled.div`
   .main {
     background-color: rgb(245, 245, 245);
   }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 `;

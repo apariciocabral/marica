@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import { useBanners } from '../../Hooks/BannersProvider';
 
@@ -11,7 +11,7 @@ export const Carousel: React.FC = () => {
   }, []);
 
   return (
-    <section className="d-none d-md-block mb-5">
+    <section className="mb-5">
       <div>
         <div
           id="carousel"
@@ -51,26 +51,50 @@ export const Carousel: React.FC = () => {
             )}
             {!isLoading &&
               banners.map((banner, index) => (
-                <div
-                  key={banner.id}
-                  className={`carousel-item ${index === 0 ? 'active' : ''}`}
-                >
-                  {banner.url ? (
-                    <a href={banner.url} target="_blank" rel="noreferrer">
+                <Fragment key={banner.id}>
+                  <div
+                    className={`carousel-item d-none d-md-block ${
+                      index === 0 ? 'active' : ''
+                    }`}
+                  >
+                    {banner.url ? (
+                      <a href={banner.url} target="_blank" rel="noreferrer">
+                        <img
+                          src={banner.image_l}
+                          className="d-block w-100"
+                          alt="carousel"
+                        />
+                      </a>
+                    ) : (
                       <img
                         src={banner.image_l}
                         className="d-block w-100"
                         alt="carousel"
                       />
-                    </a>
-                  ) : (
-                    <img
-                      src={banner.image_l}
-                      className="d-block w-100"
-                      alt="carousel"
-                    />
-                  )}
-                </div>
+                    )}
+                  </div>
+                  <div
+                    className={`carousel-item d-block d-md-none ${
+                      index === 0 ? 'active' : ''
+                    }`}
+                  >
+                    {banner.url ? (
+                      <a href={banner.url} target="_blank" rel="noreferrer">
+                        <img
+                          src={banner.image_s}
+                          className="d-block w-100"
+                          alt="carousel"
+                        />
+                      </a>
+                    ) : (
+                      <img
+                        src={banner.image_s}
+                        className="d-block w-100"
+                        alt="carousel"
+                      />
+                    )}
+                  </div>
+                </Fragment>
               ))}
           </div>
           <button

@@ -14,6 +14,8 @@ import InputValue from '../../components/InputValue';
 import { DownloadApp } from '../../components/DownloadApp';
 import IframeMaps from '../../components/Maps';
 import CarouselSlider from '../../components/Slider';
+import LoadingPills from '../../components/LoadingPill';
+import LoadingOnlyCards from '../../components/LoadingOnlyCard';
 
 export const getDate = (isoDate: string): string => {
   const isInvalid = new Date(isoDate).toString() === 'Invalid Date';
@@ -44,7 +46,13 @@ export const CityEvent: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={
+          <>
+            <LoadingOnlyCards show numberOfCards={4} />
+            <LoadingPills show numberOfCards={4} />
+            <LoadingCards show numberOfCards={4} />
+          </>
+        }
       >
         <CarouselSlider images={cityEvent?.images} />
         <div className="container">

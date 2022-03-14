@@ -48,13 +48,13 @@ export const ContentMainHome = styled.div`
   }
 `;
 export const BeforeFooter = styled.div`
-  .hRBsWH {
+  .bluepart {
     position: relative;
     background-color: rgb(45, 103, 127);
     overflow: hidden;
   }
 
-  .CWQMf {
+  .whitepart {
     position: absolute;
     top: 0px;
     right: 0px;

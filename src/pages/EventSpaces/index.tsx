@@ -12,6 +12,7 @@ import { Categories } from '../../components/Categories';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import { SearchInput } from '../../components/SearchInput';
+import LoadingPills from '../../components/LoadingPill';
 
 export const EventSpaces: React.FC = () => {
   const { eventSpaces, getEventSpaces, categories, isLoading, setCategories } =
@@ -31,7 +32,13 @@ export const EventSpaces: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={
+          <>
+            <LoadingPills show numberOfCards={3} />
+            <LoadingPills show numberOfCards={12} />
+            <LoadingCards show numberOfCards={4} />
+          </>
+        }
       >
         <div className="container">
           <div className="row">

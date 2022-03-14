@@ -20,7 +20,7 @@ export const MainHome: React.FC = () => {
     <>
       <ContentMainHome>
         <div className="container mb-4">
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2 justify-content-center">
+          <div className="row row-cols-2 row-cols-md-3 g-2 justify-content-center">
             <div className="col">
               <Card
                 title="Pontos Turísticos"
@@ -118,8 +118,8 @@ export const MainHome: React.FC = () => {
         </div>
       </ContentMainHome>
       <BeforeFooter>
-        <div className="hRBsWH">
-          <div className="CWQMf" />
+        <div className="bluepart">
+          <div className="whitepart d-none d-md-block" />
           <div className="container text-white py-5">
             <div className="row">
               <div className="d-flex flex-column col-md-7 mb-4 mb-md-0">
@@ -165,7 +165,7 @@ export const MainHome: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-5 text-end text-md-right image">
+              <div className="col-md-5 text-center image">
                 <img
                   className="img-fluid"
                   src={PhoneImg}

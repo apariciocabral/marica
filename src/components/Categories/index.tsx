@@ -1,6 +1,6 @@
 import slugify from 'react-slugify';
 import { CategoryType } from '../../@types/Category';
-import { PillStyles } from './styles';
+import { CategoryOverflow, PillStyles } from './styles';
 
 interface ICategoriesProps {
   categories: CategoryType[];
@@ -17,7 +17,7 @@ export const Categories: React.FC<ICategoriesProps> = ({
   size = 'md',
   setCategories,
 }) => (
-  <div className="mb-3">
+  <CategoryOverflow className="mb-3">
     <ul className="d-flex flex-wrap m-0 list-unstyled">
       {categories.map(category => (
         <li key={category.id}>
@@ -34,5 +34,5 @@ export const Categories: React.FC<ICategoriesProps> = ({
         </li>
       ))}
     </ul>
-  </div>
+  </CategoryOverflow>
 );

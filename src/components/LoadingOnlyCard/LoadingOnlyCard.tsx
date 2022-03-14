@@ -1,15 +1,15 @@
 import ContentLoader from 'react-content-loader';
 
-const LoadingPill: React.FC = () => (
+const LoadingCard: React.FC = () => (
   <ContentLoader
     speed={2}
     width="100%"
-    height={50}
+    height={420}
     backgroundColor="#dad5d5"
     foregroundColor="#ebe6e6"
   >
-    <rect x="0" y="0" rx="15" ry="15" width="250" height="30" />
+    <rect x="0" y="0" rx="5" ry="5" width="100%" height="280" />
   </ContentLoader>
 );
 
-export default LoadingPill;
+export default LoadingCard;

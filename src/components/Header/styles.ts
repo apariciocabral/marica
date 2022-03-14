@@ -93,6 +93,15 @@ export const ContentHeader = styled.div`
     width: 480px;
   }
 
+  .mobileImg {
+    width: 120px;
+  }
+  @media (max-width: 991px) {
+    .sm-logo {
+      max-width: 300px;
+    }
+  }
+
   button {
     font-size: 1rem;
     color: white;

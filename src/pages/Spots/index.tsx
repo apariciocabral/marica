@@ -12,6 +12,7 @@ import { Categories } from '../../components/Categories';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import { SearchInput } from '../../components/SearchInput';
+import LoadingPills from '../../components/LoadingPill';
 
 export const Spots: React.FC = () => {
   const { spots, getSpots, categories, isLoading, setCategories } = useSpots();
@@ -30,16 +31,25 @@ export const Spots: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={
+          <>
+            <LoadingPills show numberOfCards={3} />
+            <LoadingPills show numberOfCards={12} />
+            <LoadingCards show numberOfCards={4} />
+          </>
+        }
       >
         <div className="container">
           <div className="row">
             <div className="d-flex col-md-6">
               <PageTitle title="Pontos Turísticos" />
             </div>
-            <div className="d-flex col-md-6 justify-content-end">
+            <div className="d-flex col-md-6 justify-content-center">
               <Link to="/pontos/mapa">
-                <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
+                <div
+                  className="btn btn-primary my-4 py-2 px-3 me-3"
+                  title="Ver no mapa"
+                >
                   <FaMapMarkedAlt className="me-2 fs-4 text-white" />
                   Mapa
                 </div>

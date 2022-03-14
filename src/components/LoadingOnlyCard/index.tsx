@@ -1,25 +1,25 @@
-import LoadingPill from './LoadingPill';
+import LoadingOnlyCard from './LoadingOnlyCard';
 
-interface ILoadingPillProps {
+interface ILoadingCardsProps {
   show: boolean;
   numberOfCards?: number;
 }
 
-const LoadingPills: React.FC<ILoadingPillProps> = ({
+const LoadingOnlyCards: React.FC<ILoadingCardsProps> = ({
   show,
   numberOfCards = 12,
 }) =>
   show ? (
     <div className="container">
-      <div className="row row-cols-4 my-3">
+      <div className="row row-cols-4 g-3 my-3">
         {[...Array(numberOfCards)].map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <div key={i} className="col">
-            <LoadingPill />
+            <LoadingOnlyCard />
           </div>
         ))}
       </div>
     </div>
   ) : null;
 
-export default LoadingPills;
+export default LoadingOnlyCards;

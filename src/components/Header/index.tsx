@@ -18,6 +18,7 @@ import { GiMicrophone } from 'react-icons/gi';
 import { RiCalendar2Fill } from 'react-icons/ri';
 import { VscThreeBars } from 'react-icons/vsc';
 import logoImg from '../../assets/logo.png';
+import mobileLogoImg from '../../assets/mobileLogo.png';
 import { ContainerHeader, ContentHeader, MenuHeader, Overlay } from './styles';
 
 const routesUrl = process.env.REACT_APP_ROUTES_URL ?? '';
@@ -120,18 +121,29 @@ export const Header: React.FC<IHeaderProps> = ({ fixed = false }) => {
             <div className="row">
               <div className="col">
                 <div className="d-flex justify-content-between align-items-center">
-                  <button type="button" onClick={() => setShowMenu(!showMenu)}>
+                  <button
+                    className="d-flex align-items-center"
+                    type="button"
+                    onClick={() => setShowMenu(!showMenu)}
+                  >
                     <VscThreeBars className="fs-4" />
-                    <span className="text-white ms-2">Menu</span>
+                    <span className="d-none d-md-block text-white ms-2">
+                      Menu
+                    </span>
                   </button>
                   <Link to="/">
                     <img
                       src={logoImg}
                       alt="Maricá"
-                      className="d-none d-md-block"
+                      className="d-none d-md-block sm-logo"
+                    />
+                    <img
+                      src={mobileLogoImg}
+                      alt="Maricá"
+                      className="d-block d-md-none mobileImg"
                     />
                   </Link>
-                  <div className="d-flex">
+                  <div className="d-flex d-none d-md-block">
                     {facebookUrl && (
                       <a
                         className="text-white fs-5"
@@ -177,6 +189,7 @@ export const Header: React.FC<IHeaderProps> = ({ fixed = false }) => {
                       </a>
                     )}
                   </div>
+                  <div className="d-block d-md-none" />
                 </div>
               </div>
             </div>
