@@ -8,12 +8,14 @@ import { MaricaBackground } from './styles';
 import { useAboutCity } from '../../Hooks/AboutCity';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
+import { setTitle } from '../../utils/title';
 
 export const AboutCity: React.FC = () => {
   const { aboutCity, getAboutCity, isLoading } = useAboutCity();
 
   useEffect(() => {
     getAboutCity();
+    setTitle('Sobre a cidade');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

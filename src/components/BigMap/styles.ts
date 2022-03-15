@@ -1,25 +1,43 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const MarkerStyles = styled.div`
-  .marker {
+export const LocationPoint = styled.button`
+  transform: translate(-50%, -20%);
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+`;
+
+export const CardMarker = styled.div`
+  width: 400px;
+  position: absolute;
+  bottom: 45px;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  &:after {
+    content: '';
     position: absolute;
-    top: 50%;
+    border-style: solid;
+    border-width: 20px 20px 0;
+    border-color: #ffffff transparent;
+    display: block;
+    width: 0;
+    bottom: 0;
     left: 50%;
-    width: 18px;
-    height: 18px;
-    background-color: #000;
-    border: 2px solid #fff;
-    border-radius: 100%;
-    user-select: none;
-    transform: translate(-50%, -50%);
-    &:hover {
-      z-index: 1;
-    }
+    transform: translateX(-50%);
   }
 `;
 
+export const Wrapper = styled.div`
+  position: relative;
+`;
+
 export const MapTitle = styled(Link)`
+  position: absolute;
+  margin-bottom: -80%;
+  z-index: 1;
   position: absolute;
   top: 110px;
   left: 15px;
@@ -27,6 +45,5 @@ export const MapTitle = styled(Link)`
   padding: 15px;
   border-radius: 5px;
   box-shadow: rgb(0 0 0 / 30%) 0px 1px 5px;
-  z-index: 2;
   border: none;
 `;

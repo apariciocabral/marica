@@ -1,5 +1,5 @@
 export const setTitle = (title?: string): void => {
-  const appName = process.env.REACT_APP_API_NAME ?? '';
+  const appName = process.env.REACT_APP_APP_NAME ?? '';
 
   if (title) {
     document.title = `${title} | ${appName}`;

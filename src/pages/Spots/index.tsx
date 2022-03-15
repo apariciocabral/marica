@@ -13,12 +13,15 @@ import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import { SearchInput } from '../../components/SearchInput';
 import LoadingPills from '../../components/LoadingPill';
+import { setTitle } from '../../utils/title';
 
 export const Spots: React.FC = () => {
-  const { spots, getSpots, categories, isLoading, setCategories } = useSpots();
+  const { spots, getSpots, categories, isLoading } = useSpots();
 
   useEffect(() => {
     getSpots();
+    setTitle('Pontos Turísticos');
+    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -72,7 +75,6 @@ export const Spots: React.FC = () => {
               categories={categories}
               url="pontos"
               color="secondary"
-              setCategories={setCategories}
             />
           </div>
         </div>
@@ -81,11 +83,7 @@ export const Spots: React.FC = () => {
             {spots.map(spot => {
               return (
                 <div key={spot.id} className="d-flex align-items-stretch">
-                  <SpotsCard
-                    spot={spot}
-                    addresses={spot.enderecos}
-                    setCategories={setCategories}
-                  />
+                  <SpotsCard spot={spot} />
                 </div>
               );
             })}

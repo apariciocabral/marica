@@ -16,9 +16,10 @@ import { Categories } from '../../components/Categories';
 import { useRestaurants } from '../../Hooks/RestaurantsProvider';
 import { PriceRange } from '../../components/PriceRange';
 import { PillDelivery } from './styles';
+import { setTitle } from '../../utils/title';
 
 export const Restaurant: React.FC = () => {
-  const { restaurant, getRestaurant, setRestaurant, isLoading, setCategories } =
+  const { restaurant, getRestaurant, setRestaurant, isLoading } =
     useRestaurants();
   const { id } = useParams();
 
@@ -27,6 +28,10 @@ export const Restaurant: React.FC = () => {
     getRestaurant(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setTitle(`${restaurant?.nome ?? 'Loading...'} | Bares e Restaurantes`);
+  }, [restaurant]);
 
   return (
     <Wrapper>
@@ -52,7 +57,6 @@ export const Restaurant: React.FC = () => {
                     categories={restaurant.categorias}
                     url="restaurantes"
                     color="secondary"
-                    setCategories={setCategories}
                   >
                     <Link to={`/restaurantes/categorias/${id}`} />
                   </Categories>

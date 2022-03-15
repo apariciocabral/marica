@@ -15,9 +15,10 @@ import InputValue from '../../components/InputValue';
 import { DownloadApp } from '../../components/DownloadApp';
 import IframeMaps from '../../components/Maps';
 import CarouselSlider from '../../components/Slider';
+import { setTitle } from '../../utils/title';
 
 export const TouristSpot: React.FC = () => {
-  const { spot, getSpot, setSpot, isLoading, setCategories } = useSpots();
+  const { spot, getSpot, setSpot, isLoading } = useSpots();
   const { id } = useParams();
 
   useEffect(() => {
@@ -25,6 +26,10 @@ export const TouristSpot: React.FC = () => {
     getSpot(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setTitle(`${spot?.nome ?? 'Loading...'} | Pontos Turísticos`);
+  }, [spot]);
 
   return (
     <Wrapper>
@@ -51,7 +56,6 @@ export const TouristSpot: React.FC = () => {
                     categories={spot.categorias}
                     url="pontos"
                     color="secondary"
-                    setCategories={setCategories}
                   >
                     <Link to={`/pontos/categorias/${id}`} />
                   </Categories>

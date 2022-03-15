@@ -9,13 +9,15 @@ import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import { Categories } from '../../components/Categories';
 import { Select } from './styles';
+import { setTitle } from '../../utils/title';
 
 export const Deliveries: React.FC = () => {
-  const { getDeliveries, categories, isLoading, setCategories } =
-    useDeliveries();
+  const { getDeliveries, categories, isLoading } = useDeliveries();
 
   useEffect(() => {
     getDeliveries();
+    setTitle('Delivery');
+    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -33,27 +35,23 @@ export const Deliveries: React.FC = () => {
             </div>
             <p className="mb-4">Selecione o tipo de estabelecimento:</p>
             <Select>
-              <div className="row">
-                <div className="col">
-                  <div className="d-flex align-items-center p-3 g-3">
-                    <a
-                      className=""
-                      title="Bares e Restaurantes"
-                      href="/bares-e-restaurantes?delivery=1"
-                    >
-                      <FaMotorcycle className="ms-0 me-3 fs-4 color" />
-                    </a>
-                    <span className="m-0">
-                      <a
-                        className="text-dark text-decoration-none"
-                        title="Bares e Restaurantes"
-                        href="/bares-e-restaurantes?delivery=1"
-                      >
-                        Bares e Restaurantes
-                      </a>
-                    </span>
-                  </div>
-                </div>
+              <div className="d-flex align-items-center p-3">
+                <a
+                  className=""
+                  title="Bares e Restaurantes"
+                  href="/bares-e-restaurantes?delivery=1"
+                >
+                  <FaMotorcycle className="ms-0 me-3 fs-4 color" />
+                </a>
+                <span className="m-0">
+                  <a
+                    className="text-dark text-decoration-none"
+                    title="Bares e Restaurantes"
+                    href="/bares-e-restaurantes?delivery=1"
+                  >
+                    Bares e Restaurantes
+                  </a>
+                </span>
               </div>
             </Select>
             <Select>
@@ -83,7 +81,6 @@ export const Deliveries: React.FC = () => {
                   categories={categories}
                   url="/delivery"
                   color="secondary"
-                  setCategories={setCategories}
                 />
               </div>
             </div>

@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { AddressType } from '../../@types/Address';
-import { CategoryType } from '../../@types/Category';
 import { CityEventsType } from '../../@types/CityEvents';
 import { EventSpacesType } from '../../@types/EventSpaces';
 import { HotelsType } from '../../@types/Hotels';
@@ -19,14 +18,9 @@ interface ICardMapProps {
     | CityEventsType
     | EventSpacesType;
   addresses: AddressType[];
-  setCategories: (categories: CategoryType[]) => void;
 }
 
-const CardMap: React.FC<ICardMapProps> = ({
-  item,
-  addresses,
-  setCategories,
-}) => (
+const CardMap: React.FC<ICardMapProps> = ({ item, addresses }) => (
   <div className="card mb-3 w-100">
     <Link to={`${item.id}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${item.capa})` }} />
@@ -38,7 +32,6 @@ const CardMap: React.FC<ICardMapProps> = ({
         url="pontos"
         color="gray"
         size="sm"
-        setCategories={setCategories}
       />
       <div className="mt-auto">
         {addresses.map(address => (

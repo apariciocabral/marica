@@ -1,18 +1,13 @@
 import { Link } from 'react-router-dom';
-import { CategoryType } from '../../@types/Category';
 import { DiscountsType } from '../../@types/Discounts';
 import { Categories } from '../Categories';
 import { Cover } from './styles';
 
 interface IDiscountsCardProps {
   discount: DiscountsType;
-  setCategories: (categories: CategoryType[]) => void;
 }
 
-const DiscountsCard: React.FC<IDiscountsCardProps> = ({
-  discount,
-  setCategories,
-}) => (
+const DiscountsCard: React.FC<IDiscountsCardProps> = ({ discount }) => (
   <div className="card mb-3 w-100">
     <Link to={`${discount.data}`} className="fs-1 text-center">
       <Cover style={{ backgroundImage: `url(${discount.links})` }} />
@@ -24,7 +19,6 @@ const DiscountsCard: React.FC<IDiscountsCardProps> = ({
         url="descontos"
         color="gray"
         size="sm"
-        setCategories={setCategories}
       />
       <div className="mt-auto">
         {discount.modulos.map(address => (

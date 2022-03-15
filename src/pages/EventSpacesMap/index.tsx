@@ -18,8 +18,9 @@ export const EventSpacesMap: React.FC = () => {
       {Array.isArray(eventSpaces) && eventSpaces.length > 0 && (
         <BigMap
           items={eventSpaces}
-          url="/espacos"
-          backTo="Espaços para eventos"
+          backTo="/espacos"
+          title="Espaços para eventos"
+          type="eventSpace"
         />
       )}
     </Wrapper>

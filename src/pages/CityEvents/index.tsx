@@ -13,13 +13,15 @@ import LoadingCards from '../../components/LoadingCards';
 import { SearchInput } from '../../components/SearchInput';
 import CityEventsCard from '../../components/CityEventCard';
 import LoadingPills from '../../components/LoadingPill';
+import { setTitle } from '../../utils/title';
 
 export const CityEvents: React.FC = () => {
-  const { cityEvents, getCityEvents, categories, isLoading, setCategories } =
-    useCityEvents();
+  const { cityEvents, getCityEvents, categories, isLoading } = useCityEvents();
 
   useEffect(() => {
     getCityEvents();
+    setTitle('Eventos');
+    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -30,6 +32,34 @@ export const CityEvents: React.FC = () => {
   return (
     <Wrapper>
       <Header />
+      <div className="container">
+        <div className="row">
+          <div className="d-flex col-md-6">
+            <PageTitle title="Eventos" />
+          </div>
+          <div className="d-flex col-md-6 justify-content-end">
+            <Link
+              to="/eventos/mapa"
+              className="btn btn-primary my-4 py-2 px-3 me-3 d-flex"
+              title="Ver no mapa"
+            >
+              <FaMapMarkedAlt className="me-2 fs-4 text-white" />
+              <span>Mapa</span>
+            </Link>
+            <div className="my-4 flex-grow-1">
+              <SearchInput
+                className="input"
+                type="search"
+                onSearch={handleSearch}
+                placeholder="Buscar eventos"
+                aria-label="Search"
+              >
+                <AiOutlineSearch className="fs-4" />
+              </SearchInput>
+            </div>
+          </div>
+        </div>
+      </div>
       <LoadingGate
         waitFor={isLoading === false}
         meanwhile={
@@ -41,37 +71,10 @@ export const CityEvents: React.FC = () => {
       >
         <div className="container">
           <div className="row">
-            <div className="d-flex col-md-6">
-              <PageTitle title="Eventos" />
-            </div>
-            <div className="d-flex col-md-6 justify-content-end">
-              <Link to="/eventos/mapa">
-                <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
-                  <FaMapMarkedAlt className="me-2 fs-4 text-white" />
-                  Mapa
-                </div>
-              </Link>
-              <div className="my-4">
-                <SearchInput
-                  className="input"
-                  type="search"
-                  onSearch={handleSearch}
-                  placeholder="Buscar eventos"
-                  aria-label="Search"
-                >
-                  <AiOutlineSearch className="fs-4" />
-                </SearchInput>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="container">
-          <div className="row">
             <Categories
               categories={categories}
               url="eventos"
               color="secondary"
-              setCategories={setCategories}
             />
           </div>
         </div>
@@ -83,11 +86,7 @@ export const CityEvents: React.FC = () => {
                   key={cityEvent.id}
                   className="col d-flex align-items-stretch"
                 >
-                  <CityEventsCard
-                    cityEvent={cityEvent}
-                    addresses={cityEvent.enderecos}
-                    setCategories={setCategories}
-                  />
+                  <CityEventsCard cityEvent={cityEvent} />
                 </div>
               );
             })}

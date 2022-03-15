@@ -7,7 +7,7 @@ import { setTitle } from '../../utils/title';
 
 export const Home: React.FC = () => {
   useEffect(() => {
-    setTitle();
+    setTitle('Conheça Maricá | Guia Turístico e COmercial de Maricá');
   }, []);
 
   return (
