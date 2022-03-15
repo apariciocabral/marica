@@ -34,8 +34,7 @@ export const Hotels: React.FC = () => {
         waitFor={isLoading === false}
         meanwhile={
           <>
-            <LoadingPills show numberOfCards={3} />
-            <LoadingPills show numberOfCards={12} />
+            <LoadingPills show amount={9} />
             <LoadingCards show numberOfCards={4} />
           </>
         }

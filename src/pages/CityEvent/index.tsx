@@ -49,7 +49,7 @@ export const CityEvent: React.FC = () => {
         meanwhile={
           <>
             <LoadingOnlyCards show numberOfCards={4} />
-            <LoadingPills show numberOfCards={4} />
+            <LoadingPills show amount={4} />
             <LoadingCards show numberOfCards={4} />
           </>
         }
