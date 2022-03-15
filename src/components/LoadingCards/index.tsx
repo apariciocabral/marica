@@ -11,7 +11,7 @@ const LoadingCards: React.FC<ILoadingCardsProps> = ({
 }) =>
   show ? (
     <div className="container">
-      <div className="row row-cols-4 g-3 my-3">
+      <div className="row row-cols-3 g-3 my-3">
         {[...Array(numberOfCards)].map((_, i) => (
           // eslint-disable-next-line react/no-array-index-key
           <div key={i} className="col">

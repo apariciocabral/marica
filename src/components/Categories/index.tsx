@@ -17,22 +17,18 @@ export const Categories: React.FC<ICategoriesProps> = ({
   size = 'md',
   setCategories,
 }) => (
-  <CategoryOverflow className="mb-3">
-    <ul className="d-flex flex-wrap m-0 list-unstyled">
-      {categories.map(category => (
-        <li key={category.id}>
-          <PillStyles
-            onClick={() => setCategories(categories)}
-            to={`/${url}/categorias/${category.id}/${slugify(category.label)}`}
-            className={`btn btn-${color} btn-${size} me-2 mb-2`}
-            title={category.label}
-          >
-            {`${category.label}${
-              category?.count ? ` (${category?.count})` : ''
-            }`}
-          </PillStyles>
-        </li>
-      ))}
-    </ul>
+  <CategoryOverflow className="d-flex m-0 list-unstyled">
+    {categories.map(category => (
+      <li key={category.id}>
+        <PillStyles
+          onClick={() => setCategories(categories)}
+          to={`/${url}/categorias/${category.id}/${slugify(category.label)}`}
+          className={`btn btn-${color} btn-${size} me-2 mb-2`}
+          title={category.label}
+        >
+          {`${category.label}${category?.count ? ` (${category?.count})` : ''}`}
+        </PillStyles>
+      </li>
+    ))}
   </CategoryOverflow>
 );

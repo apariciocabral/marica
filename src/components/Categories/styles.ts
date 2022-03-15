@@ -3,16 +3,15 @@ import styled from 'styled-components';
 
 export const PillStyles = styled(Link)`
   border-radius: 20px;
+  white-space: nowrap;
 `;
 
-export const CategoryOverflow = styled.div`
-  ul.overflow-x {
-    overflow-x: scroll;
-  }
+export const CategoryOverflow = styled.ul`
+  overflow-x: scroll;
+  flex-wrap: nowrap;
 
-  @media screen and (max-width: 767px) {
-    ul.overflow-sm-x {
-      flex-wrap: nowrap;
-    }
+  @media screen and (min-width: 768px) {
+    flex-wrap: wrap;
+    overflow-x: auto;
   }
 `;

@@ -33,6 +33,8 @@ export const Routes: React.FC = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" element={<Home />} />
+
+        {/* Tourist Spots */}
         <Route path="/pontos" element={<Spots />} />
         <Route path="/pontos/mapa" element={<SpotsMap />} />
         <Route path="/pontos/:id" element={<TouristSpot />} />
@@ -40,6 +42,8 @@ export const Routes: React.FC = () => {
           path="/pontos/categorias/:id/:label"
           element={<SpotsByCategory />}
         />
+
+        {/* Hotels */}
         <Route path="/hoteis-e-pousadas" element={<Hotels />} />
         <Route path="/hoteis-e-pousadas/mapa" element={<HotelsMap />} />
         <Route path="/hoteis-e-pousadas/:id" element={<Hotel />} />
@@ -47,6 +51,8 @@ export const Routes: React.FC = () => {
           path="/hoteis-e-pousadas/categorias/:id/:label"
           element={<HotelsByCategory />}
         />
+
+        {/* Restaurants */}
         <Route path="/restaurantes" element={<Restaurants />} />
         <Route path="/restaurantes/mapa" element={<RestaurantsMap />} />
         <Route path="/restaurantes/:id" element={<Restaurant />} />
@@ -54,8 +60,12 @@ export const Routes: React.FC = () => {
           path="/restaurantes/categorias/:id/:label"
           element={<RestaurantsByCategory />}
         />
+
+        {/* Delivery */}
         <Route path="/delivery" element={<Deliveries />} />
         {/* <Route path="/delivery/:id" element={<Delivery />} /> */}
+
+        {/* Local Trades */}
         <Route path="/comercios" element={<Trades />} />
         <Route path="/comercios/mapa" element={<TradesMap />} />
         <Route path="/comercios/:id" element={<Trade />} />
@@ -63,8 +73,12 @@ export const Routes: React.FC = () => {
           path="/comercios/categorias/:id/:label"
           element={<TradesByCategory />}
         />
+
+        {/* Discounts */}
         <Route path="/descontos" element={<Discounts />} />
         {/* <Route path="/descontos/:id" element={<Discount />} /> */}
+
+        {/* Event Spaces */}
         <Route path="/espacos" element={<EventSpaces />} />
         <Route path="/espacos/mapa" element={<EventSpacesMap />} />
         <Route path="/espacos/:id" element={<EventSpace />} />
@@ -72,6 +86,8 @@ export const Routes: React.FC = () => {
           path="/espacos/categorias/:id/:label"
           element={<EventSpacesByCategory />}
         />
+
+        {/* Events */}
         <Route path="/eventos" element={<CityEvents />} />
         <Route path="/eventos/mapa" element={<CityEventsMap />} />
         <Route path="/eventos/:id" element={<CityEvent />} />
@@ -79,6 +95,8 @@ export const Routes: React.FC = () => {
           path="/eventos/categorias/:id/:label"
           element={<CityEventsByCategory />}
         />
+
+        {/* About City */}
         <Route path="/sobre" element={<AboutCity />} />
       </Switch>
     </BrowserRouter>
