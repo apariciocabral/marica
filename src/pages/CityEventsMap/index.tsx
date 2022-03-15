@@ -16,7 +16,12 @@ export const CityEventsMap: React.FC = () => {
     <Wrapper>
       <Header fixed />
       {Array.isArray(cityEvents) && cityEvents.length > 0 && (
-        <BigMap items={cityEvents} url="/eventos" backTo="Eventos" />
+        <BigMap
+          items={cityEvents}
+          backTo="/eventos"
+          title="Eventos"
+          type="cityEvent"
+        />
       )}
     </Wrapper>
   );

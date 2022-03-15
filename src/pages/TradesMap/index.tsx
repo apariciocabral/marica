@@ -16,7 +16,12 @@ export const TradesMap: React.FC = () => {
     <Wrapper>
       <Header fixed />
       {Array.isArray(trades) && trades.length > 0 && (
-        <BigMap items={trades} url="/comercios" backTo="Comércio Local" />
+        <BigMap
+          items={trades}
+          backTo="/comercios"
+          title="Comércio Local"
+          type="trade"
+        />
       )}
     </Wrapper>
   );

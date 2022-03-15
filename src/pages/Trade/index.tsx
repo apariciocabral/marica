@@ -15,7 +15,7 @@ import IframeMaps from '../../components/Maps';
 import CarouselSlider from '../../components/Slider';
 
 export const Trade: React.FC = () => {
-  const { trade, getTrade, setTrade, isLoading, setCategories } = useTrades();
+  const { trade, getTrade, setTrade, isLoading } = useTrades();
   const { id } = useParams();
 
   useEffect(() => {
@@ -49,7 +49,6 @@ export const Trade: React.FC = () => {
                     categories={trade.categorias}
                     url="comercios"
                     color="secondary"
-                    setCategories={setCategories}
                   >
                     <Link to={`/comercios/categorias/${id}`} />
                   </Categories>

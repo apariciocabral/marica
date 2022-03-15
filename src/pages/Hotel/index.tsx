@@ -14,9 +14,10 @@ import CarouselSlider from '../../components/Slider';
 import { Categories } from '../../components/Categories';
 import Accommodations from '../../components/Accommodations';
 import { useHotels } from '../../Hooks/HotelsProvider';
+import { setTitle } from '../../utils/title';
 
 export const Hotel: React.FC = () => {
-  const { hotel, getHotel, setHotel, isLoading, setCategories } = useHotels();
+  const { hotel, getHotel, setHotel, isLoading } = useHotels();
   const { id } = useParams();
 
   useEffect(() => {
@@ -24,6 +25,10 @@ export const Hotel: React.FC = () => {
     getHotel(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setTitle(`${hotel?.nome ?? 'Loading...'} | Hotéis e Pousadas`);
+  }, [hotel]);
 
   return (
     <Wrapper>
@@ -49,7 +54,6 @@ export const Hotel: React.FC = () => {
                     categories={hotel.categorias}
                     url="hoteis-e-pousadas"
                     color="secondary"
-                    setCategories={setCategories}
                   >
                     <Link to={`/hoteis-e-pousadas/categorias/${id}`} />
                   </Categories>

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { FaMapMarkedAlt } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { PageTitle } from '../../components/PageTitle';
@@ -11,22 +11,21 @@ import SpotsCard from '../../components/SpotCard';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import { SearchInput } from '../../components/SearchInput';
+import { setTitle } from '../../utils/title';
 
 export const SpotsByCategory: React.FC = () => {
-  const {
-    spots,
-    isLoading,
-    category,
-    getSpots,
-    getSpotsByCategory,
-    setCategories,
-  } = useSpots();
+  const { spots, isLoading, category, getSpots, getSpotsByCategory } =
+    useSpots();
   const { id } = useParams();
 
   useEffect(() => {
     getSpotsByCategory(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setTitle(`${category?.label ?? 'Loading...'} | Pontos Turísticos`);
+  }, [category]);
 
   const handleSearch = (searchText: string): void => {
     getSpots(searchText);
@@ -50,10 +49,14 @@ export const SpotsByCategory: React.FC = () => {
                     title={category?.label ?? 'Carregando...'}
                   />
                 </div>
-                <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
-                  <FaMapMarkedAlt className="me-2 fs-4" />
-                  Mapa
-                </div>
+                <Link
+                  to="/pontos/mapa"
+                  className="btn btn-primary my-4 py-2 px-3 me-3 d-flex"
+                  title="Ver no mapa"
+                >
+                  <FaMapMarkedAlt className="me-2 fs-4 text-white" />
+                  <span>Mapa</span>
+                </Link>
                 <div className="my-4">
                   <SearchInput
                     className="input"
@@ -74,11 +77,7 @@ export const SpotsByCategory: React.FC = () => {
             {spots.map(spot => {
               return (
                 <div key={spot.id} className="col d-flex align-items-stretch">
-                  <SpotsCard
-                    spot={spot}
-                    addresses={spot.enderecos}
-                    setCategories={setCategories}
-                  />
+                  <SpotsCard spot={spot} />
                 </div>
               );
             })}

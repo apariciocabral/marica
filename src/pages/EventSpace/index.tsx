@@ -15,9 +15,10 @@ import { Categories } from '../../components/Categories';
 import { useEventSpaces } from '../../Hooks/EventSpacesProvider';
 import Spaces from '../../components/Space';
 import Equipment from '../../components/Equipment';
+import { setTitle } from '../../utils/title';
 
 export const EventSpace: React.FC = () => {
-  const { eventSpace, getEventSpace, setEventSpace, isLoading, setCategories } =
+  const { eventSpace, getEventSpace, setEventSpace, isLoading } =
     useEventSpaces();
   const { id } = useParams();
 
@@ -26,6 +27,10 @@ export const EventSpace: React.FC = () => {
     getEventSpace(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setTitle(`${eventSpace?.nome ?? 'Loading...'} | Espaços para eventos`);
+  }, [eventSpace]);
 
   return (
     <Wrapper>
@@ -51,7 +56,6 @@ export const EventSpace: React.FC = () => {
                     categories={eventSpace.categorias}
                     url="espacos"
                     color="secondary"
-                    setCategories={setCategories}
                   >
                     <Link to={`/espacos/categorias/${id}`} />
                   </Categories>

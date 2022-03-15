@@ -18,8 +18,9 @@ export const HotelsMap: React.FC = () => {
       {Array.isArray(hotels) && hotels.length > 0 && (
         <BigMap
           items={hotels}
-          url="/hoteis-e-pousadas"
-          backTo="Hotéis e Pousadas"
+          backTo="/hoteis-e-pousadas"
+          title="Hotéis e Pousadas"
+          type="hotel"
         />
       )}
     </Wrapper>

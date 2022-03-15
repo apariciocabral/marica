@@ -16,6 +16,7 @@ import IframeMaps from '../../components/Maps';
 import CarouselSlider from '../../components/Slider';
 import LoadingPills from '../../components/LoadingPill';
 import LoadingOnlyCards from '../../components/LoadingOnlyCard';
+import { setTitle } from '../../utils/title';
 
 export const getDate = (isoDate: string): string => {
   const isInvalid = new Date(isoDate).toString() === 'Invalid Date';
@@ -32,8 +33,7 @@ export const getDate = (isoDate: string): string => {
 };
 
 export const CityEvent: React.FC = () => {
-  const { cityEvent, getCityEvent, setCityEvent, isLoading, setCategories } =
-    useCityEvents();
+  const { cityEvent, getCityEvent, setCityEvent, isLoading } = useCityEvents();
   const { id } = useParams();
 
   useEffect(() => {
@@ -41,6 +41,11 @@ export const CityEvent: React.FC = () => {
     getCityEvent(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setTitle(`${cityEvent?.nome ?? 'Loading...'} | Eventos`);
+  }, [cityEvent]);
+
   return (
     <Wrapper>
       <Header />
@@ -49,7 +54,7 @@ export const CityEvent: React.FC = () => {
         meanwhile={
           <>
             <LoadingOnlyCards show numberOfCards={4} />
-            <LoadingPills show numberOfCards={4} />
+            <LoadingPills show amount={4} />
             <LoadingCards show numberOfCards={4} />
           </>
         }
@@ -72,7 +77,6 @@ export const CityEvent: React.FC = () => {
                     categories={cityEvent.categorias}
                     url="eventos"
                     color="secondary"
-                    setCategories={setCategories}
                   >
                     <Link to={`/eventos/categorias/${id}`} />
                   </Categories>

@@ -6,22 +6,22 @@ import {
   useMemo,
 } from 'react';
 import { CategoryType } from '../@types/Category';
-import { CollectionType } from '../@types/Collection';
 import { DiscountsType } from '../@types/Discounts';
 import { Api } from '../services/Api';
 
 // Aqui é definida a Interface com os tipos de dados de tudo que será disponibilizado "para fora" do Provider
 interface IDiscountsContextProps {
-  // discount: DiscountsType | null;
+  discount: DiscountsType | null;
   discounts: DiscountsType[];
   categories: CategoryType[];
-  collection: CollectionType[];
+  category: CategoryType | null;
   isLoading: boolean;
   errorMessage: string | null;
+  setDiscount: (discount: DiscountsType | null) => void;
   setCategories: (categories: CategoryType[]) => void;
-  // setDiscount: (spot: SpotsType | null) => void;
-  // getDiscount: (id: number) => Promise<void>;
-  getDiscounts: () => Promise<void>;
+  getDiscount: (id: number) => Promise<void>;
+  getDiscounts: (text?: string) => Promise<void>;
+  getDiscountsByCategory: (id: number) => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
@@ -37,7 +37,7 @@ export const useDiscounts = (): IDiscountsContextProps => {
   const context = useContext(DiscountsContext);
 
   if (!context) {
-    throw new Error('useSpots must be within DiscountsProvider');
+    throw new Error('useSpots must be within SpotsProvider');
   }
 
   return context;
@@ -45,90 +45,96 @@ export const useDiscounts = (): IDiscountsContextProps => {
 
 // Aqui são definidas as variáveis de State e as funções do Provider
 export const DiscountsProvider: React.FC = ({ children }) => {
-  // const [discount, setDiscount] = useState<DiscountsType | null>(null);
+  const [discount, setDiscount] = useState<DiscountsType | null>(null);
   const [discounts, setDiscounts] = useState<DiscountsType[]>([]);
+  const [category, setCategory] = useState<CategoryType | null>(null);
   const [categories, setCategories] = useState<CategoryType[]>([]);
-  const [collection, setCollection] = useState<CollectionType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
-  const getDiscounts = useCallback(async (): Promise<void> => {
-    if (!alreadyGot) {
+  const getDiscountsByCategory = useCallback(
+    async (id): Promise<void> => {
       setLoading(true);
-      setErrorMessage(null);
-      try {
-        const response = await Api.get('/descontos');
-
-        if (Array.isArray(response?.data?.collection)) {
-          setDiscounts(response?.data?.collection);
-          setCategories(response?.data?.categorias);
-          setCollection(response?.data?.collection);
-          setAlreadyGot(true);
-        } else {
+      Api.get(`/descontos/categorias/${id}`)
+        .then(response => {
+          setDiscounts(response.data.collection);
+          const categoryToFind = categories.find(c => c.id === id);
+          setCategory(categoryToFind ?? null);
+          setAlreadyGot(false);
+        })
+        .catch(() => {
           setDiscounts([]);
-          setCategories([]);
-          setErrorMessage(
-            'Could not get the Discount list. Please try again later.'
-          );
-        }
-      } catch (e) {
-        if (e instanceof Error) setErrorMessage(e.message);
-      } finally {
-        setLoading(false);
-      }
-    }
-  }, [alreadyGot]);
+          setCategory(null);
+        })
+        .finally(() => setLoading(false));
+    },
+    [categories]
+  );
 
-  // const getDiscount = useCallback(
-  //   async (id: number): Promise<void> => {
-  //     if (id !== discount?.id) {
-  //       setLoading(true);
-  //       setErrorMessage(null);
-  //       try {
-  //         const response = await Api.get(`/descontos/${id}`);
-  //         if (response?.data?.item) {
-  //           setDiscount(response?.data?.item);
-  //         } else {
-  //           setErrorMessage(
-  //             'Could not get the Discount list. Please try again later.'
-  //           );
-  //         }
-  //       } catch (e) {
-  //         if (e instanceof Error) setErrorMessage(e.message);
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     }
-  //   },
-  //   [discount]
-  // );
+  const getDiscount = useCallback(async (id): Promise<void> => {
+    setLoading(true);
+    Api.get(`/descontos/${id}`)
+      .then(response => setDiscount(response.data.item))
+      .catch(() => setDiscount(null))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const getDiscounts = useCallback(
+    async (searchText = ''): Promise<void> => {
+      if (!alreadyGot || searchText.length > 0) {
+        setLoading(true);
+        setErrorMessage(null);
+
+        const url = searchText
+          ? `/descontos/busca?busca=${searchText}`
+          : '/descontos';
+        try {
+          const response = await Api.get(url);
+          if (!searchText) {
+            setCategories(response.data.categorias);
+          }
+          setDiscounts(response.data.collection);
+          setAlreadyGot(true);
+        } catch (e) {
+          if (e instanceof Error) setErrorMessage(e.message);
+        } finally {
+          setLoading(false);
+        }
+      }
+    },
+    [alreadyGot]
+  );
 
   // Aqui são definidas quais informações estarão disponíveis "para fora" do Provider
   const providerValue = useMemo(
     () => ({
-      // discount,
+      discount,
       discounts,
-      collection,
       categories,
+      category,
       isLoading,
       errorMessage,
       setCategories,
-      // setDiscount,
-      // getDiscount,
+      setCategory,
+      setDiscount,
+      getDiscount,
       getDiscounts,
+      getDiscountsByCategory,
     }),
     [
-      // discount,
+      discount,
       discounts,
-      collection,
       categories,
+      category,
       isLoading,
       errorMessage,
       setCategories,
-      // setDiscount,
-      // getDiscount,
+      setCategory,
+      setDiscount,
+      getDiscount,
       getDiscounts,
+      getDiscountsByCategory,
     ]
   );
 
