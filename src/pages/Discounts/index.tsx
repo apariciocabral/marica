@@ -65,7 +65,7 @@ export const Discounts: React.FC = () => {
         meanwhile={
           <>
             <LoadingPills show amount={9} />
-            <LoadingCards show numberOfCards={3} />
+            <LoadingCards show amount={3} />
           </>
         }
       >

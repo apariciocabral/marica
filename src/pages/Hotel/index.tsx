@@ -35,7 +35,7 @@ export const Hotel: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <CarouselSlider images={hotel?.images} />
         <div className="container">

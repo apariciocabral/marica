@@ -53,9 +53,9 @@ export const CityEvent: React.FC = () => {
         waitFor={isLoading === false}
         meanwhile={
           <>
-            <LoadingOnlyCards show numberOfCards={4} />
+            <LoadingOnlyCards show amount={4} />
             <LoadingPills show amount={4} />
-            <LoadingCards show numberOfCards={4} />
+            <LoadingCards show amount={4} />
           </>
         }
       >

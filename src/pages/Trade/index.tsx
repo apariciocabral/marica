@@ -29,7 +29,7 @@ export const Trade: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <CarouselSlider images={trade?.images} />
         <div className="container">

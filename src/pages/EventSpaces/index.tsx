@@ -66,7 +66,7 @@ export const EventSpaces: React.FC = () => {
         meanwhile={
           <>
             <LoadingPills show amount={9} />
-            <LoadingCards show numberOfCards={3} />
+            <LoadingCards show amount={3} />
           </>
         }
       >

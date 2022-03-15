@@ -36,7 +36,7 @@ export const TouristSpot: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <CarouselSlider images={spot?.images} />
         <div className="container">
